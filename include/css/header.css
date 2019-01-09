@@ -8,12 +8,33 @@
 
 .header .top {
     display: flex; 
-    
 }
 
-.header .logo {
+.header .top .logo {
     width: 200px;
     padding: 10px;
+}
+
+.header .top .divider {
+    height: 60px;
+    align-self: center;
+    border-left: 1px solid #202020;
+}
+
+.header .top .name {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.header .top .name .college {
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+.header .top .name .title {
+    font-size: 36px;
+    margin-top: 3px;
 }
 
 .header nav {
@@ -23,4 +44,13 @@
 .header nav a {
     text-decoration: none;
     color: white;
+}
+
+.header nav .nav-link {
+    margin: 2px;
+}
+
+.header nav .nav-link.active {
+    background-color: white;
+    color: black;
 }

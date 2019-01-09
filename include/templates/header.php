@@ -33,19 +33,26 @@
 <body>
     <div class="header">
         <div class="top">
-        <div class="logo">
-            <img src="include/img/osu-logo.svg"/>
+            <div class="logo">
+                <img src="include/img/osu-logo.svg"/>
+            </div>
+            <div class="divider"></div>
+            <div class="name">
+                <span class="title">Internet of Things Alliance</span>
+                <i class="college">College of Engineering</i>
+                
+            </div>
         </div>
-        <div class="divider"></div></div>
         <div class="menu">
-        <nav class="nav nav-pill">
-            <?php
-                foreach($menu as $title => $link) {
-                    $active = (strpos($_SERVER['REQUEST_URI'], $link) !== false) ? 'active' : '';
-                    echo '<li class="nav-item"><a class="nav-link" href="' . $link . '" '. $active .'>' . $title . '</a></li>'; 
-                }
-            ?>
-        </nav></div>
+            <nav class="nav nav-pills">
+                <?php
+                    foreach($menu as $title => $link) {
+                        $active = (strpos($_SERVER['REQUEST_URI'], $link) !== false) ? 'active' : '';
+                        echo '<li class="nav-item"><a class="nav-link ' . $active . '" href="' . $link . '">' . $title . '</a></li>'; 
+                    }
+                ?>
+            </nav>
+        </div>
         
         
     </div>
