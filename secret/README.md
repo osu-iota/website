@@ -1,0 +1,2 @@
+# OSU IOTA PHP Server Secrets
+To keep passwords and other sensitive information out of the Github repository, all passwords should be stored as files in this secrets folder and read when they need access from the dependent PHP script. The `.gitignore` file is set up so that only this README file will ever be checked in to the repository. If the repository code is needed on a separate machine, you will need to manually copy over or create the appropriate files that are expected to be in this directory.
