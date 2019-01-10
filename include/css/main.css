@@ -8,6 +8,7 @@ body {
     align-items: stretch;
 }
 .container {
+    padding-top: 10px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -17,8 +18,21 @@ footer {
     background-color: #000000;
     color: white;
     font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .calendar {
     align-self: center;
+}
+
+.calendar-col {
+    display: flex;
+}
+
+footer .disclaimer {
+    color: white;
+    text-decoration: underline;
+    margin-right: 10px;
 }

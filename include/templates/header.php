@@ -1,6 +1,13 @@
 <?php include_once '.meta.php' ?>
 <?php 
-    $menu = array('Home' => '', 'Calendar' => 'calendar');
+    $menu = array(
+        'Home' => '', 
+        'Calendar' => 'calendar',
+        'Skill Tree' => 'skill-tree',
+        'Office Hours' => 'office-hours',
+        'Charter' => 'charter',
+        'Contact Us' => 'contact',
+        'Participation Form' => 'participate');
     $baseHref = 'http://web.engr.oregonstate.edu/~hitchcob/iota/website/';
 ?>
 <!DOCTYPE html>
