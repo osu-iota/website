@@ -3,12 +3,11 @@
 $menu = array(
     'Home' => '',
     'Calendar' => 'calendar',
-    'Skill Tree' => 'skill-tree',
+    'Skill Tree' => 'skill-trees',
     'Office Hours' => 'office-hours',
     'Charter' => 'charter',
     'Contact Us' => 'contact',
     'Participation Form' => 'participate');
-$baseHref = 'http://web.engr.oregonstate.edu/~hitchcob/iota/website/';
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,7 @@ $baseHref = 'http://web.engr.oregonstate.edu/~hitchcob/iota/website/';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>OSU IOTA</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <base href="<?php echo $baseHref; ?>"/>
+    <base href="<?php echo BASE_URL; ?>"/>
 
     <!-- Include Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -36,19 +35,19 @@ $baseHref = 'http://web.engr.oregonstate.edu/~hitchcob/iota/website/';
     <link rel="stylesheet" href="include/css/main.css"/>
 </head>
 <body>
-<div class="header">
+<header>
     <div class="top">
         <div class="logo">
             <img src="include/img/osu-logo.svg"/>
         </div>
         <div class="divider"></div>
         <div class="name">
-            <span class="title">Internet of Things Alliance</span>
+            <span class="title">Internet-of-Things Alliance</span>
             <i class="college">College of Engineering</i>
 
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,10 +62,8 @@ $baseHref = 'http://web.engr.oregonstate.edu/~hitchcob/iota/website/';
                 ?>
             </ul>
         </div>
-
     </nav>
+</header>
+<main class="container">
 
-
-</div>
-<div class="container">
 

@@ -1,4 +1,4 @@
-.header {
+header {
     background-color: #dc4405;
     color: white;
     display: flex;
@@ -6,37 +6,45 @@
     align-items: stretch;
 }
 
-.header .top {
+header .top {
     display: flex;
 }
 
-.header .top .logo {
+header .top .logo {
     width: 200px;
     padding: 10px;
 }
 
-.header .top .divider {
+header .top .divider {
     height: 60px;
     align-self: center;
     border-left: 1px solid #202020;
 }
 
-.header .top .name {
+header .top .name {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
 }
 
-.header .top .name .college {
+header .top .name .college {
     font-size: 12px;
     margin-top: -10px;
 }
 
-.header .top .name .title {
+header .top .name .title {
     font-size: 36px;
     margin-top: 3px;
 }
 
-.header nav .nav-item.active {
+header nav {
+    background-color: black !important;
+}
+
+header nav .nav-item.active {
     background-color: #343434;
+}
+
+header nav .nav-item {
+    margin: 0px 10px;
 }
