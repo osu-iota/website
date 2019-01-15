@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-6">
             <h3>Clubs</h3>
             <ul>
                 <li>Linux Users Group (LUG)</li>
@@ -20,7 +20,7 @@
                 <li>Inventors Enterprise</li>
             </ul>
         </div>
-        <div class="col-6">
+        <div class="col-md-6">
             <h3>Classes</h3>
             <ul>
                 <li>CS Online and On-Campus Capstones</li>

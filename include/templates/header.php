@@ -46,6 +46,9 @@ $menu = array(
             <i class="college">College of Engineering</i>
 
         </div>
+        <div class="name-mobile">
+            <span class="title">IOTA</span>
+        </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
