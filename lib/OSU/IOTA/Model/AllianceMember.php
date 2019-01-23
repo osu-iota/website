@@ -1,29 +1,20 @@
 <?php
 
-namespace osu\iota;
+namespace OSU\IOTA\Model;
 
-/**
- * @Entity @Table(name="iota_alliance_member")
- */
+use OSU\IOTA\Util\Security;
+
 class AllianceMember {
 
-    /** @Id
-     * @Column(name="aid", type="integer")
-     * @GeneratedValue
-     */
     private $id;
-
-    /** @Column(type="string") */
     private $name;
-
-    /** @Column(type="text") */
     private $description;
-
-    /** @Column(type="string") */
     private $url;
-
-    /** @ManyToOne(targetEntity="User", inversedBy="uid") */
     private $head;
+
+    public function __construct($id = null) {
+        $this->id = $id != null ? $id : Security::generateSecureUniqueId();
+    }
 
     /**
      * @return mixed

@@ -1,34 +1,22 @@
 <?php
 
-namespace osu\iota;
+namespace OSU\IOTA\Model;
+use OSU\IOTA\Util\Security;
 
-/**
- * @Entity @Table(name="iota_user")
- */
 class User {
 
-    /** @Id
-     * @Column(name="uid", type="integer")
-     * @GeneratedValue
-     */
     private $id;
 
-    /** @Column(type="string") */
     private $name;
 
-    /** @Column(type="string") */
     private $onid;
 
-    /** @Column(type="integer") */
     private $role;
 
-    /** @Column(type="datetime") */
     private $lastLogin;
 
-    /** @OneToMany(targetEntity="AttendedEvent", mappedBy="uid") */
     private $attendedEvents;
 
-    /** @OneToMany(targetEntity="AllianceMember", mappedBy="head") */
     private $alliancesHeaded;
 
     private $registeredEvents;
@@ -36,7 +24,7 @@ class User {
     private $ledEvents;
 
     public function __construct($id = null) {
-        $this->id = $id != null ? $id : uniqid();
+        $this->id = $id != null ? $id : Security::generateSecureUniqueId();
     }
 
     /**
@@ -157,7 +145,6 @@ class User {
     public function setLedEvents($ledEvents) {
         $this->ledEvents = $ledEvents;
     }
-
 
 
 }

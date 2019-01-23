@@ -1,38 +1,22 @@
 <?php
 
-namespace osu\iota;
+namespace OSU\IOTA\Model;
 
-/**
- * @Entity @Table(name="iota_event")
- */
+use OSU\IOTA\Util\Security;
+
+
 class Event {
 
-    /** @Id
-     * @Column(name="eid", type="integer")
-     * @GeneratedValue
-     * @OneToMany(targetEntity="AttendedEvent", mappedBy="eid")
-     */
     private $id;
-
-    /** @Column(type="string") */
     private $title;
-
-    /** @Column(type="text") */
     private $description;
-
-    /** @Column(type="datetime") */
     private $date;
-
-    /** @Column(type="string") */
     private $location;
-
-    /** @var @Column(type="text") */
-    private $details;
-
-    /** @OneToOne(targetEntity="AllianceMember")
-     * @JoinColumn(referencedColumnName="aid")
-     */
     private $sponsor;
+
+    public function __construct($id = null) {
+        $this->id = $id != null ? $id : Security::generateSecureUniqueId();
+    }
 
     /**
      * @return mixed
@@ -124,7 +108,6 @@ class Event {
     public function setSponsor($sponsor) {
         $this->sponsor = $sponsor;
     }
-
 
 
 }
