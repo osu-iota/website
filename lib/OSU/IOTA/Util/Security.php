@@ -3,12 +3,12 @@
 namespace OSU\IOTA\Util;
 
 class Security {
-    public static function generateSecureUniqueId($length = 13) {
+    public static function generateSecureUniqueId($length = 15) {
         $token = "";
         $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
         $codeAlphabet .= "0123456789";
-        $max = strlen($codeAlphabet); // edited
+        $max = strlen($codeAlphabet);
 
         try {
             for ($i = 0; $i < $length; $i++) {
