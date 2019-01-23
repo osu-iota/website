@@ -1,6 +1,6 @@
 <?php
 
-namespace OSU\IOTA;
+namespace OSU\IOTA\DAO;
 
 class DbConnection {
 
@@ -25,6 +25,7 @@ class DbConnection {
             $statement->setFetchMode(\PDO::FETCH_ASSOC);
             $statement->execute();
             $result = $statement->fetchAll();
+            return $result;
         } catch (\PDOException $e) {
             return null;
         }

@@ -1,50 +1,75 @@
 <?php
-namespace OSU\IOTA;
+
+namespace OSU\IOTA\DAO;
+
+use OSU\IOTA\Model\User;
+use OSU\IOTA\DAO\Tables\User as UserTable;
 
 class UserDao extends Dao {
 
-    public function getAll() {
+    public function getAllUsers() {
         $users = array();
-        $sql = 'SELECT * FROM '.Tables\Users::TABLE_NAME;
+        $sql = 'SELECT * FROM ' . UserTable::TABLE_NAME;
         $result = $this->getConnection()->query($sql);
-        foreach($result as $row) {
-            $users[] = $this->createUserFromRow($row);
+        foreach ($result as $row) {
+            $users[] = $this->convertToUser($row);
         }
         return $users;
     }
 
-    public function get($id) {
-        $sql = 'SELECT * FROM '.Tables\Users::TABLE_NAME.' WHERE '.Tables\Users::UID.' = ?';
-        $result = $this->getConnection()->query($sql,[$id]);
-        return $this->createUserFromRow($result[0]);
+    public function getUser($id) {
+        $sql = 'SELECT * FROM ' . UserTable::TABLE_NAME . ' WHERE ' . UserTable::ID . ' = ?';
+        $result = $this->getConnection()->query($sql, [$id]);
+        return $this->convertToUser($result[0]);
     }
 
-    public function getWithOnid($onid) {
-        $sql = 'SELECT * FROM '.Tables\Users::TABLE_NAME.' WHERE '.Tables\Users::ONID.' = ?';
+    public function getUserWithOnid($onid) {
+        $sql = 'SELECT * FROM ' . UserTable::TABLE_NAME . ' WHERE ' . UserTable::ONID . ' = ?';
         $result = $this->getConnection()->query($sql, [$onid]);
-        return $this->createUserFromRow($result[0]);
+        return $this->convertToUser($result[0]);
     }
 
     /**
      * @param $user User
      * @return bool
      */
-    public function create($user) {
+    public function createUser($user) {
         $values = array(
             $user->getId(),
             $user->getOnid(),
             $user->getRole(),
             $user->getLastLogin()
         );
-        return $this->getConnection()->exec(Tables\Users::TABLE_INSERT, $values);
+        $sql = 'INSERT INTO ' . UserTable::TABLE_NAME .
+            ' (' . UserTable::ID . ',' . UserTable::NAME . ',' . UserTable::ONID . ',' . UserTable::ROLE . ',' . UserTable::LAST_LOGIN . ') VALUES(?,?,?,?,?)';
+        return $this->getConnection()->exec($sql, $values);
     }
 
-    private function createUserFromRow($row) {
-        $u = new User($row[Tables\Users::UID]);
-        $u->setName($row[Tables\Users::NAME]);
-        $u->setOnid($row[Tables\Users::ONID]);
-        $u->setRole($row[Tables\Users::ROLE]);
-        $u->setLastLogin($row[Tables\Users::LAST_LOGIN]);
+    /**
+     * @param $user User
+     * @return bool
+     */
+    public function updateUser($user) {
+        $sql = 'UPDATE ' . UserTable::TABLE_NAME . ' SET ';
+        $sql .= UserTable::NAME . ' = ?,';
+        $sql .= UserTable::LAST_LOGIN . ' = ?,';
+        $sql .= UserTable::ROLE . ' = ? ';
+        $sql .= 'WHERE ' . UserTable::ID . ' = ?';
+        $values = array(
+            $user->getName(),
+            $user->getLastLogin(),
+            $user->getRole(),
+            $user->getId()
+        );
+        return $this->getConnection()->exec($sql, $values);
+    }
+
+    public static function convertToUser($row, $prefix = '') {
+        $u = new User($row[$prefix . UserTable::ID]);
+        $u->setName($row[$prefix . UserTable::NAME]);
+        $u->setOnid($row[$prefix . UserTable::ONID]);
+        $u->setRole($row[$prefix . UserTable::ROLE]);
+        $u->setLastLogin($row[$prefix . UserTable::LAST_LOGIN]);
         return $u;
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace OSU\IOTA;
+namespace OSU\IOTA\DAO;
 
 class Dao {
     /** @var DbConnection */
@@ -21,7 +21,7 @@ class Dao {
         $this->conn = new DbConnection($dbconfig['name'], $dbconfig['host'], $dbconfig['user'], $dbconfig['password']);
     }
 
-    public function getConnection() {
+    protected function getConnection() {
         return $this->conn;
     }
 }
