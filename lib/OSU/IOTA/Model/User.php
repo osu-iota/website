@@ -6,22 +6,10 @@ use OSU\IOTA\Util\Security;
 class User {
 
     private $id;
-
     private $name;
-
     private $onid;
-
     private $role;
-
     private $lastLogin;
-
-    private $attendedEvents;
-
-    private $alliancesHeaded;
-
-    private $registeredEvents;
-
-    private $ledEvents;
 
     public function __construct($id = null) {
         $this->id = $id != null ? $id : Security::generateSecureUniqueId();
@@ -89,62 +77,5 @@ class User {
     public function setLastLogin($lastLogin) {
         $this->lastLogin = $lastLogin;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getAttendedEvents() {
-        return $this->attendedEvents;
-    }
-
-    /**
-     * @param mixed $attendedEvents
-     */
-    public function setAttendedEvents($attendedEvents) {
-        $this->attendedEvents = $attendedEvents;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAlliancesHeaded() {
-        return $this->alliancesHeaded;
-    }
-
-    /**
-     * @param mixed $alliancesHeaded
-     */
-    public function setAlliancesHeaded($alliancesHeaded) {
-        $this->alliancesHeaded = $alliancesHeaded;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRegisteredEvents() {
-        return $this->registeredEvents;
-    }
-
-    /**
-     * @param mixed $registeredEvents
-     */
-    public function setRegisteredEvents($registeredEvents) {
-        $this->registeredEvents = $registeredEvents;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLedEvents() {
-        return $this->ledEvents;
-    }
-
-    /**
-     * @param mixed $ledEvents
-     */
-    public function setLedEvents($ledEvents) {
-        $this->ledEvents = $ledEvents;
-    }
-
 
 }
