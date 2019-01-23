@@ -1,5 +1,16 @@
 <?php include_once '.meta.php'; ?>
 <?php include BASE . '/include/templates/header.php'; ?>
+<?php
+// Split the q param in the URL to find out what content to load
+$urlPath = explode('/', $_GET['q']);
+
+if(count($urlPath) == 0){
+    // We are on the home page
+} else {
+    // Time to load content. Look at the first entry in the path. If it is a reserved path, redirect to the appropriate
+    // sub-directory. Otherwise we need to load the content and display it
+}
+?>
     <div class="row">
         <div class="col">
             <h1>Welcome to the IoT Alliance!</h1>
