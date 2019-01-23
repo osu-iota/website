@@ -90,9 +90,15 @@ class EventDao extends Dao {
         $sql .= AmTable::aliased(AmTable::DESCRIPTION) . ' AS ' . self::SPONSOR_DESCRIPTION . ', ';
         $sql .= AmTable::aliased(AmTable::URL) . ' AS ' . self::SPONSOR_URL . ', ';
         $sql .= AmTable::aliased(AmTable::HEAD) . ' AS ' . self::SPONSOR_HEAD_ID . ' ';
+        $sql .= UserTable::aliased(UserTable::NAME) . ' AS ' . self::SPONSOR_HEAD_NAME;
+        $sql .= UserTable::aliased(UserTable::ONID) . ' AS ' . self::SPONSOR_HEAD_ONID;
+        $sql .= UserTable::aliased(UserTable::ROLE) . ' AS ' . self::SPONSOR_HEAD_ROLE;
+        $sql .= UserTable::aliased(UserTable::LAST_LOGIN) . ' AS ' . self::SPONSOR_HEAD_LAST_LOGIN;
         $sql .= 'FROM ' . EventTable::TABLE_NAME . ' ' . EventTable::TABLE_ALIAS . ' ';
         $sql .= 'INNER JOIN ' . AmTable::TABLE_NAME . ' ' . AmTable::TABLE_ALIAS . ' ';
         $sql .= 'ON ' . AmTable::aliased(AmTable::ID) . ' = ' . EventTable::aliased(EventTable::SPONSOR);
+        $sql .= 'INNER JOIN ' . UserTable::TABLE_NAME . ' ' . UserTable::TABLE_ALIAS . ' ';
+        $sql .= 'ON ' . UserTable::aliased(UserTable::ID) . ' = ' . AmTable::aliased(AmTable::HEAD);
         return $sql;
     }
 
@@ -101,4 +107,8 @@ class EventDao extends Dao {
     private const SPONSOR_DESCRIPTION = EventTable::SPONSOR . '_' . AmTable::DESCRIPTION;
     private const SPONSOR_URL = EventTable::SPONSOR . '_' . AmTable::URL;
     private const SPONSOR_HEAD_ID = EventTable::SPONSOR . '_' . AmTable::HEAD . '_' . UserTable::ID;
+    private const SPONSOR_HEAD_NAME = EventTable::SPONSOR . '_' . AmTable::HEAD . '_' . UserTable::NAME;
+    private const SPONSOR_HEAD_ONID = EventTable::SPONSOR . '_' . AmTable::HEAD . '_' . UserTable::ONID;
+    private const SPONSOR_HEAD_ROLE = EventTable::SPONSOR . '_' . AmTable::HEAD . '_' . UserTable::ROLE;
+    private const SPONSOR_HEAD_LAST_LOGIN = EventTable::SPONSOR . '_' . AmTable::HEAD . '_' . UserTable::LAST_LOGIN;
 }
