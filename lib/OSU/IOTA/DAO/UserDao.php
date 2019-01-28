@@ -12,7 +12,7 @@ class UserDao extends Dao {
         $sql = 'SELECT * FROM ' . UserTable::TABLE_NAME;
         $result = $this->getConnection()->query($sql);
         foreach ($result as $row) {
-            $users[] = $this->convertToUser($row);
+            $users[] = self::extractUserFromRow($row);
         }
         return $users;
     }
@@ -20,13 +20,13 @@ class UserDao extends Dao {
     public function getUser($id) {
         $sql = 'SELECT * FROM ' . UserTable::TABLE_NAME . ' WHERE ' . UserTable::ID . ' = ?';
         $result = $this->getConnection()->query($sql, [$id]);
-        return $this->convertToUser($result[0]);
+        return self::extractUserFromRow($result[0]);
     }
 
     public function getUserWithOnid($onid) {
         $sql = 'SELECT * FROM ' . UserTable::TABLE_NAME . ' WHERE ' . UserTable::ONID . ' = ?';
         $result = $this->getConnection()->query($sql, [$onid]);
-        return $this->convertToUser($result[0]);
+        return self::extractUserFromRow($result[0]);
     }
 
     /**
@@ -36,12 +36,12 @@ class UserDao extends Dao {
     public function createUser($user) {
         $values = array(
             $user->getId(),
+            $user->getName(),
             $user->getOnid(),
             $user->getRole(),
             $user->getLastLogin()
         );
-        $sql = 'INSERT INTO ' . UserTable::TABLE_NAME .
-            ' (' . UserTable::ID . ',' . UserTable::NAME . ',' . UserTable::ONID . ',' . UserTable::ROLE . ',' . UserTable::LAST_LOGIN . ') VALUES(?,?,?,?,?)';
+        $sql = 'INSERT INTO ' . UserTable::TABLE_NAME . ' VALUES(?,?,?,?,?)';
         return $this->getConnection()->exec($sql, $values);
     }
 
@@ -64,12 +64,12 @@ class UserDao extends Dao {
         return $this->getConnection()->exec($sql, $values);
     }
 
-    public static function convertToUser($row, $prefix = '') {
-        $u = new User($row[$prefix . UserTable::ID]);
-        $u->setName($row[$prefix . UserTable::NAME]);
-        $u->setOnid($row[$prefix . UserTable::ONID]);
-        $u->setRole($row[$prefix . UserTable::ROLE]);
-        $u->setLastLogin($row[$prefix . UserTable::LAST_LOGIN]);
+    public static function extractUserFromRow($row) {
+        $u = new User($row[UserTable::ID]);
+        $u->setName($row[UserTable::NAME]);
+        $u->setOnid($row[UserTable::ONID]);
+        $u->setRole($row[UserTable::ROLE]);
+        $u->setLastLogin($row[UserTable::LAST_LOGIN]);
         return $u;
     }
 }
