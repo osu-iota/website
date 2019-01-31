@@ -1,71 +1,127 @@
 <?php include_once '.meta.php'; ?>
 <?php include_once BASE . '/include/templates/header.php'; ?>
-<?php include_once 'formvars.php'; ?>
+<?php
+session_start();
+$onid = $_SESSION['onid'];
+$name = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
+
+$ptTypes = json_decode(file_get_contents(BASE . '/include/data/participation-types.json'), true);
+$clubs = json_decode(file_get_contents(BASE . '/include/data/clubs.json'), true);
+?>
 
 <div class="row">
     <div class="col">
         <h1>IOTA Participation Form</h1>
+        <p>Please fill out the form below to indicate how you participated in the IoT Alliance.</p>
     </div>
 </div>
+<hr/>
+<?php if (empty($onid) || $onid == false): ?>
+    <div class="row">
+        <div class="col">
+            <p>Please <a href="participate/?auth=true">sign in using your ONID</a> to complete the form</p>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="row">
+        <div class="col">
+            <form>
+                <div class="form-row">
+                    <div class="col-md-4 form-group">
+                        <label>Name (first and last) *</label>
+                        <input class="form-control" type="text" name="name" value="<?php echo $name ?>" disabled/>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>ONID (&commat;oregonstate.edu) *</label>
+                        <input class="form-control" type="text" name="onid" value="<?php echo $onid ?>" disabled/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-3" id="types">
+                        <label>Participation Type *</label>
+                        <?php
+                        // Types of participation
+                        foreach ($ptTypes as $type) {
+                            echo '<div class="form-check">';
+                            echo '<input class="form-check-input" type="radio" name="type" value="' . $type['code'] . '"/>';
+                            echo '<label class="form-check-label">' . $type['name'] . '</label>';
+                            echo '</div>';
+                        } ?>
+                    </div>
+                </div>
+                <div class="form-row top-buffer" id="clubEventName">
+                    <div class="col-md-3">
+                        <label>Event Name *</label>
+                        <input class="form-control" name="event"/>
+                    </div>
+                </div>
+                <div class="form-row top-buffer" id="clubs">
+                    <div class="col-md-4">
+                        <label>Club Name *</label>
+                        <?php
+                        // Different possible clubs
+                        foreach ($clubs as $club) {
+                            echo '<div class="form-check">';
+                            echo '<input class="form-check-input" type="radio" name="club" value="' . $club['code'] . '"/>';
+                            echo '<label class="form-check-label">' . $club['name'] . '</label>';
+                            echo '</div>';
+                        }
+                        ?>
+                    </div>
+                    <div class="form-row top-buffer">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="selfieAddon">Selfie</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" accept="image/*" class="custom-file-input" id="selfie"
+                                           aria-describedby="selfieAddon">
+                                    <label class="custom-file-label" for="selfie">Choose image</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="row">
-    <div class="col">
-        <form>
-            <div class="form-row">
-                <div class="col-md-4 form-group">
-                    <label>Name (first and last) *</label>
-                    <input class="form-control" type="text" name="name"/>
+                <div class="form-row top-buffer">
+                    <div class="col-md-6">
+                        <label for="description">Description *</label>
+                        <textarea class="form-control" name="description"
+                                  placeholder="Briefly describe your participation here" rows="5"></textarea>
+                    </div>
                 </div>
-                <div class="col-md-4 form-group">
-                    <label>ONID (&commat;oregonstate.edu) *</label>
-                    <input class="form-control" type="text" name="onid"/>
+                <div class="form-row" id="submitParticipationButton">
+                    <div class="col top-buffer">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-4" id="types">
-                    <label><strong>Participation Type</strong></label>
-                    <?php
-                    // Types of participation
-                    foreach ($participationTypes as $id => $name) {
-                        $fid = 'type' . str_replace(' ', '', $name);
-                        echo '<div class="form-check">';
-                        echo '<input class="form-check-input" type="radio" name="type" id="' . $fid . '" value="' . $id . '"/>';
-                        echo '<label class="form-check-label" for="' . $fid . '">' . $name . '</label>';
-                        echo '</div>';
-                    } ?>
-                </div>
-                <div class="col-md-4" id="clubs">
-                    <label><strong>Club Name</strong></label>
-                    <?php
-                    // Different possible clubs
-                    foreach ($clubNames as $id => $name) {
-                        $fid = 'club' . str_replace(' ', '', $name);
-                        echo '<div class="form-check">';
-                        echo '<input class="form-check-input" type="radio" name="club" id="' . $fid . '" value="' . $id . '"/>';
-                        echo '<label class="form-check-label" for="' . $fid . '">' . $name . '</label>';
-                        echo '</div>';
-                    }
-                    ?>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-<script>
-    $('input[type=radio][name=type]').change(function () {
-        if (this.value === 'event' || this.value === 'meeting') {
-            $('#clubs').show();
-        } else {
-            $('#clubs').hide();
-        }
-    });
-    $('input[type=radio][name=club]').change(function () {
-        console.log(this.value);
-    });
-</script>
+    <script>
+        $('input[type=radio][name=type]').change(function () {
+            if (this.value === 'event') {
+                $('#clubEventName').show();
+                $('#clubEventName').attr('required', true);
+                $('#clubs').show();
+            } else if (this.value === 'meeting') {
+                $('#clubEventName').hide();
+                $('#clubEventName').attr('required', false);
+                $('#clubs').show();
+            } else {
+                $('#clubEventName').hide();
+                $('#clubEventName').attr('required', false);
+                $('#clubs').hide();
+            }
+        });
+        $('#selfie').on('change', function (e) {
+            //get the file name
+            var filename = e.target.files[0].name;
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(filename);
+        })
+    </script>
+<?php endif; ?>
+
 <?php include_once BASE . '/include/templates/footer.php'; ?>

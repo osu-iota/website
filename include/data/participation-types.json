@@ -1,0 +1,18 @@
+[
+  {
+    "code": "meeting",
+    "name": "Club Meeting"
+  },
+  {
+    "code": "event",
+    "name": "Club Event"
+  },
+  {
+    "code": "project",
+    "name": "Project"
+  },
+  {
+    "code": "other",
+    "name": "Other"
+  }
+]

@@ -1,5 +1,12 @@
-<?php include_once '.meta.php' ?>
-<?php include_once BASE . '/include/templates/header.php' ?>
+<?php
+include_once '.meta.php';
+include_once BASE . '/include/templates/header.php';
+session_start();
+
+$name = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
+$email = $_SESSION['email'];
+
+?>
 
 <?php if ($_GET["sent"] === "true"): ?>
 
@@ -23,20 +30,26 @@
         <div class="col">
             <form method="POST" action="contact/submit.php">
                 <div class="form-row">
-                    <div class="form-group col-4">
-                        <input class="form-control" type="text" name="name" placeholder="Enter name *" required/>
-                    </div>
-                    <div class="form-group col-4">
-                        <input class="form-control" type="email" name="email" placeholder="Enter email address *"
-                               required/>
-                    </div>
-                    <div class="form-group col-4">
-                        <input class="form-control" type="text" name="subject" placeholder="Enter message subject *"
-                               required/>
+                    <div class="form-group col-sm-8 col-md-4">
+                        <label for="name">Name *</label>
+                        <input class="form-control" type="text" name="name" required
+                               value="<?php echo !empty($name) ? $name : '' ?>"/>
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col">
+                    <div class="form-group col-sm-8 col-md-4">
+                        <label for="email">Email *</label>
+                        <input class="form-control" type="email" name="email" placeholder="Enter email address *"
+                               required value="<?php echo !empty($email) ? $email : '' ?>"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="subject">Subject *</label>
+                        <input class="form-control" type="text" name="subject" placeholder="Enter message subject *"
+                               required/>
+                    </div>
+                    <div class="form-group col-12">
                         <textarea class="form-control" rows="10" placeholder="How can we help?" required></textarea>
                     </div>
                 </div>

@@ -64,6 +64,14 @@ class UserDao extends Dao {
         return $this->getConnection()->exec($sql, $values);
     }
 
+    public function registerUserForEvent($user, $event) {
+
+    }
+
+    public function unregisterUserFromEvent($user, $event) {
+
+    }
+
     public static function extractUserFromRow($row) {
         $u = new User($row[UserTable::ID]);
         $u->setName($row[UserTable::NAME]);

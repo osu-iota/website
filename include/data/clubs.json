@@ -1,0 +1,26 @@
+[
+  {
+    "code": "iota",
+    "name": "Internet of Things Alliance"
+  },
+  {
+    "code": "lug",
+    "name": "Linux Users Group"
+  },
+  {
+    "code": "robot",
+    "name": "OSU Robotics"
+  },
+  {
+    "code": "hack",
+    "name": "Hackathon Club"
+  },
+  {
+    "code": "security",
+    "name": "Security Club"
+  },
+  {
+    "code": "ie",
+    "name": "Inventors Enterprise"
+  }
+]

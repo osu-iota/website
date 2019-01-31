@@ -1,5 +1,9 @@
 <?php include_once '.meta.php' ?>
 <?php
+include_once BASE . '/lib/OSU/IOTA/Util/onidauth.php';
+if($_GET['auth'] == true || $_REQUEST['ticket'] . '' != ''){
+    onidauth(false);
+}
 $menu = array(
     'Home' => '',
     'Calendar' => 'calendar',
@@ -59,7 +63,10 @@ $menu = array(
             <ul class="navbar-nav mr-auto">
                 <?php
                 foreach ($menu as $title => $link) {
-                    $active = (strpos($_SERVER['REQUEST_URI'], $link) !== false) ? 'active' : '';
+                    $active = '';
+                    if (!empty($link)) {
+                        $active = (strpos($_SERVER['REQUEST_URI'], $link) !== false) ? 'active' : '';
+                    }
                     echo '<li class="nav-item ' . $active . '"><a class="nav-link" href="' . $link . '">' . $title . '</a></li>';
                 }
                 ?>

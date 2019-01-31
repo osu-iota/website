@@ -28,6 +28,10 @@ footer {
     justify-content: space-between;
 }
 
+.top-buffer {
+    margin-top: 20px;
+}
+
 
 .calendar {
     overflow: visible;
@@ -66,4 +70,12 @@ footer .disclaimer {
 
 #clubs {
     display: none;
+}
+
+#clubEventName {
+    display: none;
+}
+
+#submitParticipationButton {
+    margin-bottom: 20px;
 }

@@ -1,98 +1,62 @@
 CREATE TABLE IF NOT EXISTS iota_user
 (
-  uid        CHAR(15)    NOT NULL,
-  u_name       VARCHAR(50) NOT NULL,
-  u_onid       VARCHAR(20) NOT NULL,
-  u_role       CHAR(15),
-  u_last_login DATETIME,
+  uid               CHAR(15)    NOT NULL,
+  u_onid            VARCHAR(20) NOT NULL,
+  u_privilege_level SMALLINT    NOT NULL DEFAULT 0,
+  u_last_login      DATETIME,
   PRIMARY KEY (uid)
 );
 
-CREATE TABLE IF NOT EXISTS iota_event
+CREATE TABLE IF NOT EXISTS iota_resource
 (
-  eid         CHAR(15)    NOT NULL,
-  e_title       VARCHAR(50) NOT NULL,
-  e_description TEXT        NOT NULL,
-  e_date        DATETIME    NOT NULL,
-  e_location    VARCHAR(200),
-  e_sponsor     CHAR(15)    NOT NULL,
-  PRIMARY KEY (eid),
-  FOREIGN KEY (e_sponsor) REFERENCES iota_alliance_member (amid)
+  rid           CHAR(15)     NOT NULL,
+  r_name        VARCHAR(50)  NOT NULL,
+  r_description TEXT,
+  r_topic       VARCHAR(20)  NOT NULL,
+  PRIMARY KEY (rid)
 );
 
-CREATE TABLE IF NOT EXISTS iota_alliance_member
+CREATE TABLE IF NOT EXISTS iota_resource_data
 (
-  amid         CHAR(15)    NOT NULL,
-  am_name        VARCHAR(50) NOT NULL,
-  am_description TEXT        NOT NULL,
-  am_url         VARCHAR(100),
-  am_head        CHAR(15),
-  PRIMARY KEY (amid),
-  FOREIGN KEY (am_head) REFERENCES iota_user (uid)
+  rdid         CHAR(15) NOT NULL,
+  rid          CHAR(15) NOT NULL,
+  rd_data      BLOB     NOT NULL,
+  rd_extension CHAR(5)  NOT NULL,
+  rd_date      DATETIME NOT NULL,
+  rd_downloads INT      NOT NULL DEFAULT 0,
+  PRIMARY KEY (rdid),
+  FOREIGN KEY (rid) REFERENCES iota_resource (rid)
 );
 
-CREATE TABLE IF NOT EXISTS iota_material
+CREATE TABLE IF NOT EXISTS iota_participates
 (
-  mid         CHAR(15)     NOT NULL,
-  m_name        VARCHAR(50)  NOT NULL,
-  m_description TEXT,
-  m_type        CHAR(15)     NOT NULL,
-  m_file        VARCHAR(100) NOT NULL,
-  PRIMARY KEY (mid),
-  FOREIGN KEY (m_type) REFERENCES iota_material_type (mtid)
-);
-
-CREATE TABLE IF NOT EXISTS iota_material_type
-(
-  mtid CHAR(15) NOT NULL,
-  mt_name VARCHAR(50),
-  PRIMARY KEY (mtid)
-);
-
-CREATE TABLE IF NOT EXISTS iota_attends
-(
-  uid      CHAR(15)     NOT NULL,
-  eid      CHAR(15)     NOT NULL,
-  a_selfie   VARCHAR(100) NOT NULL,
-  a_rating   FLOAT,
-  a_comments TEXT,
-  PRIMARY KEY (uid, eid),
+  pid           CHAR(15)    NOT NULL,
+  uid           CHAR(15)    NOT NULL,
+  p_type        VARCHAR(20) NOT NULL,
+  p_club        VARCHAR(20) NOT NULL,
+  p_description TEXT        NOT NULL,
+  p_data        CHAR(15),
+  PRIMARY KEY (pid),
   FOREIGN KEY (uid) REFERENCES iota_user (uid),
-  FOREIGN KEY (eid) REFERENCES iota_event (eid)
+  FOREIGN KEY (p_data) REFERENCES iota_participate_data (pdid)
 );
 
-CREATE TABLE IF NOT EXISTS iota_registers_for
+CREATE TABLE IF NOT EXISTS iota_participate_data
 (
-  uid CHAR(15) NOT NULL,
-  eid CHAR(15) NOT NULL,
-  PRIMARY KEY (uid, eid),
-  FOREIGN KEY (uid) REFERENCES iota_user (uid),
-  FOREIGN KEY (eid) REFERENCES iota_event (eid)
-);
-
-CREATE TABLE IF NOT EXISTS iota_led_by
-(
-  eid CHAR(15) NOT NULL,
-  uid CHAR(15) NOT NULL,
-  PRIMARY KEY (eid, uid),
-  FOREIGN KEY (eid) REFERENCES iota_event (eid),
-  FOREIGN KEY (uid) REFERENCES iota_user (uid)
+  pdid         CHAR(15) NOT NULL,
+  pd_data      BLOB     NOT NULL,
+  pd_extension CHAR(5)  NOT NULL,
+  PRIMARY KEY (pdid)
 );
 
 CREATE TABLE IF NOT EXISTS iota_contributes
 (
-  uid  CHAR(15)    NOT NULL,
-  mid  VARCHAR(15) NOT NULL,
-  c_date DATETIME    NOT NULL,
-  PRIMARY KEY (uid, mid),
+  uid     CHAR(15)    NOT NULL,
+  rid     VARCHAR(15) NOT NULL,
+  cn_date DATETIME    NOT NULL,
+  PRIMARY KEY (uid, rid),
   FOREIGN KEY (uid) REFERENCES iota_user (uid),
-  FOREIGN KEY (mid) REFERENCES iota_material (mid)
+  FOREIGN KEY (rid) REFERENCES iota_resource (rid)
 );
 
-CREATE TABLE IF NOT EXISTS iota_resource_for (
-  mid CHAR(15) NOT NULL,
-  eid CHAR(15) NOT NULL,
-  PRIMARY KEY (mid, eid),
-  FOREIGN KEY (mid) REFERENCES iota_material(mid),
-  FOREIGN KEY (eid) REFERENCES iota_event(eid)
-);
+

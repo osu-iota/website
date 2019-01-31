@@ -1,6 +1,6 @@
 <?php
 
-namespace osu\iota;
+namespace OSU\IOTA\Model;
 
 class MaterialType {
     protected $id;
