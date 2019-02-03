@@ -6,4 +6,8 @@
 </footer>
 </body>
 </html>
-
+<?php
+// In the .meta.php file included in the header (from the root level) we opened up a database connection. We need to
+// close it here
+$db = null;
+?>

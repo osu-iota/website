@@ -6,34 +6,19 @@ use OSU\IOTA\Util\Security;
 class User {
 
     private $id;
-    private $name;
     private $onid;
-    private $role;
     private $lastLogin;
+    private $privilegeLevel;
 
     public function __construct($id = null) {
         $this->id = $id != null ? $id : Security::generateSecureUniqueId();
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getId() {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName() {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name) {
-        $this->name = $name;
     }
 
     /**
@@ -53,20 +38,6 @@ class User {
     /**
      * @return mixed
      */
-    public function getRole() {
-        return $this->role;
-    }
-
-    /**
-     * @param mixed $role
-     */
-    public function setRole($role) {
-        $this->role = $role;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getLastLogin() {
         return $this->lastLogin;
     }
@@ -76,6 +47,20 @@ class User {
      */
     public function setLastLogin($lastLogin) {
         $this->lastLogin = $lastLogin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivilegeLevel() {
+        return $this->privilegeLevel;
+    }
+
+    /**
+     * @param mixed $privilegeLevel
+     */
+    public function setPrivilegeLevel($privilegeLevel) {
+        $this->privilegeLevel = $privilegeLevel;
     }
 
 }

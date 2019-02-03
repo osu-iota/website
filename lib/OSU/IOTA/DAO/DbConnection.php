@@ -14,7 +14,7 @@ class DbConnection {
     }
 
     public function query($sql, $params = []) {
-        if ($this->conn != null) {
+        if ($this->conn == null) {
             return null;
         }
         try {
@@ -27,6 +27,7 @@ class DbConnection {
             $result = $statement->fetchAll();
             return $result;
         } catch (\PDOException $e) {
+            echo $e;
             return null;
         }
     }
