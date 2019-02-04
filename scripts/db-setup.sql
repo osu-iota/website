@@ -17,12 +17,14 @@ CREATE TABLE IF NOT EXISTS iota_resource
 
 CREATE TABLE IF NOT EXISTS iota_resource_data
 (
-  rdid         CHAR(15) NOT NULL,
-  rid          CHAR(15) NOT NULL,
-  rd_data      BLOB     NOT NULL,
-  rd_extension CHAR(5)  NOT NULL,
-  rd_date      INT      NOT NULL,
-  rd_downloads INT      NOT NULL DEFAULT 0,
+  rdid         CHAR(15)    NOT NULL,
+  rid          CHAR(15)    NOT NULL,
+  rd_data      MEDIUMBLOB  NOT NULL,
+  rd_extension CHAR(5)     NOT NULL,
+  rd_mime      VARCHAR(50) NOT NULL,
+  rd_date      INT         NOT NULL,
+  rd_downloads INT         NOT NULL DEFAULT 0,
+  rd_active    BOOL        NOT NULL,
   PRIMARY KEY (rdid),
   FOREIGN KEY (rid) REFERENCES iota_resource (rid)
 );
@@ -67,12 +69,12 @@ CREATE TABLE IF NOT EXISTS iota_participates
 
 CREATE TABLE IF NOT EXISTS iota_contributes
 (
-  uid     CHAR(15)    NOT NULL,
-  rid     VARCHAR(15) NOT NULL,
-  cn_date INT         NOT NULL,
-  PRIMARY KEY (uid, rid),
+  uid     CHAR(15) NOT NULL,
+  rdid    CHAR(15) NOT NULL,
+  cn_date INT      NOT NULL,
+  PRIMARY KEY (uid, rdid),
   FOREIGN KEY (uid) REFERENCES iota_user (uid),
-  FOREIGN KEY (rid) REFERENCES iota_resource (rid)
+  FOREIGN KEY (rdid) REFERENCES iota_resource_data (rdid)
 );
 
 

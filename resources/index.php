@@ -15,6 +15,7 @@ session_start();
         <?php endif; ?>
     </div>
 </div>
+<?php include_once BASE . '/include/templates/message.php' ?>
 <?php if ($userIsContributor): ?>
     <div class="row">
         <div class="col contribute-resource">

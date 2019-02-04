@@ -11,10 +11,6 @@ $event = $_POST['event'];
 $club = $_POST['club'];
 $selfie = $_FILES['selfie'];
 $description = $_POST['description'];
-echo '<pre>';
-print_r($_FILES);
-print_r($_POST);
-echo '</pre>';
 
 
 // Verify the uid and the onid are included
@@ -80,13 +76,13 @@ try {
     fail('Failed to save participation data. Please submit again or try later');
 }
 
-//header('Location: ' . BASE_URL . '/participate/?submitted=true');
+header('Location: ' . BASE_URL . '/participate/?submitted=true');
 
 function fail($message) {
     $_SESSION['message'] = array(
         'content' => $message,
         'type' => 'error'
     );
-    //header('Location: ' . BASE_URL . '/participate');
+    header('Location: ' . BASE_URL . '/participate');
     die();
 }

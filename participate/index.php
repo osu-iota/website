@@ -37,7 +37,8 @@ $clubs = json_decode(file_get_contents(BASE . '/include/data/clubs.json'), true)
     <?php else: ?>
         <div class="row">
             <div class="col">
-                <form method="POST" action="participate/submit.php" id="participationForm">
+                <form method="POST" action="participate/submit.php" id="participationForm"
+                      enctype="multipart/form-data">
                     <input type="hidden" name="uid" value="<?php echo $uid ?>"/>
                     <div class="form-row">
                         <div class="col-md-4 form-group">
@@ -85,16 +86,12 @@ $clubs = json_decode(file_get_contents(BASE . '/include/data/clubs.json'), true)
                         </div>
                         <div class="form-row top-buffer">
                             <div class="col-md-4">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="selfieAddon">Selfie</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" name="selfie" accept="image/*" class="custom-file-input"
-                                               id="selfie"
-                                               aria-describedby="selfieAddon" formenctype="multipart/form-data">
-                                        <label class="custom-file-label" for="selfie">Choose image</label>
-                                    </div>
+                                <label>Selfie *</label>
+                                <div class="custom-file">
+                                    <input type="file" name="selfie" accept="image/*" class="custom-file-input"
+                                           id="selfie"
+                                           aria-describedby="selfieAddon">
+                                    <label class="custom-file-label" for="selfie">Choose image</label>
                                 </div>
                             </div>
                         </div>

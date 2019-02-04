@@ -27,3 +27,12 @@ $url = 'mysql:host=' . $dbHost . ';dbname=' . $dbName;
 $db = new PDO($url, $dbUser, $dbPassword);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+function fail($redirect, $message) {
+    $_SESSION['message'] = array(
+        'content' => $message,
+        'type' => 'error'
+    );
+    header('Location: ' . BASE_URL . $redirect);
+    die();
+}
+
