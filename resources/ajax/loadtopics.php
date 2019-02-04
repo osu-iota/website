@@ -1,5 +1,5 @@
 <?php
-include_once '.meta.php';
+session_start();
 
 $sql = 'SELECT * FROM iota_resource_topic ORDER BY rt_name';
 try {
@@ -10,6 +10,7 @@ try {
 
 foreach ($res as $topic) {
     echo '<tr>';
-    echo '<td>' . $topic['rt_name'] . '</td>';
+    echo '<td><a href="resources/topics/?t=' . $topic['rtid'] . '">' . $topic['rt_name'] . '</a></td>';
+    echo '<td></td>';
     echo '</tr>';
 }

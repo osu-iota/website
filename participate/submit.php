@@ -1,5 +1,4 @@
 <?php
-include_once '.meta.php';
 
 use OSU\IOTA\Util\Security;
 

@@ -1,4 +1,3 @@
-<?php include_once '.meta.php'; ?>
 <?php include BASE . '/include/templates/header.php'; ?>
 <?php
 // Split the q param in the URL to find out what content to load

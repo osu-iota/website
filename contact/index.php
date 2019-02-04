@@ -1,5 +1,4 @@
 <?php
-include_once '.meta.php';
 include_once BASE . '/include/templates/header.php';
 session_start();
 

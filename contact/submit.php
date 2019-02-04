@@ -1,4 +1,4 @@
-<?php include_once '.meta.php';
+<?php
 
 $from = array(
     "name" => "IoT Alliace",

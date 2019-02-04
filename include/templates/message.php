@@ -1,5 +1,4 @@
 <?php
-include_once '.meta.php';
 session_start();
 
 if ($_SESSION['message']): ?>

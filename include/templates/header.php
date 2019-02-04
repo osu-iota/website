@@ -1,10 +1,14 @@
-<?php include_once '.meta.php' ?>
 <?php
 include_once BASE . '/lib/OSU/IOTA/Util/onidauth.php';
+session_start();
+
 if ($_GET['auth'] == true || $_REQUEST['ticket'] . '' != '') {
     onidauth($db);
 }
-getIotaUserInfo($db);
+
+$userIsAdmin = $_SESSION['privilegeLevel'] > 1;
+$userIsContributor = $_SESSION['privilegeLevel'] > 0;
+
 $menu = array(
     'Home' => '',
     'Calendar' => 'calendar',

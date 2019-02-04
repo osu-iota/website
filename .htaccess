@@ -5,4 +5,5 @@
 #    RewriteCond %{REQUEST_URI} !=/favicon.ico
 #    RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 #</IfModule>
+php_value auto_prepend_file "/nfs/farm/groups/iota/public_html/bootstrap.php"
 

@@ -1,4 +1,3 @@
-<?php include '.meta.php' ?>
 <?php include BASE . '/include/templates/header.php'; ?>
     <div class="row">
         <div class="col">

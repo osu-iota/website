@@ -1,9 +1,7 @@
 <?php
-include_once '.meta.php';
-
 $topic = $_POST['topic'];
 
-if(!$topic) {
+if (!$topic) {
     http_send_status(400);
     die();
 }
@@ -15,7 +13,7 @@ $prepared->bindParam(':id', $rtid, PDO::PARAM_STR);
 $prepared->bindParam(':topic', $topic, PDO::PARAM_STR);
 try {
     $prepared->execute();
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     $logger->error($e->getMessage());
     http_send_status(500);
     die();
