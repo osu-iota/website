@@ -99,3 +99,32 @@ footer .disclaimer {
     max-height: 200px;
     overflow-y: auto;
 }
+
+table.topic-results {
+    display: none;
+}
+
+table.topic-results tbody tr td:last-child {
+    width: 30px;
+}
+
+.topic-results-mobile .col {
+    border: 1px solid #cccccc;
+    box-shadow: 1px 1px 1px #cccccc;
+    margin: 8px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.topic-results-mobile .col a {
+    float: right;
+}
+
+@media only screen and (min-width: 768px) {
+    .topic-results-mobile {
+        display: none;
+    }
+    table.topic-results {
+        display: table;
+    }
+}
