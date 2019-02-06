@@ -1,7 +1,6 @@
 <?php
 include_once BASE . '/lib/OSU/IOTA/Util/onidauth.php';
 session_start();
-
 if ($_GET['auth'] == true || $_REQUEST['ticket'] . '' != '') {
     onidauth($db);
 }
@@ -12,7 +11,7 @@ $userIsContributor = $_SESSION['privilegeLevel'] > 0;
 $menu = array(
     'Home' => '',
     'Calendar' => 'calendar',
-    'Skill Tree' => 'skill-trees',
+    'Skill Trees' => 'skill-trees',
     'Office Hours' => 'office-hours',
     'Resources' => 'resources',
     'Participation Form' => 'participate',

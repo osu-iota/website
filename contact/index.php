@@ -2,7 +2,7 @@
 include_once BASE . '/include/templates/header.php';
 session_start();
 
-$name = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
+$name = $_SESSION['fname'] ? $_SESSION['fname'] . ' ' . $_SESSION['lname'] : '';
 $email = $_SESSION['email'];
 
 ?>
@@ -40,15 +40,13 @@ $email = $_SESSION['email'];
                     <div class="form-group col-sm-8 col-md-4">
                         <label for="email">Email *</label>
                         <input required class="form-control" type="email" name="email"
-                               placeholder="Enter email address *"
                                value="<?php echo !empty($email) ? $email : '' ?>"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="subject">Subject *</label>
-                        <input required class="form-control" type="text" name="subject"
-                               placeholder="Enter message subject *"/>
+                        <input required class="form-control" type="text" name="subject"/>
                     </div>
                     <div class="form-group col-12">
                         <textarea required name="content" class="form-control" rows="10"
