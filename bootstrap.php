@@ -9,6 +9,10 @@ define('BASE', __DIR__);
 define('BASE_PRIVATE', dirname(__DIR__));
 define('BASE_URL', 'http://groups.engr.oregonstate.edu/IOTA/');
 
+// Initialize some variables to easily track permissions
+$userIsAdmin = $_SESSION['privilegeLevel'] > 1;
+$userIsContributor = $_SESSION['privilegeLevel'] > 0;
+
 // Set an autoloader for custom classes
 spl_autoload_register(function ($className) {
     include BASE . '/lib/' . str_replace('\\', '/', $className) . '.php';

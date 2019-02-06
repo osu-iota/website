@@ -5,9 +5,6 @@ if ($_GET['auth'] == true || $_REQUEST['ticket'] . '' != '') {
     onidauth($db);
 }
 
-$userIsAdmin = $_SESSION['privilegeLevel'] > 1;
-$userIsContributor = $_SESSION['privilegeLevel'] > 0;
-
 $menu = array(
     'Home' => '',
     'Calendar' => 'calendar',
