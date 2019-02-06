@@ -61,7 +61,7 @@ if (!$userIsContributor):
                     <div class="col-sm 2 col-md-4 col-lg-3">
                         <label>Resource File *</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="resource">
+                            <input required type="file" class="custom-file-input" name="resource">
                             <label class="custom-file-label" for="customFile">Choose File</label>
                         </div>
                     </div>

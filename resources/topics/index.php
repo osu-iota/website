@@ -13,9 +13,10 @@ $topic = $prepared->fetchAll()[0]['rt_name'];
 // Get all of the resources associated with the topic
 $sql = 'SELECT rt.*, r.*, rd.rdid, rd.rd_extension ';
 $sql .= 'FROM iota_resource_topic rt, iota_resource_for rf, iota_resource r, iota_resource_data rd ';
-$sql .= 'WHERE rt.rtid = rf.rtid AND rf.rid = r.rid AND rd.rid = r.rid ';
+$sql .= 'WHERE rt.rtid = rf.rtid AND rf.rid = r.rid AND rd.rid = r.rid AND rt.rtid = :id ';
 $sql .= 'ORDER BY rd.rd_date DESC';
 $prepared = $db->prepare($sql);
+$prepared->bindParam(':id', $rtid, PDO::PARAM_STR);
 $prepared->execute();
 $prepared->setFetchMode(PDO::FETCH_ASSOC);
 $results = $prepared->fetchAll();
@@ -37,26 +38,28 @@ $results = $prepared->fetchAll();
             </thead>
             <tbody>
             <?php
-            echo '<tr>';
             foreach ($results as $result) {
+                echo '<tr>';
                 echo '<td>' . $result['r_name'] . '</td>';
                 echo '<td>' . $result['r_description'] . '</td>';
                 echo '<td>' . strtoupper($result['rd_extension']) . '</td>';
                 echo '<td><a href="resources/topics/download.php?r=' . $result['rdid'] . '">Download</a></td>';
+                echo '</tr>';
             }
-            echo '</tr>';
             ?>
             </tbody>
         </table>
     </div>
 </div>
-<div class="row topic-results-mobile">
+<div class="topic-results-mobile">
     <?php
     foreach ($results as $result) {
+        echo '<div class="row justify-content-center">';
         echo '<div class="col">';
         echo '<h4>' . $result['r_name'] . '</h4>';
         echo '<p>' . $result['r_description'] . '</p>';
         echo '<a href="resources/topics/download.php?r=' . $result['rdid'] . '"><button class="btn btn-sm btn-secondary">Download</button></a>';
+        echo '</div>';
         echo '</div>';
     }
     ?>

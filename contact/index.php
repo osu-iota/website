@@ -24,32 +24,35 @@ $email = $_SESSION['email'];
                 concerns you may have.</p>
         </div>
     </div>
-
+    <hr>
+    <?php include_once BASE . '/include/templates/message.php' ?>
     <div class="row">
         <div class="col">
             <form method="POST" action="contact/submit.php">
                 <div class="form-row">
                     <div class="form-group col-sm-8 col-md-4">
                         <label for="name">Name *</label>
-                        <input class="form-control" type="text" name="name" required
+                        <input required class="form-control" type="text" name="name"
                                value="<?php echo !empty($name) ? $name : '' ?>"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-sm-8 col-md-4">
                         <label for="email">Email *</label>
-                        <input class="form-control" type="email" name="email" placeholder="Enter email address *"
-                               required value="<?php echo !empty($email) ? $email : '' ?>"/>
+                        <input required class="form-control" type="email" name="email"
+                               placeholder="Enter email address *"
+                               value="<?php echo !empty($email) ? $email : '' ?>"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="subject">Subject *</label>
-                        <input class="form-control" type="text" name="subject" placeholder="Enter message subject *"
-                               required/>
+                        <input required class="form-control" type="text" name="subject"
+                               placeholder="Enter message subject *"/>
                     </div>
                     <div class="form-group col-12">
-                        <textarea class="form-control" rows="10" placeholder="How can we help?" required></textarea>
+                        <textarea required name="content" class="form-control" rows="10"
+                                  placeholder="How can we help?"></textarea>
                     </div>
                 </div>
                 <div class="form-row">

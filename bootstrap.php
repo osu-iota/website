@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Uncomment for debugging
 ini_set('display_errors', 1);
 error_reporting(E_WARNING);

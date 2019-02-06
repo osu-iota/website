@@ -13,7 +13,7 @@ if (!$uid) fail($url, 'Please log in to contribute content');
 if (!$name) fail($url, 'Please include a name for the resource');
 if (!$description) fail($url, 'Please include a description for the resource');
 if (!$topics || count($topics) == 0) fail($url, 'Please associate the resource with at least one topic');
-if (!$resource) fail($url, 'You must include a resource file');
+if (!$resource || $resource['size'] == 0) fail($url, 'You must include a resource file');
 
 // Everything looks good
 $db->beginTransaction();
