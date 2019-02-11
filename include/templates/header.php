@@ -8,11 +8,11 @@ if ($_GET['auth'] == true || $_REQUEST['ticket'] . '' != '') {
 $menu = array(
     'Home' => '',
     'Calendar' => 'calendar',
-    'Skill Trees' => 'skill-trees',
+    'Charter' => 'charter',
     'Office Hours' => 'office-hours',
+    'Skill Trees' => 'skill-trees',
     'Resources' => 'resources',
     'Participation Form' => 'participate',
-    'Charter' => 'charter',
     'Contact Us' => 'contact');
 ?>
 <!DOCTYPE html>
