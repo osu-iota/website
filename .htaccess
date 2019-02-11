@@ -7,3 +7,25 @@
 #</IfModule>
 php_value auto_prepend_file "/nfs/farm/groups/iota/public_html/bootstrap.php"
 
+# Deny access to .htaccess
+<Files .htaccess>
+Order allow,deny
+Deny from all
+</Files>
+
+# Deny access to files with extensions .ini, .psd, .log, .sh
+<FilesMatch "\.(ini|psd|log|sh|sql)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# Deny access to filenames starting with dot(.)
+<FilesMatch "^\.">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+# Disable directory browsing
+Options -Indexes
+
+
