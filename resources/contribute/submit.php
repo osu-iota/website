@@ -9,11 +9,16 @@ $description = $_POST['description'];
 $topics = $_POST['topics'];
 $resource = $_FILES['resource'];
 
-if (!$uid) fail($url, 'Please log in to contribute content');
-if (!$name) fail($url, 'Please include a name for the resource');
-if (!$description) fail($url, 'Please include a description for the resource');
-if (!$topics || count($topics) == 0) fail($url, 'Please associate the resource with at least one topic');
-if (!$resource || $resource['size'] == 0) fail($url, 'You must include a resource file');
+if (!$uid) fail('Please log in to contribute content', $url);
+if (!$name) fail('Please include a name for the resource', $url);
+if (!$description) fail('Please include a description for the resource', $url);
+if (!$topics || count($topics) == 0) fail('Please associate the resource with at least one topic', $url);
+if (!$resource || $resource['size'] == 0) fail('You must include a resource file', $url);
+
+// Check file size (10 MB limit)
+if ($resource["size"] > 10000000) {
+    fail('File size is too large. File must be smaller than 10 MB', $url);
+}
 
 // Everything looks good
 $db->beginTransaction();
@@ -33,14 +38,21 @@ try {
     $infofd = finfo_open(FILEINFO_MIME_TYPE);
     $mime = finfo_file($infofd, $resource['tmp_name']);
     finfo_close($infofd);
-    $fd = fopen($resource['tmp_name'], 'rb');
     $downloads = 0;
     $active = true;
-    $sql = 'INSERT INTO iota_resource_data VALUES(:rdid, :rid, :rddata, :rdext, :rdmime, :rddate, :rddownloads, :rdactive)';
+
+    // Write the file to the directory before putting metadata in the database
+    $target = RESOURCE_DATA_DIR . '/' . $rdid . '.' . $ext;
+    $uploaded = move_uploaded_file($resource['tmp_name'], $target);
+    if (!$uploaded) {
+        throw new Exception('Failed to upload the file associated with the resource');
+    }
+
+    // The upload was successful. Add the entry to the database.
+    $sql = 'INSERT INTO iota_resource_data VALUES(:rdid, :rid, :rdext, :rdmime, :rddate, :rddownloads, :rdactive)';
     $prepared = $db->prepare($sql);
     $prepared->bindParam(':rdid', $rdid, PDO::PARAM_STR);
     $prepared->bindParam(':rid', $rid, PDO::PARAM_STR);
-    $prepared->bindParam(':rddata', $fd, PDO::PARAM_LOB);
     $prepared->bindParam(':rdext', $ext, PDO::PARAM_STR);
     $prepared->bindParam(':rdmime', $mime, PDO::PARAM_STR);
     $prepared->bindParam(':rddate', time(), PDO::PARAM_INT);
@@ -72,9 +84,10 @@ try {
     header('Location: ' . BASE_URL . $url . '/?submitted=true');
 
 } catch (Exception $e) {
+    // TODO: if the file upload succeeds but the database fails, we need to roll back
     $logger->error($e->getMessage());
     $db->rollBack();
-    fail($url, 'Failed to save resource. If you continue to experience problems, please contact an IOTA site administrator');
+    fail('Failed to save resource. If you continue to experience problems, please contact an IOTA site administrator', $url);
 }
 
 

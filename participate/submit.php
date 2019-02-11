@@ -4,6 +4,8 @@ use OSU\IOTA\Util\Security;
 
 session_start();
 
+$url = 'participate/';
+
 $uid = $_POST['uid'];
 $onid = $_POST['onid'];
 $type = $_POST['type'];
@@ -14,19 +16,26 @@ $description = $_POST['description'];
 
 
 // Verify the uid and the onid are included
-if (!$uid || !$onid) fail('Missing required session information. Please log in to submit participation data.');
+if (!$uid || !$onid) fail('Missing required session information. Please log in to submit participation data.', $url);
 
 // Verify a participation type was selected
-if (!$type) fail('Please select a participation type.');
+if (!$type) fail('Please select a participation type.', $url);
 
 // If the participation type was an event, verify that the club, event name, and selfie are included
-if ($type == 'event' && (!$club || !$event || !$selfie)) fail('Please include the event name, club, and a selfie in your submission');
+if ($type == 'event' && (!$club || !$event || !$selfie)) fail('Please include the event name, club, and a selfie in your submission', $url);
 
 // If the participation type was an meeting, verify that the club and selfie are included
-if ($type == 'meeting' && (!$club || $selfie)) fail('Please include the club whose meeting you attended and a selfie with your submission');
+if ($type == 'meeting' && (!$club || $selfie)) fail('Please include the club whose meeting you attended and a selfie with your submission', $url);
 
 // Verify the description was included
-if (!$description) fail('Please include a description');
+if (!$description) fail('Please include a description', $url);
+
+// Make sure the upload is actually an image
+$check = getimagesize($selfie["tmp_name"]);
+if ($check == false) {
+    fail('The uploaded file is not an image. Please submit a selfie to receive participation credit.', $url);
+}
+
 
 // Process the data
 switch ($type) {
@@ -54,7 +63,7 @@ if ($selfie) {
         $prepared->execute();
     } catch (PDOException $e) {
         $logger->error($e->getMessage());
-        fail('Failed to save selfie image. Participation data was not saved.');
+        fail('Failed to save selfie image. Participation data was not saved.', $url);
     }
 }
 
@@ -73,16 +82,7 @@ try {
     $prepared->execute();
 } catch (PDOException $e) {
     $logger->error($e->getMessage());
-    fail('Failed to save participation data. Please submit again or try later');
+    fail('Failed to save participation data. Please submit again or try later', $url);
 }
 
 header('Location: ' . BASE_URL . '/participate/?submitted=true');
-
-function fail($message) {
-    $_SESSION['message'] = array(
-        'content' => $message,
-        'type' => 'error'
-    );
-    header('Location: ' . BASE_URL . '/participate');
-    die();
-}

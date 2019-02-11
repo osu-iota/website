@@ -19,7 +19,6 @@ CREATE TABLE IF NOT EXISTS iota_resource_data
 (
   rdid         CHAR(15)    NOT NULL,
   rid          CHAR(15)    NOT NULL,
-  rd_data      MEDIUMBLOB  NOT NULL,
   rd_extension CHAR(5)     NOT NULL,
   rd_mime      VARCHAR(50) NOT NULL,
   rd_date      INT         NOT NULL,
@@ -48,8 +47,8 @@ CREATE TABLE IF NOT EXISTS iota_resource_for
 CREATE TABLE IF NOT EXISTS iota_participates_data
 (
   pdid         CHAR(15)   NOT NULL,
-  pd_data      MEDIUMBLOB NOT NULL,
   pd_extension CHAR(5)    NOT NULL,
+  pd_mime      CHAR(20)   NOT NULL,
   PRIMARY KEY (pdid)
 );
 

@@ -6,6 +6,8 @@ try {
     $res = $db->query($sql);
 } catch (PDOException $e) {
     $logger->error($e->getMessage());
+    http_send_status(500);
+    die();
 }
 
 foreach ($res as $topic) {

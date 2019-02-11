@@ -18,4 +18,14 @@ $data = $result[0];
 $filename = strtolower(str_replace(' ', '-', $data['r_name'])) . '.' . $data['rd_extension'];
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Content-Type: ' . $data['rd_mime']);
-echo $data['rd_data'];
+$bytes = readfile(RESOURCE_DATA_DIR . '/' . $rdid . '.' . $data['rd_extension']);
+if(!$bytes) {
+    fail('Failed to upload resource file. If the problem persists, please use the "Contact Us" form to contact the '.
+    'IoT Alliance website administrators.');
+}
+
+// Update the download count
+$sql = 'UPDATE iota_resource_data SET downloads = downloads + 1 WHERE rdid = :rdid';
+$prepared = $db->prepare($sql);
+$prepared->bindParam(':rdid', $rdid, PDO::PARAM_STR);
+$prepared->execute();
