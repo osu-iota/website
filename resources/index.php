@@ -27,12 +27,14 @@ session_start();
     <div class="col">
         <h4>Topics</h4>
         <table class="table">
+            <!--- Eventually add some stats about each topic in the header
             <thead>
             <tr>
                 <th>Name</th>
                 <th></th>
             </tr>
             </thead>
+            --->
             <tbody id="topics">
             <?php include 'ajax/loadtopics.php' ?>
             </tbody>
