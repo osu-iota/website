@@ -17,7 +17,8 @@ define('PARTICIPATES_DATA_DIR', BASE_PRIVATE . '/data/participates-data');
 define('RESOURCE_DATA_DIR', BASE_PRIVATE . '/data/resource-data');
 
 // Initialize some variables to easily track permissions
-$userIsAdmin = $_SESSION['privilegeLevel'] > 1;
+$userIsAdmin = $_SESSION['privilegeLevel'] > 2;
+$userIsManager = $_SESSION['privilegeLevel'] > 1;
 $userIsContributor = $_SESSION['privilegeLevel'] > 0;
 
 // Set an autoloader for custom classes

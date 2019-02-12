@@ -95,6 +95,14 @@ footer .disclaimer {
     margin-top: 20px !important;
 }
 
+table.available-topics td {
+    vertical-align: middle;
+}
+
+table.available-topics td:last-child {
+    width: 120px !important;
+}
+
 .resource-topics-container {
     max-height: 200px;
     overflow-y: auto;
@@ -111,6 +119,8 @@ table.topic-results tbody tr td:last-child {
 table.topic-results tbody tr td:first-child {
     width: 200px;
 }
+
+
 
 .topic-results-mobile .col {
     border: 1px solid #cccccc;

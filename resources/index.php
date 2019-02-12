@@ -26,7 +26,7 @@ session_start();
 <div class="row">
     <div class="col">
         <h4>Topics</h4>
-        <table class="table">
+        <table class="table available-topics">
             <!--- Eventually add some stats about each topic in the header
             <thead>
             <tr>
