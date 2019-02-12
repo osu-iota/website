@@ -32,8 +32,10 @@ foreach ($res as $topic) {
 
 if ($userIsAdmin) : ?>
     <script>
+        let current = null;
         function onDeleteTopic(id, topic) {
-            let sure = confirm('Are you sure you want to delete the topic "' + topic + '"?');
+            let sure = confirm('Are you sure you want to delete the topic "' + topic + '"? Doing so will ' +
+            'remove all resource associations to the topic. This may make searching for the topic difficult.');
             if(sure) {
                 $.post('resources/ajax/deletetopic.php', {
                     id: id
@@ -46,17 +48,26 @@ if ($userIsAdmin) : ?>
             let $row = $(`tr[id=${id}]`);
             $row.find('a').hide();
             showEditButtons($row, true);
+            if(current != null) {
+                onCancelEditTopic(current);
+            }
             let input = document.createElement('input');
             input.classList.add('form-control');
             input.value = topic;
             input.id = 'editTopic';
             $row.find('td:first-child').append(input);
+            current = id;
         }
 
-        function onSaveTopic(id, newTopic) {
+        function onSaveTopic(id) {
+            let newTopic = $('#editTopic').val();
+            if(newTopic === '') {
+                alert('You must specify a tag name');
+                return;
+            }
             $.post('resources/ajax/updatetopic.php', {
                 id: id,
-                name: $('#editTopic').val(),
+                name: newTopic,
             }).done(() => $('#topics').load('resources/ajax/loadtopics.php'))
                 .fail(() => alert('Failed to update topic'));
         }
@@ -66,6 +77,7 @@ if ($userIsAdmin) : ?>
             $row.find('input').remove();
             $row.find('a').show();
             showEditButtons($row, false);
+            current = null;
         }
 
         function showEditButtons($row, show) {
