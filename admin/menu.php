@@ -1,4 +1,5 @@
 <?php
+include_once 'authorize.php';
 $menuOptions = array(
     'Dashboard' => array(
             'link' => '',
