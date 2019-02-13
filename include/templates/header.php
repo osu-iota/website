@@ -12,8 +12,15 @@ $menu = array(
     'Office Hours' => 'office-hours',
     'Skill Trees' => 'skill-trees',
     'Resources' => 'resources',
-    'Participation Form' => 'participate',
+    'Participate' => 'participate',
     'Contact Us' => 'contact');
+
+if ($userIsManager) {
+    $menu['Reports'] = 'reports';
+}
+if ($userIsAdmin) {
+    $menu['Admin'] = 'admin';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,6 +56,8 @@ $menu = array(
 
     <link rel="stylesheet" href="include/css/header.css"/>
     <link rel="stylesheet" href="include/css/main.css"/>
+    <link rel="stylesheet" href="include/css/snackbar.css"/>
+    <?php if($userIsAdmin): ?><link rel="stylesheet" href="include/css/admin.css"/><?php endif; ?>
 </head>
 <body>
 <header>
@@ -72,20 +81,21 @@ $menu = array(
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
                 <?php
                 foreach ($menu as $title => $link) {
-                    $active = '';
+                    $styleClasses = '';
                     if (!empty($link)) {
-                        $active = (strpos($_SERVER['REQUEST_URI'], $link) !== false) ? 'active' : '';
+                        $styleClasses = urlContains($link) ? 'active' : '';
+                        $styleClasses .= $link == 'reports' ? ' extra-links-start' : '';
                     }
-                    echo '<li class="nav-item ' . $active . '"><a class="nav-link" href="' . $link . '">' . $title . '</a></li>';
+                    echo '<li class="nav-item ' . $styleClasses . '"><a class="nav-link" href="' . $link . '">' . $title . '</a></li>';
                 }
                 ?>
             </ul>
         </div>
     </nav>
 </header>
-<main class="container">
+<main class="container<?php if(urlContains('admin')) echo '-fluid'; ?>">
 
 

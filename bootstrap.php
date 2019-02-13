@@ -1,7 +1,7 @@
 <?php
 session_start();
 $reset = false;
-if($reset) {
+if ($reset) {
     session_unset();
 }
 
@@ -47,6 +47,10 @@ function fail($message, $redirect = 'error/') {
     );
     header('Location: ' . BASE_URL . $redirect);
     die();
+}
+
+function urlContains($path) {
+    return strpos($_SERVER['REQUEST_URI'], $path) !== false;
 }
 
 //echo '<pre>';

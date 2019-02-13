@@ -12,6 +12,15 @@ body {
 
 main {
     flex: 1;
+}
+
+main.container-fluid {
+    display: flex;
+    flex-direction: row;
+    padding: 0 !important;
+}
+
+main.container {
     padding-top: 10px;
 }
 
@@ -121,7 +130,6 @@ table.topic-results tbody tr td:first-child {
 }
 
 
-
 .topic-results-mobile .col {
     border: 1px solid #cccccc;
     box-shadow: 1px 1px 1px #cccccc;
@@ -138,7 +146,22 @@ table.topic-results tbody tr td:first-child {
     .topic-results-mobile {
         display: none;
     }
+
     table.topic-results {
         display: table;
+    }
+}
+
+.navbar-nav {
+    width: 100%;
+}
+
+.extra-links-start {
+    margin-left: auto !important;
+}
+
+@media only screen and (min-width: 992px) {
+    .extra-links-start {
+        margin-left: 10px;
     }
 }
