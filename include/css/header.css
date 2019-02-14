@@ -75,3 +75,14 @@ header nav .nav-link {
 header nav .nav-link:hover {
     color: rgba(255,255,255,.7) !important;
 }
+
+
+@media only screen and (min-width: 992px) {
+    .extra-links-start {
+        margin-left: auto !important;
+    }
+
+    .navbar-nav {
+        width: 100%;
+    }
+}

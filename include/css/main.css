@@ -151,17 +151,3 @@ table.topic-results tbody tr td:first-child {
         display: table;
     }
 }
-
-.navbar-nav {
-    width: 100%;
-}
-
-.extra-links-start {
-    margin-left: auto !important;
-}
-
-@media only screen and (min-width: 992px) {
-    .extra-links-start {
-        margin-left: 10px;
-    }
-}
