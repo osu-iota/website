@@ -14,39 +14,44 @@ try {
 
 ?>
 <div class="admin-main">
-    <div class="add-user">
-        <form onsubmit="return onAddUser()">
-            <input required type="text" class="form-control" id="newUserOnid" placeholder="Enter ONID for new user" />
-            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;User</button>
-        </form>
+    <div class="page">
+        <?php /*
+        <div class="add-user">
+            <form onsubmit="return onAddUser()">
+                <input required type="text" class="form-control" id="newUserOnid"
+                       placeholder="Enter ONID for new user"/>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;User</button>
+            </form>
+        </div> */ ?>
+        <table class="table">
+            <thead>
+            <th>ONID</th>
+            <th>Privilege Level</th>
+            <th>Last Login</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <?php foreach ($users as $user): ?>
+                <tr class="user">
+                    <td><?php echo $user['u_onid'] ?></td>
+                    <td>
+                        <select id="<?php echo $user['uid'] ?>" class="form-control user-priv-select"
+                                onChange="onPrivilegeLevelEdit(this)">
+                            <?php foreach ($levels as $index => $level): ?>
+                                <option value="<?php echo $index ?>" <?php if ($index == $user['u_privilege_level']) echo 'selected' ?>>
+                                    <?php echo $level ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </td>
+                    <td><?php echo date("F j, Y, g:i a", $user['u_last_login']) ?></td>
+                    <td></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
-    <table class="table">
-        <thead>
-        <th>ONID</th>
-        <th>Privilege Level</th>
-        <th>Last Login</th>
-        <th></th>
-        </thead>
-        <tbody>
-        <?php foreach ($users as $user): ?>
-            <tr class="user">
-                <td><?php echo $user['u_onid'] ?></td>
-                <td>
-                    <select id="<?php echo $user['uid'] ?>" class="form-control user-priv-select"
-                            onChange="onPrivilegeLevelEdit(this)">
-                        <?php foreach ($levels as $index => $level): ?>
-                            <option value="<?php echo $index ?>" <?php if ($index == $user['u_privilege_level']) echo 'selected' ?>>
-                                <?php echo $level ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </td>
-                <td><?php echo date("F j, Y, g:i a", $user['u_last_login']) ?></td>
-                <td></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+
 </div>
 <script>
     function onPrivilegeLevelEdit(el) {
@@ -54,9 +59,9 @@ try {
             id: el.id,
             level: el.value
         }).done(() => {
-            snackbar("Successfully updated the user's privilege level");
+            snackbar("Successfully updated the user's privilege level", 'success');
         }).fail(() => {
-            snackbar("Failed to update the user's privilege level");
+            snackbar("Failed to update the user's privilege level", 'error');
         });
     }
 </script>

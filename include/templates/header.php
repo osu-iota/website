@@ -31,6 +31,8 @@ if ($userIsAdmin) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <base href="<?php echo BASE_URL; ?>"/>
 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
     <!-- Include Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -54,10 +56,14 @@ if ($userIsAdmin) {
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />-->
 
+    <!-- Styling -->
     <link rel="stylesheet" href="include/css/header.css"/>
     <link rel="stylesheet" href="include/css/main.css"/>
     <link rel="stylesheet" href="include/css/snackbar.css"/>
     <?php if($userIsAdmin): ?><link rel="stylesheet" href="include/css/admin.css"/><?php endif; ?>
+
+    <!-- Scripts -->
+    <script src="include/js/snackbar.js"></script>
 </head>
 <body>
 <header>
