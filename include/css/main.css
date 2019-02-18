@@ -121,12 +121,26 @@ table.topic-results {
     display: none;
 }
 
-table.topic-results tbody tr td:last-child {
-    width: 30px;
+table.topic-results .name {
+    width: 200px;
 }
 
-table.topic-results tbody tr td:first-child {
-    width: 200px;
+table.topic-results .downloads {
+    width: 110px;
+}
+
+table.topic-results .filetype {
+    width: 110px;
+}
+
+table.topic-results .actions {
+    width: 130px;
+}
+
+table.topic-results .actions-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 

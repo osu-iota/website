@@ -11,9 +11,9 @@ $prepared->setFetchMode(PDO::FETCH_ASSOC);
 $topic = $prepared->fetchAll()[0]['rt_name'];
 
 // Get all of the resources associated with the topic
-$sql = 'SELECT rt.*, r.*, rd.rdid, rd.rd_extension ';
-$sql .= 'FROM iota_resource_topic rt, iota_resource_for rf, iota_resource r, iota_resource_data rd ';
-$sql .= 'WHERE rt.rtid = rf.rtid AND rf.rid = r.rid AND rd.rid = r.rid AND rt.rtid = :id ';
+$sql = 'SELECT rt.*, r.*, rd.rdid, rd.rd_extension, rd.rd_downloads, u.uid ';
+$sql .= 'FROM iota_resource_topic rt, iota_resource_for rf, iota_resource r, iota_resource_data rd, iota_user u, iota_contributes c ';
+$sql .= 'WHERE rt.rtid = rf.rtid AND rf.rid = r.rid AND rd.rid = r.rid AND c.rdid = rd.rdid AND c.uid = u.uid AND rt.rtid = :id ';
 $sql .= 'ORDER BY rd.rd_date DESC';
 $prepared = $db->prepare($sql);
 $prepared->bindParam(':id', $rtid, PDO::PARAM_STR);
@@ -31,22 +31,34 @@ $results = $prepared->fetchAll();
     <div class="col">
         <table class="table topic-results">
             <thead>
-            <th>Name</th>
-            <th>Description</th>
-            <th>File Type</th>
-            <th></th>
+            <th class="name">Name</th>
+            <th class="description">Description</th>
+            <th class="downloads">Downloads</th>
+            <th class="filetype">File Type</th>
+            <th class="actions"></th>
             </thead>
             <tbody>
-            <?php
-            foreach ($results as $result) {
-                echo '<tr>';
-                echo '<td>' . $result['r_name'] . '</td>';
-                echo '<td>' . $result['r_description'] . '</td>';
-                echo '<td>' . strtoupper($result['rd_extension']) . '</td>';
-                echo '<td><a href="resources/topics/download.php?r=' . $result['rdid'] . '">Download</a></td>';
-                echo '</tr>';
-            }
-            ?>
+            <?php foreach ($results as $result): ?>
+                <tr>
+                    <td class="name"><?php echo $result['r_name'] ?></td>
+                    <td class="description"> <?php echo $result['r_description'] ?></td>
+                    <td class="downloads"><?php echo $result['rd_downloads'] ?></td>
+                    <td class="filetype"><?php echo strtoupper($result['rd_extension']) ?></td>
+                    <td class="actions">
+                        <div class="actions-wrapper">
+                            <a href="resources/topics/download.php?r=<?php echo $result['rdid'] ?>">Download</a>
+                            <?php if ($userIsAdmin || $_SESSION['uid'] == $result['uid']): ?>
+                                <a href="resources/edit?r=<?php echo $result['rid'] ?>">
+                                    <button class="btn" data-toggle="tooltip" data-placement="right" title="Edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>

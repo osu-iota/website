@@ -1,15 +1,8 @@
-<?php include_once BASE . '/include/templates/header.php';
+<?php
+include_once '../authorize.php';
+include_once BASE . '/include/templates/header.php'; ?>
 
-if (!$userIsContributor):
-    ?>
-    <?php
-    $_SESSION['message'] = array(
-        'content' => 'You do not have permissions to contribute content.',
-        'type' => 'info'
-    );
-    header('Location: ' . BASE_URL . '/resources/')
-    ?>
-<?php elseif($_GET['submitted'] == "true"): ?>
+<?php if ($_GET['submitted'] == "true"): ?>
     <div class="row">
         <div class="col">
             <h3>Thank you!</h3>

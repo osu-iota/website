@@ -53,6 +53,12 @@ function urlContains($path) {
     return strpos($_SERVER['REQUEST_URI'], $path) !== false;
 }
 
+function dump($var) {
+    echo '<pre>';
+    print_r($var);
+    echo '</pre>';
+}
+
 //echo '<pre>';
 //print_r($db->query('SELECT version()')->fetchAll());
 //echo '</pre>';

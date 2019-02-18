@@ -24,8 +24,12 @@ if(!$bytes) {
     'IoT Alliance website administrators.');
 }
 
-// Update the download count
-$sql = 'UPDATE iota_resource_data SET downloads = downloads + 1 WHERE rdid = :rdid';
-$prepared = $db->prepare($sql);
-$prepared->bindParam(':rdid', $rdid, PDO::PARAM_STR);
-$prepared->execute();
+try {
+    // Update the download count
+    $sql = 'UPDATE iota_resource_data SET rd_downloads = rd_downloads + 1 WHERE rdid = :rdid';
+    $prepared = $db->prepare($sql);
+    $prepared->bindParam(':rdid', $rdid, PDO::PARAM_STR);
+    $prepared->execute();
+} catch(Exception $e) {
+    $logger->error($e->getMessage());
+}
