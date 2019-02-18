@@ -1,5 +1,5 @@
 <?php
-$topic = $_POST['topic'];
+$topic = htmlentities($_POST['topic']);
 
 if (!$topic) {
     http_send_status(400);

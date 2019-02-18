@@ -7,7 +7,7 @@ $url = 'contact/';
 $name = $_POST['name'];
 $email = $_POST['email'];
 $subject = $_POST['subject'];
-$content = $_POST['content'];
+$content = htmlentities($_POST['content']);
 
 if (!$name) fail($url, 'Please include your name');
 if (!$email) fail($url, 'Please include your email');

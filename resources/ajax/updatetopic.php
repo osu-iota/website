@@ -1,7 +1,7 @@
 <?php
 
 $rtid = $_POST['id'];
-$name = $_POST['name'];
+$name = htmlentities($_POST['name']);
 
 if(empty($rtid) || $rtid == '' || empty($name) || $name == '') {
     $logger->error('Attempted to update topic with malformed request: rtid = ' . $rtid . ', name = ' . $name);

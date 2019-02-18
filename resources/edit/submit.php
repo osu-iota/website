@@ -6,8 +6,8 @@ session_start();
 $uid = $_SESSION['uid'];
 $rid = $_POST['rid'];
 $oldRdid = $_POST['oldRdid'];
-$name = $_POST['name'];
-$description = $_POST['description'];
+$name = htmlentities($_POST['name']);
+$description = htmlentities($_POST['description']);
 $topics = $_POST['topics'];
 $resource = $_FILES['resource'];
 

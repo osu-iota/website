@@ -9,10 +9,10 @@ $url = 'participate/';
 $uid = $_POST['uid'];
 $onid = $_POST['onid'];
 $type = $_POST['type'];
-$event = $_POST['event'];
+$event = htmlentities($_POST['event']);
 $club = $_POST['club'];
 $selfie = $_FILES['selfie'];
-$description = $_POST['description'];
+$description = htmlentities($_POST['description']);
 
 
 // Verify the uid and the onid are included

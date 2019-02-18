@@ -4,8 +4,8 @@ session_start();
 $url = 'resources/contribute';
 
 $uid = $_SESSION['uid'];
-$name = $_POST['name'];
-$description = $_POST['description'];
+$name = htmlentities($_POST['name']);
+$description = htmlentities($_POST['description']);;
 $topics = $_POST['topics'];
 $resource = $_FILES['resource'];
 
