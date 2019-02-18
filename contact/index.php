@@ -20,8 +20,8 @@ $email = $_SESSION['email'];
     <div class="row">
         <div class="col">
             <h1>Contact Us</h1>
-            <p>Use the form below to contact the OSU Internet of Things Alliance regarding any questions, comments, or
-                concerns you may have.</p>
+            <p>Use the form below to contact the OSU Internet of Things Alliance regarding resource contribution access
+                or any questions, comments, or concerns you may have.</p>
         </div>
     </div>
     <hr>
