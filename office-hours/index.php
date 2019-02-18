@@ -14,7 +14,7 @@ $members = array(
         'name' => 'Niraj Basnet',
         'room' => 'Johnson 123',
         'hours' => array(
-            'Thursday 3:30pm - 4pm'
+            'Friday 3:00pm - 3:30pm'
         )
     )
 );
