@@ -1,11 +1,13 @@
 CREATE TABLE IF NOT EXISTS iota_user
 (
   uid               CHAR(15)    NOT NULL,
-  u_onid            VARCHAR(20) NOT NULL,
+  u_onid            VARCHAR(20) NOT NULL UNIQUE,
   u_privilege_level SMALLINT    NOT NULL DEFAULT 0,
   u_last_login      INT,
   PRIMARY KEY (uid)
 );
+
+CREATE INDEX iota_user_u_onid USING HASH ON iota_user (u_onid);
 
 CREATE TABLE IF NOT EXISTS iota_resource
 (
@@ -46,9 +48,9 @@ CREATE TABLE IF NOT EXISTS iota_resource_for
 
 CREATE TABLE IF NOT EXISTS iota_participates_data
 (
-  pdid         CHAR(15)   NOT NULL,
-  pd_extension CHAR(5)    NOT NULL,
-  pd_mime      CHAR(20)   NOT NULL,
+  pdid         CHAR(15) NOT NULL,
+  pd_extension CHAR(5)  NOT NULL,
+  pd_mime      CHAR(20) NOT NULL,
   PRIMARY KEY (pdid)
 );
 
