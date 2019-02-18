@@ -7,7 +7,7 @@ session_start();
 $url = 'participate/';
 
 $uid = $_POST['uid'];
-$onid = $_POST['onid'];
+$onid = strtolower($_POST['onid']);
 $type = $_POST['type'];
 $event = htmlentities($_POST['event']);
 $club = $_POST['club'];

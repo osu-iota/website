@@ -26,7 +26,7 @@ function onidauth($db) {
         $url = "https://login.oregonstate.edu/cas/serviceValidate?ticket=" . $ticket . "&service=" . $pageURL;
         $html = file_get_contents($url);
 
-        $_SESSION['onid'] = extractFromXml('cas:user', $html);
+        $_SESSION['onid'] = strtolower(extractFromXml('cas:user', $html));
         $_SESSION['fname'] = extractFromXml('cas:firstname', $html);
         $_SESSION['lname'] = extractFromXml('cas:lastname', $html);
         $_SESSION['email'] = extractFromXml('cas:email', $html);

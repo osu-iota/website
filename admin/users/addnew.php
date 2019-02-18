@@ -1,6 +1,6 @@
 <?php
 
-$onid = $_POST['onid'];
+$onid = strtolower($_POST['onid']);
 $level = $_POST['privLevel'];
 
 if(empty($onid) || $onid == '' || (empty($level) && $level != 0) || !is_numeric($level)) {
