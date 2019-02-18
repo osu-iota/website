@@ -24,7 +24,7 @@ include_once BASE . '/include/templates/header.php'; ?>
     <?php include_once BASE . '/include/templates/message.php' ?>
     <div class="row form-contribute-resource">
         <div class="col">
-            <form method="post" action="resources/contribute/submit.php" enctype="multipart/form-data">
+            <form method="post" action="resources/contribute/submit.php" enctype="multipart/form-data" onsubmit="onFormSubmit()">
                 <input type="hidden" name="uid" value="<?php echo $uid ?>"/>
                 <div class="form-row">
                     <div class="col-md-6 col-lg-4">
@@ -52,7 +52,7 @@ include_once BASE . '/include/templates/header.php'; ?>
                 </div>
                 <div class="form-row">
                     <div class="col-sm 2 col-md-4 col-lg-3">
-                        <label>Resource File *</label>
+                        <label>Resource File * (10MB Limit)</label>
                         <div class="custom-file">
                             <input required type="file" class="custom-file-input" name="resource">
                             <label class="custom-file-label" for="customFile">Choose File</label>
@@ -62,6 +62,7 @@ include_once BASE . '/include/templates/header.php'; ?>
                 <div class="form-row form-submit">
                     <div class="col">
                         <button class="btn btn-primary" type="submit">Submit</button>
+                        <div class="loader"></div>
                     </div>
                 </div>
             </form>
@@ -75,6 +76,11 @@ include_once BASE . '/include/templates/header.php'; ?>
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(filename);
         });
+
+        function onFormSubmit() {
+            $('button[type=submit]').hide();
+            $('.loader').show();
+        }
     </script>
 
 <?php endif; ?>
