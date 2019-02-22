@@ -23,7 +23,7 @@ session_start();
                 <button class="btn btn-primary">Request Permission to Contribute</button>
             </a>
         <?php else: ?>
-            <a href="resources/contribute/?auth=true">
+            <a href="resources/?auth=true">
                 <button class="btn btn-primary">Sign in to Contribute</button>
             </a>
         <?php endif; ?>

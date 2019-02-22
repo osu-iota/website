@@ -1,4 +1,4 @@
 <?php
-include_once BASE . '/lib/OSU/IOTA/Util/onidauth.php';
-onidauth($db);
+include_once BASE . '/lib/onidauth.php';
+onidauth();
 header('Location: ' . BASE_URL);

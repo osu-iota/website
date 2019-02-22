@@ -1,9 +1,9 @@
 <?php
 include_once BASE . '/include/templates/header.php';
 session_start();
-$onid = $_SESSION['onid'];
-$name = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
-$uid = $_SESSION['uid'];
+$onid = $user ? $user->getOnid() : null;
+$name = $user ? $user->getName() : '';
+$uid = $user ? $user->getId() : '';
 
 $ptTypes = json_decode(file_get_contents(BASE . '/include/data/participation-types.json'), true);
 $clubs = json_decode(file_get_contents(BASE . '/include/data/clubs.json'), true);
@@ -28,7 +28,7 @@ $clubs = json_decode(file_get_contents(BASE . '/include/data/clubs.json'), true)
     </div>
     <hr/>
     <?php include BASE . '/include/templates/message.php' ?>
-    <?php if (empty($onid) || $onid == false): ?>
+    <?php if (!$onid): ?>
         <div class="row">
             <div class="col">
                 <p>Please <a href="participate/?auth=true">sign in using your ONID</a> to complete the form</p>

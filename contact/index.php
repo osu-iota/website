@@ -1,9 +1,8 @@
 <?php
 include_once BASE . '/include/templates/header.php';
-session_start();
 
-$name = $_SESSION['fname'] ? $_SESSION['fname'] . ' ' . $_SESSION['lname'] : '';
-$email = $_SESSION['email'];
+$name = $user ? $user->getName() : '';
+$email = $user ? $user->getEmail() : '';
 
 ?>
 

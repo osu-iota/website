@@ -1,8 +1,8 @@
 <?php
-include_once BASE . '/lib/OSU/IOTA/Util/onidauth.php';
+include_once BASE . '/lib/onidauth.php';
 session_start();
 if ($_GET['auth'] == true || $_REQUEST['ticket'] . '' != '') {
-    onidauth($db);
+    onidauth();
 }
 
 $menu = array(
@@ -18,9 +18,6 @@ $menu = array(
 $extraLinks = array();
 if ($userIsManager) $extraLinks['Reports'] = 'reports';
 if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
-
-$reportLink = 'reports';
-$adminLink = 'admin';
 
 ?>
 <!DOCTYPE html>

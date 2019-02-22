@@ -9,9 +9,12 @@ class User {
     private $onid;
     private $lastLogin;
     private $privilegeLevel;
+    private $name;
+    private $email;
 
     public function __construct($id = null) {
         $this->id = $id != null ? $id : Security::generateSecureUniqueId();
+        $this->lastLogin = time();
     }
 
     /**
@@ -61,6 +64,22 @@ class User {
      */
     public function setPrivilegeLevel($privilegeLevel) {
         $this->privilegeLevel = $privilegeLevel;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
     }
 
 }

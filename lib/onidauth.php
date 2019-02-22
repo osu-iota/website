@@ -1,12 +1,9 @@
 <?php
 session_start();
-/**
- * @param $db OSU\IOTA\DAO\DbConnection
- * @return string
- */
-function onidauth($db) {
 
-    if (isset($_SESSION["onid"])) return $_SESSION["onid"];
+function onidauth() {
+
+    if (isset($_SESSION["onid"])) return;
 
     $pageURL = 'http';
     if ($_SERVER["HTTPS"] == "on") {
@@ -27,12 +24,26 @@ function onidauth($db) {
         $html = file_get_contents($url);
 
         $_SESSION['onid'] = strtolower(extractFromXml('cas:user', $html));
-        $_SESSION['fname'] = extractFromXml('cas:firstname', $html);
-        $_SESSION['lname'] = extractFromXml('cas:lastname', $html);
+        $_SESSION['name'] = extractFromXml('cas:firstname', $html) . ' ' . extractFromXml('cas:lastname', $html);
         $_SESSION['email'] = extractFromXml('cas:email', $html);
-        $user = getIotaUserInfo($db);
-        $_SESSION['privilegeLevel'] = $user->getPrivilegeLevel();
-        $_SESSION['uid'] = $user->getId();
+
+        // Check to see if the user already exists in the database. If they don't, create a new entry
+        global $daoUsers;
+        $user = $daoUsers->getUserWithOnid($_SESSION['onid']);
+        if(!$user) {
+            $user = new OSU\IOTA\Model\User();
+            $user->setOnid($_SESSION['onid']);
+            $user->setPrivilegeLevel(0);
+            // TODO: add failure check here
+            $daoUsers->createUser($user);
+        } else {
+            // Update their last login
+            $user->setLastLogin(time());
+            $daoUsers->updateUser($user);
+            // TODO: add failure check here
+        }
+        $user->setName($_SESSION['name']);
+        $user->setEmail($_SESSION['email']);
 
         echo "<script>location.replace('" . $pageURL . "');</script>";
 
@@ -40,9 +51,6 @@ function onidauth($db) {
         $url = "https://login.oregonstate.edu/cas/login?service=" . $pageURL;
         echo "<script>location.replace('" . $url . "');</script>";
     }
-
-    return "";
-
 }
 
 function extractFromXml($key, $xml) {
@@ -52,23 +60,4 @@ function extractFromXml($key, $xml) {
         return $matches[1];
     }
     return false;
-}
-
-/**
- * @param $db OSU\IOTA\DAO\DbConnection
- * @return \OSU\IOTA\Model\User
- */
-function getIotaUserInfo($db){
-    // If the user doesn't exist in our database, add them. Otherwise get their IOTA uid and privilege level
-    $dao = new OSU\IOTA\DAO\UserDao($db);
-    $user = $dao->getUserWithOnid($_SESSION['onid']);
-    if(!$user) {
-        $user = new OSU\IOTA\Model\User();
-        $user->setOnid($_SESSION['onid']);
-        $user->setPrivilegeLevel(0);
-        $user->setLastLogin(time());
-        // TODO: add failure check here
-        $dao->createUser($user);
-    }
-    return $user;
 }

@@ -7,7 +7,7 @@ if (!$userIsLoggedIn) {
     die();
 }
 
-$name = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
+$name = $user ? $user->getName() : '';
 
 ?>
 <?php if ($_GET['sent'] == 'true'): ?>
@@ -34,19 +34,19 @@ $name = $_SESSION['fname'] . ' ' . $_SESSION['lname'];
             <form method="post" action="resources/contribute/request/submit.php">
                 <div class="form-row">
                     <div class="col-md-4">
-                        <label for="name">Name</label>
+                        <label for="name">Name *</label>
                         <input required class="form-control" name="name" type="text" value="<?php echo $name ?>"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-4">
-                        <label for="seminar">Seminar</label>
+                        <label for="seminar">Seminar *</label>
                         <input required class="form-control" name="seminar" type="text"/>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-8">
-                        <label>Role</label>
+                        <label>Role *</label>
                         <textarea required class="form-control" name="role"
                                   placeholder="Please indicate what role you played in the seminar mentioned above"></textarea>
                     </div>

@@ -6,8 +6,8 @@ if ($reset) {
 }
 
 // Uncomment for debugging
-ini_set('display_errors', 1);
-error_reporting(E_WARNING);
+// ini_set('display_errors', 1);
+// error_reporting(E_WARNING);
 
 // Define some globals
 define('BASE', __DIR__);
@@ -17,11 +17,9 @@ define('PARTICIPATES_DATA_DIR', BASE_PRIVATE . '/data/participates-data');
 define('RESOURCE_DATA_DIR', BASE_PRIVATE . '/data/resource-data');
 
 $userIsLoggedIn = !empty($_SESSION['onid']);
-
-// Initialize some variables to easily track permissions
-$userIsAdmin = $_SESSION['privilegeLevel'] > 2;
-$userIsManager = $_SESSION['privilegeLevel'] > 1;
-$userIsContributor = $_SESSION['privilegeLevel'] > 0;
+$userIsAdmin = false;
+$userIsManager = false;
+$userIsContributor = false;
 
 // Set an autoloader for custom classes
 spl_autoload_register(function ($className) {
@@ -41,6 +39,20 @@ $dbPassword = $dbCredentials[$dbType]['password'];
 $url = 'mysql:host=' . $dbHost . ';dbname=' . $dbName;
 $db = new PDO($url, $dbUser, $dbPassword);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$daoUsers = new \OSU\IOTA\DAO\UserDao($db);
+
+// Load the user if it isn't already loaded
+/** @var \OSU\IOTA\Model\User|null $user */
+$user = null;
+if($userIsLoggedIn) {
+    $user = $daoUsers->getUserWithOnid($_SESSION['onid']);
+    $user->setName($_SESSION['name']);
+    $user->setEmail($_SESSION['email']);
+    // Initialize some variables to easily track permissions
+    $userIsAdmin = $user->getPrivilegeLevel() > 2;
+    $userIsManager = $user->getPrivilegeLevel() > 1;
+    $userIsContributor = $user->getPrivilegeLevel() > 0;
+}
 
 function fail($message, $redirect = 'error/') {
     $_SESSION['message'] = array(
