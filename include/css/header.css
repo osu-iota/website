@@ -69,21 +69,44 @@ header nav .nav-item {
     padding: 0px 10px;
 }
 
-header nav .nav-link {
+header nav .nav-link, .extra-links-mobile button, .extra-links-mobile a {
     color: white !important;
 }
 
-header nav .nav-link:hover {
+header nav .nav-link:hover, .extra-links-mobile a:hover {
     color: rgba(255,255,255,.7) !important;
+    background-color: black;
 }
 
+.extra-links-mobile {
+    margin-left: auto !important;
+}
+
+.extra-links-mobile .dropdown-menu {
+    background-color: black;
+}
 
 @media only screen and (min-width: 992px) {
-    .extra-links-start {
-        margin-left: auto !important;
+    .extra-links {
+        display: none;
+    }
+
+    .extra-links-mobile {
+        display: block;
     }
 
     .navbar-nav {
         width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .extra-links {
+        margin-left: auto !important;
+        display: flex;
+    }
+
+    .extra-links-mobile {
+        display: none;
     }
 }

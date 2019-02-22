@@ -15,12 +15,13 @@ $menu = array(
     'Participate' => 'participate',
     'Contact Us' => 'contact');
 
-if ($userIsManager) {
-    $menu['Reports'] = 'reports';
-}
-if ($userIsAdmin) {
-    $menu['Admin'] = 'admin';
-}
+$extraLinks = array();
+if ($userIsManager) $extraLinks['Reports'] = 'reports';
+if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
+
+$reportLink = 'reports';
+$adminLink = 'admin';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +61,8 @@ if ($userIsAdmin) {
     <link rel="stylesheet" href="include/css/header.css"/>
     <link rel="stylesheet" href="include/css/main.css"/>
     <link rel="stylesheet" href="include/css/snackbar.css"/>
-    <?php if($userIsAdmin): ?><link rel="stylesheet" href="include/css/admin.css"/><?php endif; ?>
+    <?php if ($userIsAdmin): ?>
+        <link rel="stylesheet" href="include/css/admin.css"/><?php endif; ?>
 
     <!-- Scripts -->
     <script src="include/js/snackbar.js"></script>
@@ -93,15 +95,34 @@ if ($userIsAdmin) {
                     $styleClasses = '';
                     if (!empty($link)) {
                         $styleClasses = urlContains($link) ? 'active' : '';
-                        $styleClasses .= $link == 'reports' ? ' extra-links-start' : '';
+                        $styleClasses .= $link == 'reports' ? ' extra-link' : '';
                     }
                     echo '<li class="nav-item ' . $styleClasses . '"><a class="nav-link" href="' . $link . '">' . $title . '</a></li>';
                 }
                 ?>
+                <?php if ($userIsAdmin || $userIsContributor): ?>
+                    <div class="extra-links">
+                    <?php foreach ($extraLinks as $title => $link): ?>
+                        <li class="nav-item<?php echo !empty($link) && urlContains($link) ? ' active' : '' ?>">
+                            <a class="nav-link" href="<?php echo $link ?>"><?php echo $title ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                    </div>
+                    <div class="extra-links-mobile dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Manage</i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <?php foreach ($extraLinks as $title => $link): ?>
+                            <a class="dropdown-item" href="<?php echo $link ?>"><?php echo $title ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </ul>
         </div>
     </nav>
 </header>
-<main class="container<?php if(urlContains('admin')) echo '-fluid'; ?>">
+<main class="container<?php if (urlContains('admin')) echo '-fluid'; ?>">
 
 
