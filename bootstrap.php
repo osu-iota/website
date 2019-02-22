@@ -16,6 +16,8 @@ define('BASE_URL', 'http://groups.engr.oregonstate.edu/IOTA/');
 define('PARTICIPATES_DATA_DIR', BASE_PRIVATE . '/data/participates-data');
 define('RESOURCE_DATA_DIR', BASE_PRIVATE . '/data/resource-data');
 
+$userIsLoggedIn = !empty($_SESSION['onid']);
+
 // Initialize some variables to easily track permissions
 $userIsAdmin = $_SESSION['privilegeLevel'] > 2;
 $userIsManager = $_SESSION['privilegeLevel'] > 1;

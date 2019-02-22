@@ -8,21 +8,27 @@ session_start();
         <h1>Resource Repository</h1>
         <p>The IoT Alliance offers a repository of resources and materials on topics typically covered during events
             related to the alliance. All users can search and download content from the repository.</p>
-        <?php if (!$userIsContributor): ?>
-            <p>If you'd like to become a contributor of content to the repository, please
-                <a href="contact/">contact us</a>. If you have already been granted rights to contribute materials,
-                please <a href="resources/?auth=true">sign in</a>.</p>
-        <?php endif; ?>
     </div>
 </div>
 <?php include_once BASE . '/include/templates/message.php' ?>
-<?php if ($userIsContributor): ?>
-    <div class="row">
-        <div class="col contribute-resource">
-            <a href="resources/contribute"><button class="btn btn-primary">Contribute Resource</button></a>
-        </div>
+
+<div class="row">
+    <div class="col contribute-resource">
+        <?php if ($userIsContributor): ?>
+            <a href="resources/contribute">
+                <button class="btn btn-primary">Contribute Resource</button>
+            </a>
+        <?php elseif($userIsLoggedIn): ?>
+            <a href="resources/contribute/request">
+                <button class="btn btn-primary">Request Permission to Contribute</button>
+            </a>
+        <?php else: ?>
+            <a href="resources/contribute/?auth=true">
+                <button class="btn btn-primary">Sign in to Contribute</button>
+            </a>
+        <?php endif; ?>
     </div>
-<?php endif; ?>
+</div>
 <div class="row">
     <div class="col">
         <h4>Topics</h4>
