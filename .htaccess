@@ -28,4 +28,7 @@ Deny from all
 # Disable directory browsing
 Options -Indexes
 
+# Custom error pages
+ErrorDocument 404 /IOTA/not-found/index.php
+
 

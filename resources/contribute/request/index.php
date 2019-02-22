@@ -1,9 +1,8 @@
 <?php
 session_start();
-
 include_once BASE . '/include/templates/header.php';
 if (!$userIsLoggedIn) {
-    header('Location: ' . BASE_URL . 'resources/contribute/request/?auth=true');
+    echo '<script>location.replace("'. BASE_URL . 'resources/contribute/request/?auth=true' .'");</script>';
     die();
 }
 
