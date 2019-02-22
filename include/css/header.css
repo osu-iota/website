@@ -75,7 +75,7 @@ header nav .nav-link, .extra-links-mobile button, .extra-links-mobile a {
 
 header nav .nav-link:hover, .extra-links-mobile a:hover {
     color: rgba(255,255,255,.7) !important;
-    background-color: black;
+    background-color: inherit;
 }
 
 .extra-links-mobile {
