@@ -24,7 +24,8 @@ include_once BASE . '/include/templates/header.php'; ?>
     <?php include_once BASE . '/include/templates/message.php' ?>
     <div class="row form-contribute-resource">
         <div class="col">
-            <form method="post" action="resources/contribute/submit.php" enctype="multipart/form-data" onsubmit="onFormSubmit()">
+            <form method="post" action="resources/contribute/submit.php" enctype="multipart/form-data"
+                  onsubmit="onFormSubmit()">
                 <input type="hidden" name="uid" value="<?php echo $uid ?>"/>
                 <div class="form-row">
                     <div class="col-md-6 col-lg-4">
@@ -47,6 +48,7 @@ include_once BASE . '/include/templates/header.php'; ?>
                                 echo '<label><input type="checkbox" name="topics[]" value="' . $topic['rtid'] . '"/>&nbsp;' . $topic['rt_name'] . '</label><br>';
                             }
                             ?>
+                            <a href="resources/topics/request">Request a new topic</a>
                         </div>
                     </div>
                 </div>

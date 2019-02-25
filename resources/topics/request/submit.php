@@ -1,22 +1,22 @@
 <?php
 session_start();
 
-$url = 'resources/contribute/request';
+$url = 'resources/topics/request';
 
 // Verify the form
 $name = $_POST['name'];
 $onid = $_SESSION['onid'];
 $email = $_SESSION['email'];
 $seminar = $_POST['seminar'];
-$role = htmlentities($_POST['role']);
+$topic = htmlentities($_POST['topic']);
 
 if (!$name) fail('Please include your name', $url);
 if (!$onid || !$email) fail('ONID or email missing. Please log in.', $url);
 if (!$seminar) fail('Please enter the name of the seminar you led', $url);
-if (!$role) fail('Please provide details about your role in the seminar', $url);
+if (!$topic) fail('Please include the topic you would like to add', $url);
 
 $from = 'From: IOTA Alliance <no-reply@iota.engr.orst.edu>';
-$subject = '[IOTA] Contribution Request';
+$subject = '[IOTA] Topic Addition Request';
 
 $toEmails = BASE . '/include/data/contact-us-emails.json';
 $to = implode(',', json_decode(file_get_contents($toEmails), true));
@@ -28,16 +28,16 @@ $headers .= $from . "\r\n";
 $message = "
 <html>
 <head>
-<title>Contribution Request</title>
+<title>Topic Addition Request</title>
 </head>
 <body>
 <p>IOTA Administrator,</p>
-<p>The following individual has requested permission to contribute to the resource repository.</p>
+<p>A request for an additional topic to be added to the IOTA resource repository has been submitted. See below for details:</p>
 <p><strong>Name:</strong> $name</p>
 <p><strong>Email:</strong> $email</p>
 <p><Strong>ONID:</Strong> $onid</p>
 <p><strong>Seminar:</strong> $seminar</p>
-<p><strong>Role:</strong> $role</p>
+<p><strong>Topic: $topic</strong></p>
 </body>
 </html>
 ";
