@@ -59,9 +59,9 @@ include_once BASE . '/include/templates/header.php'; ?>
                             </div>
                             <div id="topicRequestForm">
                                 <div class="req-form">
-                                    <input required class="form-control" id="newTopicSeminar" type="text"
+                                    <input class="form-control" id="newTopicSeminar" type="text"
                                            placeholder="Name of seminar"/>
-                                    <input required type="text" class="form-control" id="newTopic"
+                                    <input type="text" class="form-control" id="newTopic"
                                            placeholder="Suggest a topic"/>
                                     <button type="button" class="btn btn-sm btn-primary" id="btnTopicRequest"">Submit Topic Request
                                     </button>
