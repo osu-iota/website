@@ -18,7 +18,7 @@ session_start();
             <a href="resources/contribute">
                 <button class="btn btn-primary">Contribute Resource</button>
             </a>
-        <?php elseif($userIsLoggedIn): ?>
+        <?php elseif ($userIsLoggedIn): ?>
             <a href="resources/contribute/request">
                 <button class="btn btn-primary">Request Permission to Contribute</button>
             </a>
@@ -49,7 +49,7 @@ session_start();
                 <form method="post" id="addTopicForm" onsubmit="return addTopic();">
                     <tr>
                         <td colspan="2">
-                            <input required type="text" class="form-control" name="topic" maxlength="20"
+                            <input required type="text" class="form-control" name="topic" maxlength="100"
                                    placeholder="Enter new topic"/>
                         </td>
                     </tr>
@@ -69,12 +69,12 @@ session_start();
         var $input = $('input[name=topic]');
         console.log('hello');
         $.post('resources/ajax/addtopic.php', {
-                topic: $input.val()
-            },
-            (data, status) => {
-                $input.val('');
-                $('#topics').load('resources/ajax/loadtopics.php');
-            });
+            topic: $input.val()
+        }).done(() => {
+            $input.val('');
+            snackbar('Successfully created new topic "' + $input.val() + '"', 'success');
+            $('#topics').load('resources/ajax/loadtopics.php');
+        }).fail(() => snackbar('Failed to create new topic "' + $input.val() + '"', 'error'));
         return false;
     }
 </script>

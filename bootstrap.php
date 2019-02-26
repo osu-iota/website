@@ -6,8 +6,8 @@ if ($reset) {
 }
 
 // Uncomment for debugging
-// ini_set('display_errors', 1);
-// error_reporting(E_WARNING);
+ini_set('display_errors', 1);
+error_reporting(E_WARNING);
 
 // Define some globals
 define('BASE', __DIR__);
@@ -15,6 +15,10 @@ define('BASE_PRIVATE', dirname(__DIR__));
 define('BASE_URL', 'http://groups.engr.oregonstate.edu/IOTA/');
 define('PARTICIPATES_DATA_DIR', BASE_PRIVATE . '/data/participates-data');
 define('RESOURCE_DATA_DIR', BASE_PRIVATE . '/data/resource-data');
+
+// Define helpers variables for including CSS and JavaScript files and altering what files are included page by page
+$css = array();
+$js = array();
 
 $userIsLoggedIn = !empty($_SESSION['onid']);
 $userIsAdmin = false;

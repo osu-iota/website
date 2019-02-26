@@ -19,6 +19,18 @@ $extraLinks = array();
 if ($userIsManager) $extraLinks['Reports'] = 'reports';
 if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
 
+$css = array_merge(array(
+    'include/css/header.css',
+    'include/css/main.css',
+    'include/css/snackbar.css'
+), $css);;
+
+$js = array_merge(array(
+    'include/js/util.js',
+    'include/js/snackbar.js',
+    'include/js/api.js'
+), $js);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +56,9 @@ if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
 
+    <!-- Fetch API -->
+    <script src="//unpkg.com/cross-fetch/dist/cross-fetch.js"></script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -55,14 +70,18 @@ if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />-->
 
     <!-- Styling -->
-    <link rel="stylesheet" href="include/css/header.css"/>
-    <link rel="stylesheet" href="include/css/main.css"/>
-    <link rel="stylesheet" href="include/css/snackbar.css"/>
+    <?php foreach ($css as $style): ?>
+        <link rel="stylesheet" href="<?php echo $style ?>"/>
+    <?php endforeach; ?>
+
     <?php if ($userIsAdmin): ?>
         <link rel="stylesheet" href="include/css/admin.css"/><?php endif; ?>
 
     <!-- Scripts -->
-    <script src="include/js/snackbar.js"></script>
+    <?php foreach ($js as $script): ?>
+        <script src="<?php echo $script ?>"></script>
+    <?php endforeach; ?>
+
 </head>
 <body>
 <header>
@@ -99,11 +118,11 @@ if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
                 ?>
                 <?php if ($userIsAdmin || $userIsContributor): ?>
                     <div class="extra-links">
-                    <?php foreach ($extraLinks as $title => $link): ?>
-                        <li class="nav-item<?php echo !empty($link) && urlContains($link) ? ' active' : '' ?>">
-                            <a class="nav-link" href="<?php echo $link ?>"><?php echo $title ?></a>
-                        </li>
-                    <?php endforeach; ?>
+                        <?php foreach ($extraLinks as $title => $link): ?>
+                            <li class="nav-item<?php echo !empty($link) && urlContains($link) ? ' active' : '' ?>">
+                                <a class="nav-link" href="<?php echo $link ?>"><?php echo $title ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </div>
                     <div class="extra-links-mobile dropdown">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -111,7 +130,7 @@ if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <?php foreach ($extraLinks as $title => $link): ?>
-                            <a class="dropdown-item" href="<?php echo $link ?>"><?php echo $title ?></a>
+                                <a class="dropdown-item" href="<?php echo $link ?>"><?php echo $title ?></a>
                             <?php endforeach; ?>
                         </div>
                     </div>
@@ -120,6 +139,6 @@ if ($userIsAdmin) $extraLinks['Admin'] = 'admin';
         </div>
     </nav>
 </header>
-<main class="container<?php if (urlContains('admin')) echo '-fluid'; ?>">
+<main class="container<?php if (urlContains('admin')) echo '-fluid'; ?><?php if ($bodyClass . '' != '') echo ' ' . $bodyClass ?>">
 
 

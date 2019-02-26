@@ -33,14 +33,18 @@ foreach ($res as $topic) {
 if ($userIsAdmin) : ?>
     <script>
         let current = null;
+
         function onDeleteTopic(id, topic) {
             let sure = confirm('Are you sure you want to delete the topic "' + topic + '"? Doing so will ' +
-            'remove all resource associations to the topic. This may make searching for the topic difficult.');
-            if(sure) {
+                'remove all resource associations to the topic. This may make searching for the topic difficult.');
+            if (sure) {
                 $.post('resources/ajax/deletetopic.php', {
                     id: id
-                }).done(() => $('#topics').load('resources/ajax/loadtopics.php'))
-                    .fail(() => alert('Failed to delete topic'));
+                }).done(() => {
+                    snackbar('Successfully removed topic"' + topic + '"', 'success');
+                    $('#topics').load('resources/ajax/loadtopics.php');
+                })
+                    .fail(() => snackbar('Failed to delete topic', 'error'));
             }
         }
 
@@ -48,7 +52,7 @@ if ($userIsAdmin) : ?>
             let $row = $(`tr[id=${id}]`);
             $row.find('a').hide();
             showEditButtons($row, true);
-            if(current != null) {
+            if (current != null) {
                 onCancelEditTopic(current);
             }
             let input = document.createElement('input');
@@ -61,15 +65,18 @@ if ($userIsAdmin) : ?>
 
         function onSaveTopic(id) {
             let newTopic = $('#editTopic').val();
-            if(newTopic === '') {
+            if (newTopic === '') {
                 alert('You must specify a tag name');
                 return;
             }
             $.post('resources/ajax/updatetopic.php', {
                 id: id,
                 name: newTopic,
-            }).done(() => $('#topics').load('resources/ajax/loadtopics.php'))
-                .fail(() => alert('Failed to update topic'));
+            }).done(() => {
+                snackbar('Successfully updated topic to "' + newTopic + '"', 'success');
+                $('#topics').load('resources/ajax/loadtopics.php');
+            })
+                .fail(() => snackbar('Failed to update topic', 'error'));
         }
 
         function onCancelEditTopic(id) {

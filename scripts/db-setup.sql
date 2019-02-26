@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS iota_resource_data
 CREATE TABLE IF NOT EXISTS iota_resource_topic
 (
   rtid    CHAR(15)    NOT NULL,
-  rt_name VARCHAR(20) NOT NULL,
+  rt_name VARCHAR(100) NOT NULL,
   PRIMARY KEY (rtid)
 );
 

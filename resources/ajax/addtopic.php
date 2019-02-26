@@ -1,4 +1,8 @@
 <?php
+if(!$userIsAdmin) {
+    http_send_status(401);
+    die();
+}
 $topic = htmlentities($_POST['topic']);
 
 if (!$topic) {
@@ -20,3 +24,5 @@ try {
 }
 
 http_send_status(201);
+die();
+

@@ -1,19 +1,21 @@
 <?php
 session_start();
 
-$url = 'resources/topics/request';
+include_once BASE . '/lib/rest-utils.php';
+
+$request = readRequestBodyJson();
 
 // Verify the form
-$name = $_POST['name'];
+$name = $_SESSION['name'];
 $onid = $_SESSION['onid'];
 $email = $_SESSION['email'];
-$seminar = $_POST['seminar'];
-$topic = htmlentities($_POST['topic']);
+$seminar = $request['seminar'];
+$topic = htmlentities($request['topic']);
 
-if (!$name) fail('Please include your name', $url);
-if (!$onid || !$email) fail('ONID or email missing. Please log in.', $url);
-if (!$seminar) fail('Please enter the name of the seminar you led', $url);
-if (!$topic) fail('Please include the topic you would like to add', $url);
+if ($name . '' == '') respond(400, 'Please include your name');
+if ($onid . '' == '' || $email . '' == '') respond(400, 'ONID or email missing. Please log in.');
+if ($seminar . '' == '') respond(400, 'Please enter the name of the seminar you led');
+if ($topic . '' == '') respond(400, 'Please include the topic you would like to add');
 
 $from = 'From: IOTA Alliance <no-reply@iota.engr.orst.edu>';
 $subject = '[IOTA] Topic Addition Request';
@@ -46,8 +48,7 @@ try {
     mail($to, $subject, $message, $headers);
 } catch (Exception $e) {
     $logger->error($e->getMessage());
-    fail('Failed to send message. Please try again. If the problem persists, contact the IT department or a system administrator', $url);
+    respond(500, 'Failed to send message. Please try again. If the problem persists, contact the IT department or a system administrator');
 }
 
-
-header('Location: ' . BASE_URL . $url . '/?sent=true');
+respond(200, 'Successfully requested topic', array("topic" => $topic));
