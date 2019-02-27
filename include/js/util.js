@@ -2,8 +2,8 @@ function hide(el) {
     el.style.display = 'none';
 }
 
-function show(el) {
-    el.style.display = 'block';
+function show(el, display = 'block') {
+    el.style.display = display;
 }
 
 function freezeEvent(e) {

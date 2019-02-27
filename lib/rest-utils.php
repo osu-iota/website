@@ -12,6 +12,12 @@ function respond($status, $message, $data = null) {
     exit(0);
 }
 
+function allowIf($constraint) {
+    if(!$constraint) {
+        respond(401, 'You do not have permission to access this resource');
+    }
+}
+
 function readRequestBodyJson() {
     return json_decode(file_get_contents('php://input'), true);
 }

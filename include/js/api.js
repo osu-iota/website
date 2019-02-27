@@ -15,5 +15,34 @@ const api = {
                 response.json().then(data => resolve(data));
             }
         });
+    }),
+
+    get: (url) => new Promise((resolve, reject) => {
+        fetch(url, {
+            method: 'GET',
+            cache: 'no-cache',
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (!response.ok) {
+                return reject(new Error('Failed to retrieve data from "' + url + '"'));
+            } else {
+                response.json().then(data => resolve(data));
+            }
+        })
+    }),
+
+    load: (url, elid) => new Promise((resolve, reject) => {
+        fetch(url).then(response => {
+            if (!response.ok) {
+                reject(new Error('Failed to load HTML from "' + url + '"'))
+            } else {
+                response.text().then(data => {
+                    document.getElementById(elid).innerHTML = data;
+                    resolve(true);
+                });
+            }
+        });
     })
 };

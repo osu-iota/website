@@ -1,13 +1,18 @@
 <?php
 
-$rtid = $_POST['id'];
+include_once BASE . '/lib/rest-utils.php';
 
-if(empty($rtid) || $rtid == '') {
-    http_response_code(500);
-    die();
-}
+allowIf($userIsAdmin);
+
+$body = readRequestBodyJson();
+
+$rtid = $body['id'];
+
+if($rtid . '' == '') respond(400, 'Please include ID of topic to delete in request');
 
 try {
+    $db->beginTransaction();
+
     // First we have to delete all of the 'resource for' relations
     $sql = 'DELETE FROM iota_resource_for WHERE rtid = :id';
     $prepared = $db->prepare($sql);
@@ -19,9 +24,12 @@ try {
     $prepared = $db->prepare($sql);
     $prepared->bindParam(':id', $rtid, PDO::PARAM_STR);
     $prepared->execute();
-} catch(PDOException $e) {
+
+    $db->commit();
+} catch(Exception $e) {
+    $db->rollBack();
     $logger->error($e->getMessage());
-    http_response_code(500);
+    respond(500, 'Failed to remove topic: an internal error occurred');
 }
 
-http_response_code(200);
+respond(200, 'Successfully removed topic');

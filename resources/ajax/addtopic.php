@@ -1,14 +1,15 @@
 <?php
-if(!$userIsAdmin) {
-    http_send_status(401);
-    die();
-}
-$topic = htmlentities($_POST['topic']);
 
-if (!$topic) {
-    http_send_status(400);
-    die();
-}
+include_once BASE . '/lib/rest-utils.php';
+
+allowIf($userIsAdmin);
+
+$body = readRequestBodyJson();
+
+$topic = htmlentities($body['topic']);
+
+if (!$topic) respond(400, 'Please include topic in request');
+
 
 $sql = 'INSERT INTO iota_resource_topic VALUES(:id, :topic)';
 $prepared = $db->prepare($sql);
@@ -19,10 +20,8 @@ try {
     $prepared->execute();
 } catch (PDOException $e) {
     $logger->error($e->getMessage());
-    http_send_status(500);
-    die();
+    respond(500, 'Failed to add topic "' . $topic . '": an internal error occurred.');
 }
 
-http_send_status(201);
-die();
+respond(201, 'Successfully created new topic "' . $topic . '"');
 

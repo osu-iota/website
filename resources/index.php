@@ -49,7 +49,7 @@ session_start();
                 <form method="post" id="addTopicForm" onsubmit="return addTopic();">
                     <tr>
                         <td colspan="2">
-                            <input required type="text" class="form-control" name="topic" maxlength="100"
+                            <input required type="text" class="form-control" id="topic" name="topic" maxlength="100"
                                    placeholder="Enter new topic"/>
                         </td>
                     </tr>
@@ -66,15 +66,17 @@ session_start();
 </div>
 <script>
     function addTopic() {
-        var $input = $('input[name=topic]');
-        console.log('hello');
-        $.post('resources/ajax/addtopic.php', {
-            topic: $input.val()
-        }).done(() => {
-            $input.val('');
-            snackbar('Successfully created new topic "' + $input.val() + '"', 'success');
-            $('#topics').load('resources/ajax/loadtopics.php');
-        }).fail(() => snackbar('Failed to create new topic "' + $input.val() + '"', 'error'));
+        let eInputTopic = document.getElementById('topic');
+        let body = {
+            topic: eInputTopic.value
+        };
+        api.post('resources/ajax/addtopic.php', body).then(data => {
+            eInputTopic.value = '';
+            snackbar(data.message, 'success');
+            api.load('resources/ajax/loadtopics.php', 'topics');
+        }).catch(err => {
+            snackbar(err.message, 'error');
+        });
         return false;
     }
 </script>

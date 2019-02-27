@@ -1,47 +1,64 @@
-let snackbarQueue = [];
+let _snackbarQueue = [];
+let _sb = null;
+let _showing = false;
+
+document.addEventListener('DOMContentLoaded', () => {
+    let eBody = document.getElementsByTagName('body')[0];
+    _sb = document.createElement('div');
+    _sb.id = 'snackbar';
+    eBody.appendChild(_sb);
+});
 
 function snackbar(message, type = 'info') {
-    let sb = document.createElement('div');
-    sb.classList.add('snackbar');
-    setSnackbarStyle(sb, type);
-    sb.appendChild(document.createTextNode(message));
-    snackbarQueue.push(sb);
-    if (snackbarQueue.length === 1) {
-        showSnackbar();
+    let item = {message, type};
+    _snackbarQueue.push(item);
+    if (!_showing) {
+        _showSnackbar();
     }
 }
 
-function showSnackbar() {
-    let el = snackbarQueue.shift();
-    document.getElementsByTagName('body')[0].appendChild(el);
-    el.classList.add('show');
+function _clearSnackbar() {
+    _sb.className = '';
+    while (_sb.firstChild) {
+        _sb.removeChild(_sb.firstChild);
+    }
+}
+
+function _showSnackbar() {
+    _showing = true;
+    let item = _snackbarQueue.shift();
+    _setSnackbarStyle(_sb, item.type);
+    _sb.appendChild(document.createTextNode(item.message));
+    _sb.className += ' show';
     setTimeout(function () {
-        el.classList.remove('show');
-        if (snackbarQueue.length > 0) {
-            showSnackbar();
+        _clearSnackbar();
+        _showing = false;
+        if (_snackbarQueue.length > 0) {
+            setTimeout(function () {
+                _showSnackbar();
+            }, 100);
         }
-        el.remove();
     }, 3000);
 }
 
-function setSnackbarStyle(el, type) {
+function _setSnackbarStyle(el, type) {
     let i = document.createElement('i');
     switch (type) {
         case 'error':
             i.classList.add('fas', 'fa-exclamation-circle');
-            el.classList.add('error');
+            el.className = 'error';
             break;
         case 'warn':
             i.classList.add('fas', 'fa-exclamation-triangle');
-            el.classList.add('warn');
+            el.className = 'warn';
             break;
         case 'info':
             i.classList.add('fas', 'fa-exclamation-circle');
-            el.classList.add('info');
+            el.className = 'info';
             break;
         case 'success':
             i.classList.add('fas', 'fa-check-circle');
-            el.classList.add('success');
+            el.className = 'success';
             break;
         default:
             break;

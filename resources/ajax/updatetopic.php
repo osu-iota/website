@@ -1,13 +1,16 @@
 <?php
 
-$rtid = $_POST['id'];
-$name = htmlentities($_POST['name']);
+include_once BASE . '/lib/rest-utils.php';
 
-if(empty($rtid) || $rtid == '' || empty($name) || $name == '') {
-    $logger->error('Attempted to update topic with malformed request: rtid = ' . $rtid . ', name = ' . $name);
-    http_response_code(500);
-    die();
-}
+allowIf($userIsAdmin);
+
+$body = readRequestBodyJson();
+
+$rtid = $body['id'];
+$name = htmlentities($body['name']);
+
+if ($rtid . '' == '') respond(400, 'Please include id of topic to update in request');
+if ($name . '' == '') respond(400, 'Please include a valid name to update the topic to');
 
 try {
     $sql = 'UPDATE iota_resource_topic SET rt_name = :name WHERE rtid = :id';
@@ -15,9 +18,9 @@ try {
     $prepared->bindParam(':name', $name, PDO::PARAM_STR);
     $prepared->bindParam(':id', $rtid, PDO::PARAM_STR);
     $prepared->execute();
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     $logger->error($e->getMessage());
-    http_response_code(500);
+    respond(500, 'Failed to update topic: an internal error occurred');
 }
 
-http_response_code(200);
+respond(200, 'Successfully updated topic to "' . $name . '"', $body);

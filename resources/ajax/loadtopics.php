@@ -38,13 +38,15 @@ if ($userIsAdmin) : ?>
             let sure = confirm('Are you sure you want to delete the topic "' + topic + '"? Doing so will ' +
                 'remove all resource associations to the topic. This may make searching for the topic difficult.');
             if (sure) {
-                $.post('resources/ajax/deletetopic.php', {
-                    id: id
-                }).done(() => {
-                    snackbar('Successfully removed topic"' + topic + '"', 'success');
-                    $('#topics').load('resources/ajax/loadtopics.php');
-                })
-                    .fail(() => snackbar('Failed to delete topic', 'error'));
+                let data = {
+                    id
+                };
+                api.post('resources/ajax/deletetopic.php', data).then(res => {
+                    snackbar('Successfully removed topic "' + topic + '"', 'success');
+                    api.load('resources/ajax/loadtopics.php', 'topics');
+                }).catch(err => {
+                    snackbar(err.message, 'error');
+                });
             }
         }
 
@@ -65,18 +67,16 @@ if ($userIsAdmin) : ?>
 
         function onSaveTopic(id) {
             let newTopic = $('#editTopic').val();
-            if (newTopic === '') {
-                alert('You must specify a tag name');
-                return;
-            }
-            $.post('resources/ajax/updatetopic.php', {
-                id: id,
-                name: newTopic,
-            }).done(() => {
-                snackbar('Successfully updated topic to "' + newTopic + '"', 'success');
-                $('#topics').load('resources/ajax/loadtopics.php');
-            })
-                .fail(() => snackbar('Failed to update topic', 'error'));
+            let data = {
+                id,
+                name: newTopic
+            };
+            api.post('resources/ajax/updatetopic.php', data).then(res => {
+                snackbar(res.message, 'success');
+                api.load('resources/ajax/loadtopics.php', 'topics');
+            }).catch(err => {
+                snackbar(err.message, 'error');
+            });
         }
 
         function onCancelEditTopic(id) {
