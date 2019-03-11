@@ -1,8 +1,9 @@
 CREATE TABLE IF NOT EXISTS iota_user
 (
-  uid               CHAR(15)    NOT NULL,
-  u_onid            VARCHAR(20) NOT NULL UNIQUE,
-  u_privilege_level SMALLINT    NOT NULL DEFAULT 0,
+  uid               CHAR(15)     NOT NULL,
+  u_name            VARCHAR(100) NOT NULL,
+  u_onid            VARCHAR(20)  NOT NULL UNIQUE,
+  u_privilege_level SMALLINT     NOT NULL DEFAULT 0,
   u_last_login      INT,
   PRIMARY KEY (uid)
 );
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS iota_resource_data
 
 CREATE TABLE IF NOT EXISTS iota_resource_topic
 (
-  rtid    CHAR(15)    NOT NULL,
+  rtid    CHAR(15)     NOT NULL,
   rt_name VARCHAR(100) NOT NULL,
   PRIMARY KEY (rtid)
 );

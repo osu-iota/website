@@ -1,9 +1,11 @@
 <?php
 session_start();
 
+include_once '../authorize.php';
+
 $url = 'resources/contribute';
 
-$uid = $_SESSION['uid'];
+$uid = $user->getId();
 $name = htmlentities($_POST['name']);
 $description = htmlentities($_POST['description']);;
 $topics = $_POST['topics'];

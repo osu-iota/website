@@ -6,9 +6,11 @@ include_once BASE . '/lib/rest-utils.php';
 $request = readRequestBodyJson();
 
 // Verify the form
-$name = $_SESSION['name'];
-$onid = $_SESSION['onid'];
-$email = $_SESSION['email'];
+if(!$user)  respond(400, 'Please log in');
+
+$name = $user->getName();
+$onid = $user->getOnid();
+$email = $user->getEmail();
 $seminar = $request['seminar'];
 $topic = htmlentities($request['topic']);
 

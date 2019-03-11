@@ -64,7 +64,7 @@ include_once BASE . '/include/templates/header.php'; ?>
         $logger->error($e->getMessage());
     }
 
-    $uid = $_SESSION['uid'];
+    $uid = $user->getId();
 
     ?>
     <div class="row">

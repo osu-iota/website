@@ -21,6 +21,8 @@ $prepared->execute();
 $prepared->setFetchMode(PDO::FETCH_ASSOC);
 $results = $prepared->fetchAll();
 
+$uid = $user ? $user->getId() : '';
+
 ?>
 <div class="row">
     <div class="col">
@@ -47,7 +49,7 @@ $results = $prepared->fetchAll();
                     <td class="actions">
                         <div class="actions-wrapper">
                             <a href="resources/topics/download.php?r=<?php echo $result['rdid'] ?>">Download</a>
-                            <?php if ($userIsAdmin || $_SESSION['uid'] == $result['uid']): ?>
+                            <?php if ($userIsAdmin || $uid == $result['uid']): ?>
                                 <a href="resources/edit?r=<?php echo $result['rid'] ?>">
                                     <button class="btn" data-toggle="tooltip" data-placement="right" title="Edit">
                                         <i class="far fa-edit"></i>

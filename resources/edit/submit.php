@@ -3,7 +3,7 @@ include_once '../authorize.php';
 
 session_start();
 
-$uid = $_SESSION['uid'];
+$uid = $user ? $user->getId() : null;
 $rid = $_POST['rid'];
 $oldRdid = $_POST['oldRdid'];
 $name = htmlentities($_POST['name']);

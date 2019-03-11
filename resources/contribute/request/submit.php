@@ -5,8 +5,8 @@ $url = 'resources/contribute/request';
 
 // Verify the form
 $name = $_POST['name'];
-$onid = $_SESSION['onid'];
-$email = $_SESSION['email'];
+$onid = $user ? $user->getOnid() : null;
+$email = $user ? $user->getEmail() : null;
 $seminar = $_POST['seminar'];
 $role = htmlentities($_POST['role']);
 

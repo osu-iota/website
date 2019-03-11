@@ -19,7 +19,7 @@ error_reporting(E_ALL);
 $dbHost = '127.0.0.1';
 $dbName = 'iota';
 $dbUser = 'root';
-$dbPassword = 'T1baawtl@h'; // include the password here, but do not check it in to source control
+$dbPassword = ''; // include the password here, but do not check it in to source control
 $url = 'mysql:host=' . $dbHost . ';dbname=' . $dbName;
 $db = new PDO($url, $dbUser, $dbPassword);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

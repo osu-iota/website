@@ -24,8 +24,8 @@ function onidauth() {
         $html = file_get_contents($url);
 
         $_SESSION['onid'] = strtolower(extractFromXml('cas:user', $html));
-        $_SESSION['name'] = extractFromXml('cas:firstname', $html) . ' ' . extractFromXml('cas:lastname', $html);
-        $_SESSION['email'] = extractFromXml('cas:email', $html);
+
+        $name = extractFromXml('cas:firstname', $html) . ' ' . extractFromXml('cas:lastname', $html);
 
         // Check to see if the user already exists in the database. If they don't, create a new entry
         global $daoUsers;
@@ -34,16 +34,16 @@ function onidauth() {
             $user = new OSU\IOTA\Model\User();
             $user->setOnid($_SESSION['onid']);
             $user->setPrivilegeLevel(0);
-            // TODO: add failure check here
+            $user->setName($name);
             $daoUsers->createUser($user);
+            // TODO: add failure check here
         } else {
-            // Update their last login
+            // Update their last login and name
             $user->setLastLogin(time());
+            $user->setName($name);
             $daoUsers->updateUser($user);
             // TODO: add failure check here
         }
-        $user->setName($_SESSION['name']);
-        $user->setEmail($_SESSION['email']);
 
         echo "<script>location.replace('" . $pageURL . "');</script>";
 

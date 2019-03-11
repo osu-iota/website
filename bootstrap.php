@@ -50,8 +50,6 @@ $daoUsers = new \OSU\IOTA\DAO\UserDao($db);
 $user = null;
 if($userIsLoggedIn) {
     $user = $daoUsers->getUserWithOnid($_SESSION['onid']);
-    $user->setName($_SESSION['name']);
-    $user->setEmail($_SESSION['email']);
     // Initialize some variables to easily track permissions
     $userIsAdmin = $user->getPrivilegeLevel() > 2;
     $userIsManager = $user->getPrivilegeLevel() > 1;

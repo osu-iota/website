@@ -19,9 +19,16 @@ $levels = json_decode(file_get_contents(BASE . '/include/data/priv-levels.json')
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <button type="submit" class="btn btn-primary" style="margin-left: 20px"><i class="fas fa-plus"></i>&nbsp;User</button>
+                <button type="submit" class="btn btn-primary" style="margin-left: 20px"><i class="fas fa-plus"></i>&nbsp;User
+                </button>
             </form>
         </div>
+        <div class="container-email-users">
+            <a href="admin/users/email">
+                <button class="btn btn-primary" type="button">Email Users</button>
+            </a>
+        </div>
+
         <table class="table">
             <thead>
             <th>ONID</th>

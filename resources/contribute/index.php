@@ -14,7 +14,7 @@ include_once BASE . '/include/templates/header.php'; ?>
     </div>
 <?php else: ?>
     <?php
-    $uid = $_SESSION['uid'];
+    $uid = $user->getId();
     // Get all the topics
     $sql = 'SELECT * FROM iota_resource_topic';
     $topics = $db->query($sql);

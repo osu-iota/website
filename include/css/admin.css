@@ -28,6 +28,7 @@
 .admin-main {
     flex: 1;
     overflow-y: auto;
+    padding: 15px;
     /*scrollbar-width: none;
     -ms-overflow-style: none;*/
 }
@@ -61,4 +62,8 @@
 .add-user input {
     width: 220px;
     margin-right: 20px;
+}
+
+.container-email-users {
+    margin: 10px;
 }
