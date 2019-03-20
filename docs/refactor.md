@@ -1,0 +1,74 @@
+# Refactor Plans
+
+## Directory Structure
+```txt
+root/
+    scripts/
+    api/
+        contact.php
+        topics.php
+        users.php
+        contributions.php
+        participations.php
+        email.php
+    components/
+        header.php
+        footer.php
+        notification.php
+        title.php
+        text.php
+    lib/
+        rest.php
+        onidauth.php
+        authorize.php
+        Model/
+            User.php
+        Database/
+            Dao.php
+            UserDao.php
+        Security.php
+        Logger.php
+    assets/
+        css/
+            admin.css
+            header.css
+            main.css
+            participate-form.css
+            snackbar.css
+        js/
+            api.js
+            snackbar.js
+            util.js
+        img/
+            osu-logo.svg
+        config/
+            clubs.json
+            emails.json
+            types.json
+            levels.json
+            topics.json
+    admin/
+        index.php
+        users.php
+    reports/
+        index.php
+    resources/
+        index.php
+        contribute.php
+        request.php
+    bootstrap.php
+    index.php
+    charter.php
+    calendar.php
+    office-hours.php
+    participate.php
+    contact.php
+    skill-trees.php
+    login.php
+    not-found.php
+    forbidden.php
+    ---
+    README.md
+    .htaccess
+    .gitignore
+```

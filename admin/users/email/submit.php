@@ -12,8 +12,7 @@ if ($subject . '' === '') fail('Please include a message subject', $url);
 if ($content . '' === '') fail('Please include message content', $url);
 
 // Get the users from the database
-//$users = $daoUsers->getAllUsers();
-$users = array($user);
+$users = $daoUsers->getAllUsers();
 
 // Prep Headers
 $from = 'From: IOTA Alliance <no-reply@iota.engr.orst.edu>';
@@ -23,8 +22,7 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 $headers .= $from . "\r\n";
 
 foreach ($users as $user) {
-    // Construct their email
-    $to = $user->getOnid() . '@oregonstate.edu';
+    $to = $user->getEmail();
     $name = $user->getName();
 
     $message = "
