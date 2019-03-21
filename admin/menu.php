@@ -1,12 +1,15 @@
 <?php
-include_once 'authorize.php';
+include_once BASE .  '/lib/authorize.php';
+
+allowIf($userIsAdmin, false);
+
 $menuOptions = array(
     'Dashboard' => array(
             'link' => '',
         'icon' => '<i class="fas fa-tachometer-alt"></i>'
     ),
     'Users' => array(
-        'link' => 'users/',
+        'link' => 'users',
         'icon' => '<i class="fas fa-users"></i>'
     )
 )

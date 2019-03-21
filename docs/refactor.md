@@ -2,6 +2,13 @@
 
 ## Directory Structure
 ```txt
+root/   
+    forbidden.php
+```
+
+## Completed
+
+```txt
 root/
     scripts/
     api/
@@ -10,24 +17,23 @@ root/
         users.php
         contributions.php
         participations.php
-        email.php
-    components/
-        header.php
-        footer.php
-        notification.php
-        title.php
-        text.php
+        broadcast.php
+        requests.php
+    downloaders/
+        resource-data.php
+        participation-data.php
     lib/
-        rest.php
+        classes/
+            Model/
+                User.php
+            Database/
+                Dao.php
+                UserDao.php
+            Security.php
+            Logger.php
+        rest-utils.php
         onidauth.php
         authorize.php
-        Model/
-            User.php
-        Database/
-            Dao.php
-            UserDao.php
-        Security.php
-        Logger.php
     assets/
         css/
             admin.css
@@ -41,21 +47,34 @@ root/
             util.js
         img/
             osu-logo.svg
-        config/
-            clubs.json
-            emails.json
-            types.json
-            levels.json
-            topics.json
+        files/
+            skill-tree.pdf
+    components/
+        header.php
+        footer.php
+        notification.php   
+        info.php 
+    config/
+        clubs.json
+        emails.json
+        participation-types.json
+        priv-levels.json
+        topics.json
     admin/
         index.php
-        users.php
+        menu.php
+        users/
+            index.php
+            email.php
     reports/
         index.php
     resources/
         index.php
-        contribute.php
-        request.php
+        contribute/
+            index.php
+            request.php
+            edit.php
+        topic.php
     bootstrap.php
     index.php
     charter.php
@@ -66,9 +85,4 @@ root/
     skill-trees.php
     login.php
     not-found.php
-    forbidden.php
-    ---
-    README.md
-    .htaccess
-    .gitignore
 ```

@@ -1,12 +1,15 @@
 <?php
-include_once 'authorize.php';
-include_once BASE . '/include/templates/header.php';
+include_once BASE . '/lib/authorize.php';
+
+allowIf($userIsManager, false);
+
+include_once BASE . '/components/header.php';
 
 // Retrieve the number of users of the system
 $users = $daoUsers->getAllUsers();
 $numUsers = count($users);
 
-// Retrieve all the participation data
+// Retrieve all the participation config
 try {
     $sql = 'SELECT * FROM iota_participates p, iota_user u ';
     $sql .= 'WHERE p.uid = u.uid ';
@@ -43,7 +46,7 @@ try {
                     <td><?php echo $result['p_description'] ?></td>
                     <td>
                         <?php if ($result['p_data']): ?>
-                            <a href="report/data-download.php?pd=<?php echo $result['p_data'] ?>" target="_blank">View Selfie</a>
+                            <a href="downloaders/participation-data.php?pd=<?php echo $result['p_data'] ?>" target="_blank">View Selfie</a>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -53,4 +56,4 @@ try {
     </div>
 </div>
 
-<?php include_once BASE . '/include/templates/footer.php'; ?>
+<?php include_once BASE . '/components/footer.php'; ?>

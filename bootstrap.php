@@ -6,15 +6,16 @@ if ($reset) {
 }
 
 // Uncomment for debugging
-ini_set('display_errors', 1);
-error_reporting(E_WARNING);
+//ini_set('display_errors', 1);
+//error_reporting(E_WARNING);
 
 // Define some globals
 define('BASE', __DIR__);
 define('BASE_PRIVATE', dirname(__DIR__));
-define('BASE_URL', 'http://groups.engr.oregonstate.edu/IOTA/');
-define('PARTICIPATES_DATA_DIR', BASE_PRIVATE . '/data/participates-data');
-define('RESOURCE_DATA_DIR', BASE_PRIVATE . '/data/resource-data');
+#define('BASE_URL', 'http://groups.engr.oregonstate.edu/IOTA/');
+define('BASE_URL', 'http://localhost:7000/');
+define('PARTICIPATES_DATA_DIR', BASE_PRIVATE . '/config/participates-config');
+define('RESOURCE_DATA_DIR', BASE_PRIVATE . '/config/resource-config');
 
 // Define helpers variables for including CSS and JavaScript files and altering what files are included page by page
 $css = array();
@@ -27,14 +28,14 @@ $userIsContributor = false;
 
 // Set an autoloader for custom classes
 spl_autoload_register(function ($className) {
-    include BASE . '/lib/' . str_replace('\\', '/', $className) . '.php';
+    include BASE . '/lib/classes/' . str_replace('\\', '/', $className) . '.php';
 });
 
 // Initialize a simple logger (nothing fancy)
-$logger = new \OSU\IOTA\Util\Logger(BASE_PRIVATE . '/out.log');
+$logger = new Logger(BASE_PRIVATE . '/out.log');
 
 // Read database credentials and open a PDO connection
-$dbType = 'prod'; // can be 'dev' or 'prod' for development and production, respectively
+$dbType = 'dev'; // can be 'dev' or 'prod' for development and production, respectively
 $dbCredentials = parse_ini_file(BASE_PRIVATE . '/database.ini', true);
 $dbHost = $dbCredentials[$dbType]['host'];
 $dbName = $dbCredentials[$dbType]['name'];
@@ -43,10 +44,10 @@ $dbPassword = $dbCredentials[$dbType]['password'];
 $url = 'mysql:host=' . $dbHost . ';dbname=' . $dbName;
 $db = new PDO($url, $dbUser, $dbPassword);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$daoUsers = new \OSU\IOTA\DAO\UserDao($db);
+$daoUsers = new DAO\UserDao($db);
 
 // Load the user if it isn't already loaded
-/** @var \OSU\IOTA\Model\User|null $user */
+/** @var \Model\User|null $user */
 $user = null;
 if($userIsLoggedIn) {
     $user = $daoUsers->getUserWithOnid($_SESSION['onid']);
@@ -74,8 +75,4 @@ function dump($var) {
     print_r($var);
     echo '</pre>';
 }
-
-//echo '<pre>';
-//print_r($db->query('SELECT version()')->fetchAll());
-//echo '</pre>';
 

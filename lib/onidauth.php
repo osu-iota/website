@@ -31,7 +31,7 @@ function onidauth() {
         global $daoUsers;
         $user = $daoUsers->getUserWithOnid($_SESSION['onid']);
         if(!$user) {
-            $user = new OSU\IOTA\Model\User();
+            $user = new Model\User();
             $user->setOnid($_SESSION['onid']);
             $user->setPrivilegeLevel(0);
             $user->setName($name);

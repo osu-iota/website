@@ -1,5 +1,7 @@
 <?php
-include_once '../authorize.php';
+include_once BASE . '/lib/authorize.php';
+
+allowIf($userIsContributor, false);
 
 $css[] = 'include/css/participate-form.css';
 
