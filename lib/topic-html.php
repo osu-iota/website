@@ -8,7 +8,7 @@ function getTopicHtml($topics) {
         $rtid = $topic['rtid'];
         $name = $topic['rt_name'];
 
-        $html .= '<tr id="' . $rtid . '"><td><a href="resources/topics/?t=' . $rtid . '">' . $name . '</a></td>';
+        $html .= '<tr id="' . $rtid . '"><td><a href="resources/topic?t=' . $rtid . '">' . $name . '</a></td>';
         $html .= '<td>';
 
         if ($userIsAdmin) {
