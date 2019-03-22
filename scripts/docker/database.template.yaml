@@ -1,0 +1,4 @@
+name: DB_NAME
+host: DB_HOST
+user: root
+password: DB_PASSWORD
