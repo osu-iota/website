@@ -1,6 +1,6 @@
 <?php
-include_once PUBLIC_FILES . '/include/templates/header.php';
-include_once '../../menu.php';
+include_once PUBLIC_FILES . '/components/header.php';
+include_once '../menu.php';
 ?>
 <div class="admin-main">
     <?php if($_GET['sent'] == 'true'): ?>
@@ -18,7 +18,7 @@ include_once '../../menu.php';
             </div>
         </div>
         <hr/>
-        <?php include PUBLIC_FILES . '/include/templates/message.php' ?>
+        <?php include PUBLIC_FILES . '/components/message.php' ?>
         <div class="row">
             <div class="col">
                 <form method="post" action="admin/users/email/submit.php">
@@ -49,4 +49,4 @@ include_once '../../menu.php';
 </div>
 
 
-<?php include_once PUBLIC_FILES . '/include/templates/footer.php' ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php' ?>
