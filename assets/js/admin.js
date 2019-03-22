@@ -2,7 +2,7 @@ let current = null;
 
 function reloadTopics() {
     api.get('/topics?format=html').then(res => {
-        document.getElementById('topics').innerHTML = res.html;
+        document.getElementById('topics').innerHTML = res.content.html;
     });
 }
 
