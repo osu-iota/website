@@ -79,9 +79,9 @@ function addNewTopic() {
 function deleteTopic() {
 
     global $db, $logger;
-    $body = readRequestBodyJson();
+    $query = readQueryString();
 
-    $rtid = $body['id'];
+    $rtid = $query['id'];
 
     if ($rtid . '' == '') respond(400, 'Please include ID of topic to delete in request');
 
@@ -112,9 +112,11 @@ function deleteTopic() {
 
 function updateTopic() {
     global $db, $logger;
+
+    $query = readQueryString();
     $body = readRequestBodyJson();
 
-    $rtid = $body['id'];
+    $rtid = $query['id'];
     $name = htmlentities($body['name']);
 
     if ($rtid . '' == '') respond(400, 'Please include id of topic to update in request');

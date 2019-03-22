@@ -12,7 +12,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         addNewUser();
         break;
 
-    case 'PUT':
+    case 'PATCH':
         updateUser();
         break;
 
@@ -53,10 +53,12 @@ function addNewUser() {
 function updateUser() {
     global $db, $logger;
 
+    $query = readQueryString();
+
     $body = readRequestBodyJson();
 
     // Currently can only update the privilege level
-    $id = $body['id'];
+    $id = $query['id'];
     $level = $body['level'];
 
     if((empty($level) && $level != 0) || empty($id)) {

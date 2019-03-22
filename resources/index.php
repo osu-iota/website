@@ -65,29 +65,5 @@ session_start();
         </table>
     </div>
 </div>
-<script>
-    function addTopic() {
-
-        let form = document.getElementById('addTopicForm');
-        let fdata = new FormData(form);
-
-        let body = {
-            topic: fdata.get('topic')
-        };
-        api.post('/topics', body).then(data => {
-            eInputTopic.value = '';
-            snackbar(data.message, 'success');
-            api.get('/topics?format=html').then(res => {
-                $('topics').html(res.content.html);
-                form.reset();
-            }).catch(err => {
-                window.location.reload(true);
-            });
-        }).catch(err => {
-            snackbar(err.message, 'error');
-        });
-        return false;
-    }
-</script>
 
 <?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

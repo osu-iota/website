@@ -115,11 +115,12 @@ function addNewContribution() {
 function updateContributionData() {
     global $user, $db, $logger;
 
+    $query = readQueryString();
+
     $body = readRequestBodyUrlFormEncoded();
 
     $uid = $user->getId();
-    $rid = $body['rid'];
-    $oldRdid = $body['oldRdid'];
+    $rid = $query['id'];
     $name = htmlentities($body['name']);
     $description = htmlentities($body['description']);
     $topics = $body['topics'];
@@ -127,8 +128,6 @@ function updateContributionData() {
 
     if ($rid . '' == '')
         respond(400, 'Must include the resource id to edit content');
-    if ($oldRdid . '' == '')
-        respond(400, 'Must include old resource config id in case of new resource upload');
     if ($name . '' == '')
         respond(400, 'Please include a name for the resource');
     if ($description . '' == '')
@@ -140,6 +139,16 @@ function updateContributionData() {
     // Everything looks good
     $db->beginTransaction();
     try {
+
+        // Get the rdid of the currently active resource data
+        $sql = 'SELECT rdid FROM iota_resource_data WHERE rid = :rid AND active = TRUE';
+        $prepared = $db->prepare($sql);
+        $prepared->bindParam(':rid', $rid, PDO::PARAM_STR);
+        $prepared->setFetchMode(PDO::FETCH_ASSOC);
+        $prepared->execute();
+        $result = $prepared->fetchAll();
+        $oldRdid = $result[0]['rdid'];
+
         // Add the resource config if the user uploaded a new file
         if ($resource . '' != '' && $resource['size'] > 0) {
             // Check file size (10 MB limit)

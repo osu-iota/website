@@ -1,15 +1,36 @@
 let current = null;
 
+function reloadTopics() {
+    api.get('/topics?format=html').then(res => {
+        document.getElementById('topics').innerHTML = res.html;
+    });
+}
+
+function addTopic() {
+
+    let form = document.getElementById('addTopicForm');
+    let fdata = new FormData(form);
+
+    let body = {
+        topic: fdata.get('topic')
+    };
+    api.post('/topics', body).then(res => {
+        snackbar(res.message, 'success');
+        reloadTopics();
+        form.reset();
+    }).catch(err => {
+        snackbar(err.message, 'error');
+    });
+    return false;
+}
+
 function onDeleteTopic(id, topic) {
     let sure = confirm('Are you sure you want to delete the topic "' + topic + '"? Doing so will ' +
         'remove all resource associations to the topic. This may make searching for the topic difficult.');
     if (sure) {
-        let data = {
-            id
-        };
-        api.post('resources/ajax/deletetopic.php', data).then(res => {
+        api.delete('/topics?id=' + id).then(res => {
             snackbar('Successfully removed topic "' + topic + '"', 'success');
-            api.load('resources/ajax/loadtopics.php', 'topics');
+            reloadTopics();
         }).catch(err => {
             snackbar(err.message, 'error');
         });
@@ -34,12 +55,11 @@ function onEditTopic(id, topic) {
 function onSaveTopic(id) {
     let newTopic = $('#editTopic').val();
     let data = {
-        id,
         name: newTopic
     };
-    api.post('resources/ajax/updatetopic.php', data).then(res => {
+    api.patch('/topics?id=' + id, data).then(res => {
         snackbar(res.message, 'success');
-        api.load('resources/ajax/loadtopics.php', 'topics');
+        reloadTopics();
     }).catch(err => {
         snackbar(err.message, 'error');
     });
@@ -68,12 +88,12 @@ function showEditButtons($row, show) {
 }
 
 function onPrivilegeLevelEdit(el) {
-    $.post('admin/users/update.php', {
-        id: el.id,
+    let body = {
         level: el.value
-    }).done(() => {
-        snackbar("Successfully updated the user's privilege level", 'success');
-    }).fail(() => {
-        snackbar("Failed to update the user's privilege level", 'error');
+    };
+    api.patch('/users?id=' + el.id, body).then(res => {
+        snackbar(res.message, 'success');
+    }).catch(err => {
+        snackbar(err.message, 'error');
     });
 }
