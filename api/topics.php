@@ -34,7 +34,10 @@ function getTopics() {
     global $db, $logger;
     $sql = 'SELECT * FROM iota_resource_topic ORDER BY rt_name';
     try {
-        $res = $db->query($sql);
+        $prepared = $db->prepare($sql);
+        $prepared->setFetchMode(PDO::FETCH_ASSOC);
+        $prepared->execute();
+        $res = $prepared->fetchAll();
     } catch (PDOException $e) {
         $logger->error($e->getMessage());
         respond(500, 'Failed to load topics');

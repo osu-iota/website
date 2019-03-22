@@ -89,7 +89,10 @@ function getUsers() {
     $users = array();
     try {
         $sql = 'SELECT * FROM iota_user ORDER BY u_onid'; // TODO: implement LIMIT for large amount of users
-        $users = $db->query($sql);
+        $prepared = $db->prepare($sql);
+        $prepared->setFetchMode(PDO::FETCH_ASSOC);
+        $prepared->execute();
+        $users = $prepared->fetchAll();
     } catch (PDOException $e) {
         $logger->error($e->getMessage());
         respond(500, 'Failed to retrieve users information');
