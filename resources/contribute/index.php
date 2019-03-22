@@ -3,7 +3,7 @@ include_once PUBLIC_FILES . '/lib/authorize.php';
 
 allowIf($userIsContributor, false);
 
-$css[] = 'include/css/participate-form.css';
+$css[] = 'assets/css/participate-form.css';
 
 include_once PUBLIC_FILES . '/components/header.php'; ?>
 
