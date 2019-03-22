@@ -120,7 +120,7 @@ include_once PUBLIC_FILES . '/components/header.php'; ?>
             let eTopicLoader = document.getElementById('topicLoader');
             let eFormLoader = document.getElementById('formLoader');
             let eFormSubmitButton = document.getElementById('formSubmit');
-            let eForm = document.getElementById('form');
+            let eForm = document.getElementById('formContributeResource');
             let eButtonNewTopicRequest = document.getElementById('btnNewRequest');
 
             $('input[name=resource]').on('change', function (e) {
