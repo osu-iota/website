@@ -7,6 +7,12 @@
 #</IfModule>
 php_value auto_prepend_file "/nfs/farm/groups/iota/public_html/bootstrap.php"
 
+# Allow for omission of .php extension
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
 # Deny access to .htaccess
 <Files .htaccess>
 Order allow,deny
@@ -14,7 +20,7 @@ Deny from all
 </Files>
 
 # Deny access to files with extensions .ini, .psd, .log, .sh
-<FilesMatch "\.(ini|psd|log|sh|sql)$">
+<FilesMatch "\.(yaml|ini|psd|log|sh|sql)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
@@ -29,6 +35,6 @@ Deny from all
 Options -Indexes
 
 # Custom error pages
-ErrorDocument 404 /IOTA/not-found/index.php
+ErrorDocument 404 /not-found
 
 

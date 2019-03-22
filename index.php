@@ -1,15 +1,4 @@
-<?php include BASE . '/include/templates/header.php'; ?>
-<?php
-// Split the q param in the URL to find out what content to load
-/*$urlPath = explode('/', $_GET['q']);
-
-if(count($urlPath) == 0){
-    // We are on the home page
-} else {
-    // Time to load content. Look at the first entry in the path. If it is a reserved path, redirect to the appropriate
-    // sub-directory. Otherwise we need to load the content and display it
-}*/
-?>
+<?php include PUBLIC_FILES . '/components/header.php'; ?>
     <div class="row">
         <div class="col">
             <h1>Welcome to the IoT Alliance!</h1>
@@ -43,4 +32,4 @@ if(count($urlPath) == 0){
     </div>
 
 
-<?php include BASE . '/include/templates/footer.php'; ?>
+<?php include PUBLIC_FILES . '/components/footer.php'; ?>

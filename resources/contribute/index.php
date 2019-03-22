@@ -1,9 +1,11 @@
 <?php
-include_once '../authorize.php';
+include_once PUBLIC_FILES . '/lib/authorize.php';
+
+allowIf($userIsContributor, false);
 
 $css[] = 'include/css/participate-form.css';
 
-include_once BASE . '/include/templates/header.php'; ?>
+include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
 
 <?php if ($_GET['submitted'] == "true"): ?>
     <div class="row">
@@ -24,7 +26,7 @@ include_once BASE . '/include/templates/header.php'; ?>
             <h1>Contribute New Content</h1>
         </div>
     </div>
-    <?php include_once BASE . '/include/templates/message.php' ?>
+    <?php include_once PUBLIC_FILES . '/include/templates/message.php' ?>
     <div class="row form-contribute-resource">
         <div class="col">
             <form id="form" method="post" action="resources/contribute/submit.php" enctype="multipart/form-data">

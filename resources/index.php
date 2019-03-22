@@ -1,5 +1,14 @@
 <?php
-include_once BASE . '/include/templates/header.php';
+include_once PUBLIC_FILES . '/components/header.php';
+include_once PUBLIC_FILES . '/lib/topic-html.php';
+
+$topics = array();
+$sql = 'SELECT * FROM iota_resource_topic ORDER BY rt_name';
+try {
+    $topics = $db->query($sql);
+} catch (PDOException $e) {
+    $logger->error($e->getMessage());
+}
 
 session_start();
 ?>
@@ -10,7 +19,7 @@ session_start();
             related to the alliance. All users can search and download content from the repository.</p>
     </div>
 </div>
-<?php include_once BASE . '/include/templates/message.php' ?>
+<?php include_once PUBLIC_FILES . '/components/message.php' ?>
 
 <div class="row">
     <div class="col contribute-resource">
@@ -34,14 +43,14 @@ session_start();
         <h4>Topics</h4>
         <table class="table available-topics">
             <tbody id="topics">
-            <?php include 'ajax/loadtopics.php' ?>
+            <?php getTopicHtml($topics) ?>
             </tbody>
             <?php if ($userIsAdmin): ?>
                 <tfoot>
-                <form method="post" id="addTopicForm" onsubmit="return addTopic();">
+                <form id="addTopicForm" onsubmit="return addTopic();">
                     <tr>
                         <td colspan="2">
-                            <input required type="text" class="form-control" id="topic" name="topic" maxlength="100"
+                            <input required type="text" class="form-control" name="topic" maxlength="100"
                                    placeholder="Enter new topic"/>
                         </td>
                     </tr>
@@ -58,14 +67,22 @@ session_start();
 </div>
 <script>
     function addTopic() {
-        let eInputTopic = document.getElementById('topic');
+
+        let form = document.getElementById('addTopicForm');
+        let fdata = new FormData(form);
+
         let body = {
-            topic: eInputTopic.value
+            topic: fdata.get('topic')
         };
-        api.post('resources/ajax/addtopic.php', body).then(data => {
+        api.post('/topics', body).then(data => {
             eInputTopic.value = '';
             snackbar(data.message, 'success');
-            api.load('resources/ajax/loadtopics.php', 'topics');
+            api.get('/topics?format=html').then(res => {
+                $('topics').html(res.content.html);
+                form.reset();
+            }).catch(err => {
+                window.location.reload(true);
+            });
         }).catch(err => {
             snackbar(err.message, 'error');
         });
@@ -73,4 +90,4 @@ session_start();
     }
 </script>
 
-<?php include_once BASE . '/include/templates/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

@@ -1,17 +1,27 @@
 <?php
-include_once BASE . '/include/templates/header.php';
+include_once PUBLIC_FILES . '/components/header.php';
 include_once '../menu.php';
+include_once PUBLIC_FILES . '/lib/users-html.php';
 
-$levels = json_decode(file_get_contents(BASE . '/include/data/priv-levels.json'), true);
+$levels = $config['enums']['privilegeLevels'];
+
+// Get all the users
+$users = array();
+try {
+    $sql = 'SELECT * FROM iota_user ORDER BY u_onid'; // TODO: implement LIMIT for large amount of users
+    $users = $db->query($sql);
+} catch (PDOException $e) {
+    $logger->error($e->getMessage());
+}
 
 ?>
 <div class="admin-main">
     <div class="page">
         <div class="add-user">
-            <form onsubmit="return onAddNewUser()">
-                <input required type="text" class="form-control" id="newUserOnid"
+            <form id="newUserForm" onsubmit="return onAddNewUser()">
+                <input required type="text" class="form-control" name="onid"
                        placeholder="Enter ONID for new user"/>
-                <select required id="newUserLevel" class="form-control user-priv-select">
+                <select required name="level" class="form-control user-priv-select">
                     <option value="">Select Level</option>
                     <?php foreach ($levels as $index => $level): ?>
                         <option value="<?php echo $index ?>">
@@ -37,7 +47,7 @@ $levels = json_decode(file_get_contents(BASE . '/include/data/priv-levels.json')
             <th></th>
             </thead>
             <tbody id="users">
-            <?php include_once 'loadusers.php' ?>
+            <?php echo getUsersHtml($users) ?>
             </tbody>
         </table>
     </div>
@@ -45,21 +55,23 @@ $levels = json_decode(file_get_contents(BASE . '/include/data/priv-levels.json')
 </div>
 <script>
     function onAddNewUser() {
-        var onid = document.getElementById('newUserOnid');
-        var level = document.getElementById('newUserLevel');
 
-        $.post('admin/users/addnew.php', {
-            onid: onid.value,
-            privLevel: level.value
-        }).done(() => {
-            snackbar("Successfully created new user", 'success');
-            onid.value = '';
-            level.value = '';
-            $('#users').load('admin/users/loadusers.php');
-        }).fail(() => {
-            snackbar("Failed to create new user", 'error');
+        let form = document.getElementById('newUserForm');
+        let fdata = new FormData(form);
+
+        let body = {
+            onid: fdata.get('onid'),
+            privLevel: fdata.get('level')
+        };
+
+        api.post('/users', body).then(res => {
+            form.reset();
+            snackbar(res.message, 'success');
+        }).catch(err => {
+            snackbar(err.message, 'error');
         });
+
         return false;
     }
 </script>
-<?php include_once BASE . '/include/templates/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>
