@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once BASE . '/include/templates/header.php';
+include_once PUBLIC_FILES . '/include/templates/header.php';
 if (!$userIsLoggedIn) {
     echo '<script>location.replace("'. BASE_URL . 'resources/contribute/request/?auth=true' .'");</script>';
     die();
@@ -27,7 +27,7 @@ $name = $user ? $user->getName() : '';
         </div>
     </div>
     <hr/>
-    <?php include_once BASE . '/include/templates/message.php' ?>
+    <?php include_once PUBLIC_FILES . '/include/templates/message.php' ?>
     <div class="row">
         <div class="col">
             <form method="post" action="resources/contribute/request/submit.php">
@@ -59,4 +59,4 @@ $name = $user ? $user->getName() : '';
         </div>
     </div>
 <?php endif; ?>
-<?php include_once BASE . '/include/templates/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/include/templates/footer.php'; ?>

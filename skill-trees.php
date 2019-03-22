@@ -1,4 +1,4 @@
-<?php include_once BASE . '/components/header.php' ?>
+<?php include_once PUBLIC_FILES . '/components/header.php' ?>
 <div class="row">
     <div class="col">
         <h1>Skill Trees</h1>
@@ -16,4 +16,4 @@
         </table>
     </div>
 </div>
-<?php include_once BASE . '/components/footer.php' ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php' ?>

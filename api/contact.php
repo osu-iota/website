@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 0);
-include_once BASE . '/lib/rest-utils.php';
-include_once BASE . '/lib/email.php';
+include_once PUBLIC_FILES . '/lib/rest-utils.php';
+include_once PUBLIC_FILES . '/lib/email.php';
 
 // Define handlers
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -28,7 +28,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $message .= '<p>' . $name . '</p>';
 
         // Get list of emails to send the contact form to
-        $to = json_decode(file_get_contents(BASE . '/config/emails.json'));
+        $to = $config['admin']['emails'];
 
         // Send and check for errors
         $error = sendEmail($subject, $message, $to, $name . ' <' . $email . '>');

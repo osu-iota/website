@@ -1,5 +1,5 @@
 <?php
-include BASE . '/components/header.php';
+include PUBLIC_FILES . '/components/header.php';
 $members = array(
     array(
         'name' => 'Jacob Dawes',
@@ -49,4 +49,4 @@ foreach ($members as $member) {
 }
 ?>
 
-<?php include BASE . '/components/footer.php'; ?>
+<?php include PUBLIC_FILES . '/components/footer.php'; ?>

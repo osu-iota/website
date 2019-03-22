@@ -1,6 +1,6 @@
 <?php
-include_once BASE . '/components/header.php';
-include_once BASE . '/lib/topic-html.php';
+include_once PUBLIC_FILES . '/components/header.php';
+include_once PUBLIC_FILES . '/lib/topic-html.php';
 
 $topics = array();
 $sql = 'SELECT * FROM iota_resource_topic ORDER BY rt_name';
@@ -19,7 +19,7 @@ session_start();
             related to the alliance. All users can search and download content from the repository.</p>
     </div>
 </div>
-<?php include_once BASE . '/components/message.php' ?>
+<?php include_once PUBLIC_FILES . '/components/message.php' ?>
 
 <div class="row">
     <div class="col contribute-resource">
@@ -90,4 +90,4 @@ session_start();
     }
 </script>
 
-<?php include_once BASE . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

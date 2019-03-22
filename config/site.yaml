@@ -1,0 +1,41 @@
+# General settings for the IOTA website
+# Primarily allows us to choose the mode for the site and load the required configurations
+
+# mode - can be 'production' or 'development'
+mode: development
+
+admin:
+  serverEmail: IoT Alliance <no-reply@iota.engr.orst.edu>
+  emails:
+    - hitchcob@oregonstate.edu
+
+enums:
+  clubs:
+    - name: Internet of Things Alliance
+      code: iota
+    - name: Linux Users Group
+      code: lug
+    - name: OSU Robotics
+      code: robot
+    - name: Hackathon Club
+      code: hack
+    - name: Security Club
+      code: security
+    - name: Inventors Enterprise
+      code: ie
+
+  participationTypes:
+    - name: Club Meeting
+      code: meeting
+    - name: Club Event
+      code: event
+    - name: Project
+      code: project
+    - name: Other
+      code: other
+
+  privilegeLevels:
+    - User
+    - Contributor
+    - Manager
+    - Admin

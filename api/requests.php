@@ -1,8 +1,8 @@
 <?php
 ini_set('display_errors', 0);
-include_once BASE . '/lib/authorize.php';
-include_once BASE . '/lib/rest-utils.php';
-include_once BASE . '/lib/email.php';
+include_once PUBLIC_FILES . '/lib/authorize.php';
+include_once PUBLIC_FILES . '/lib/rest-utils.php';
+include_once PUBLIC_FILES . '/lib/email.php';
 
 // Define handlers
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -30,7 +30,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 }
 
 function makeContributionAccessRequest($body) {
-    global $user, $logger;
+    global $config, $user, $logger;
 
     $name = $body['name'];
     $onid = $user->getOnid();
@@ -54,10 +54,11 @@ function makeContributionAccessRequest($body) {
     $message .= "<p><strong>Role:</strong> $role</p>";
 
     // Get list of emails to send the contact form to
-    $to = json_decode(file_get_contents(BASE . '/config/emails.json'));
+    $to = $config['admin']['emails'];
+    $from = $config['admin']['serverEmail'];
 
     // Send and check for errors
-    $error = sendEmail($subject, $message, $to);
+    $error = sendEmail($subject, $message, $to, $from);
 
     if ($error) {
         $logger->error('Error sending email: ' . $error);
@@ -68,7 +69,7 @@ function makeContributionAccessRequest($body) {
 }
 
 function makeTopicAdditionRequest($body) {
-    global $user, $logger;
+    global $config, $user, $logger;
 
     $name = $user->getName();
     $onid = $user->getOnid();
@@ -92,10 +93,11 @@ function makeTopicAdditionRequest($body) {
     $message .= "<p><strong>Topic: $topic</strong></p>";
 
     // Get list of emails to send the contact form to
-    $to = json_decode(file_get_contents(BASE . '/config/emails.json'));
+    $to = $config['admin']['emails'];
+    $from = $config['admin']['serverEmail'];
 
     // Send and check for errors
-    $error = sendEmail($subject, $message, $to);
+    $error = sendEmail($subject, $message, $to, $from);
 
     if ($error) {
         $logger->error('Error sending email: ' . $error);

@@ -1,4 +1,4 @@
-<?php include BASE . '/components/header.php'; ?>
+<?php include PUBLIC_FILES . '/components/header.php'; ?>
     <div class="row">
         <div class="col">
             <h1>IOTA Calendar of Events</h1>
@@ -16,4 +16,4 @@
         </div>
     </div>
 
-<?php include BASE . '/components/footer.php'; ?>
+<?php include PUBLIC_FILES . '/components/footer.php'; ?>

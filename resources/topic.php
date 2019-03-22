@@ -1,4 +1,4 @@
-<?php include_once BASE . '/components/header.php';
+<?php include_once PUBLIC_FILES . '/components/header.php';
 
 $rtid = $_GET['t'];
 
@@ -80,4 +80,4 @@ $uid = $user ? $user->getId() : '';
 </div>
 
 
-<?php include_once BASE . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

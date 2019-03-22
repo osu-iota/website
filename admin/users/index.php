@@ -1,9 +1,9 @@
 <?php
-include_once BASE . '/components/header.php';
+include_once PUBLIC_FILES . '/components/header.php';
 include_once '../menu.php';
-include_once BASE . '/lib/users-html.php';
+include_once PUBLIC_FILES . '/lib/users-html.php';
 
-$levels = json_decode(file_get_contents(BASE . '/config/priv-levels.json'), true);
+$levels = $config['enums']['privilegeLevels'];
 
 // Get all the users
 $users = array();
@@ -74,4 +74,4 @@ try {
         return false;
     }
 </script>
-<?php include_once BASE . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

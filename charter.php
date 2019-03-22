@@ -1,4 +1,4 @@
-<?php include_once BASE . '/components/header.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/header.php'; ?>
 
 <div class="row">
     <div class="col">
@@ -331,4 +331,4 @@
             determined by the club’s resources and time.</p>
     </div>
 </div>
-<?php include_once BASE . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

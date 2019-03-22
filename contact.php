@@ -1,5 +1,5 @@
 <?php
-include_once BASE . '/components/header.php';
+include_once PUBLIC_FILES . '/components/header.php';
 
 $name = $user ? $user->getName() : '';
 $email = $user ? $user->getEmail() : '';
@@ -24,7 +24,7 @@ $email = $user ? $user->getEmail() : '';
         </div>
     </div>
     <hr>
-    <?php include_once BASE . '/components/message.php' ?>
+    <?php include_once PUBLIC_FILES . '/components/message.php' ?>
     <div class="row">
         <div class="col">
             <form id="contactUsForm" onsubmit="return onContactUsFormSubmit()">
@@ -83,4 +83,4 @@ $email = $user ? $user->getEmail() : '';
         }
     </script>
 <?php endif; ?>
-<?php include_once BASE . '/components/footer.php' ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php' ?>

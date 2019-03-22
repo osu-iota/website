@@ -1,11 +1,11 @@
 <?php
 ini_set('display_errors', 0);
 // Restrict page access to admins
-include_once BASE . '/lib/authorize.php';
+include_once PUBLIC_FILES . '/lib/authorize.php';
 allowIf($userIsAdmin);
 
-include_once BASE . '/lib/rest-utils.php';
-include_once BASE . '/lib/email.php';
+include_once PUBLIC_FILES . '/lib/rest-utils.php';
+include_once PUBLIC_FILES . '/lib/email.php';
 
 // Define handlers
 switch ($_SERVER['REQUEST_METHOD']) {

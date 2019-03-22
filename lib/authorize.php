@@ -1,6 +1,6 @@
 <?php
 
-include_once BASE . '/lib/rest-utils.php';
+include_once PUBLIC_FILES . '/lib/rest-utils.php';
 
 function allowIf($condition, $api = true) {
     if(!$condition) {

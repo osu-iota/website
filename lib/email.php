@@ -1,6 +1,6 @@
 <?php
 
-function sendEmail($subject, $message, $to, $from = 'IoT Alliance <no-reply@iota.engr.orst.edu>') {
+function sendEmail($subject, $message, $to, $from) {
     $subject = '[IOTA] ' . $subject;
     if (is_array($to)) $to = implode(',', $to);
 

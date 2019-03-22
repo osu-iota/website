@@ -1,12 +1,12 @@
 <?php
-include_once BASE . '/components/header.php';
+include_once PUBLIC_FILES . '/components/header.php';
 session_start();
 $onid = $user ? $user->getOnid() : null;
 $name = $user ? $user->getName() : '';
 $uid = $user ? $user->getId() : '';
 
-$ptTypes = json_decode(file_get_contents(BASE . '/config/participation-types.json'), true);
-$clubs = json_decode(file_get_contents(BASE . '/config/clubs.json'), true);
+$ptTypes = $config['enums']['participationTypes'];
+$clubs = $config['enums']['clubs'];
 ?>
 
 <?php if ($_GET["submitted"] === "true"): ?>
@@ -27,7 +27,7 @@ $clubs = json_decode(file_get_contents(BASE . '/config/clubs.json'), true);
         </div>
     </div>
     <hr/>
-    <?php include BASE . '/components/message.php' ?>
+    <?php include PUBLIC_FILES . '/components/message.php' ?>
     <?php if (!$onid): ?>
         <div class="row">
             <div class="col">
@@ -158,4 +158,4 @@ $clubs = json_decode(file_get_contents(BASE . '/config/clubs.json'), true);
 
 <?php endif; ?>
 
-<?php include_once BASE . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

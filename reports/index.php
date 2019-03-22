@@ -1,9 +1,9 @@
 <?php
-include_once BASE . '/lib/authorize.php';
+include_once PUBLIC_FILES . '/lib/authorize.php';
 
 allowIf($userIsManager, false);
 
-include_once BASE . '/components/header.php';
+include_once PUBLIC_FILES . '/components/header.php';
 
 // Retrieve the number of users of the system
 $users = $daoUsers->getAllUsers();
@@ -56,4 +56,4 @@ try {
     </div>
 </div>
 
-<?php include_once BASE . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>

@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 0);
-include_once BASE . '/lib/authorize.php';
-include_once BASE . '/lib/rest-utils.php';
+include_once PUBLIC_FILES . '/lib/authorize.php';
+include_once PUBLIC_FILES . '/lib/rest-utils.php';
 
 allowIf($userIsLoggedIn);
 

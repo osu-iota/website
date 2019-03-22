@@ -1,5 +1,5 @@
 <?php
-include_once BASE .  '/lib/authorize.php';
+include_once PUBLIC_FILES .  '/lib/authorize.php';
 
 allowIf($userIsAdmin, false);
 

@@ -1,0 +1,13 @@
+server:
+  privateFiles: /var/www
+  displayErrors: true
+  saveSession: true
+
+client:
+  baseUrl: http://localhost:7000/
+
+logger:
+  level: trace
+
+database:
+  configFile: /var/www/database.yaml

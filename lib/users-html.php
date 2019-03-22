@@ -1,8 +1,8 @@
 <?php
 
 function getUsersHtml($users) {
-
-    $levels = json_decode(file_get_contents(BASE . '/include/config/priv-levels.json'), true);
+    global $config;
+    $levels = $config['enums']['privilegeLevels'];
 
     $html = '';
     foreach ($users as $user) {

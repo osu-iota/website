@@ -1,9 +1,9 @@
 <?php
-include_once BASE . '/lib/authorize.php';
+include_once PUBLIC_FILES . '/lib/authorize.php';
 
 allowIf($userIsContributor, false);
 
-include_once BASE . '/include/templates/header.php'; ?>
+include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
 
 <?php if ($_GET['submitted'] == "true"): ?>
     <div class="row">
@@ -75,7 +75,7 @@ include_once BASE . '/include/templates/header.php'; ?>
             <h1>Edit <?php echo $resource['r_name'] ?></h1>
         </div>
     </div>
-    <?php include_once BASE . '/include/templates/message.php' ?>
+    <?php include_once PUBLIC_FILES . '/include/templates/message.php' ?>
     <div class="row form-contribute-resource">
         <div class="col">
             <form method="post" action="resources/edit/submit.php" enctype="multipart/form-data">
@@ -137,4 +137,4 @@ include_once BASE . '/include/templates/header.php'; ?>
     </script>
 
 <?php endif; ?>
-<?php include_once BASE . '/include/templates/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/include/templates/footer.php'; ?>

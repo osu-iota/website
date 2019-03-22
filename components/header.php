@@ -1,5 +1,5 @@
 <?php
-include_once BASE . '/lib/onidauth.php';
+include_once PUBLIC_FILES . '/lib/onidauth.php';
 session_start();
 if ($_GET['auth'] == true || $_REQUEST['ticket'] . '' != '') {
     onidauth();
