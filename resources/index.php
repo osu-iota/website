@@ -43,7 +43,7 @@ session_start();
         <h4>Topics</h4>
         <table class="table available-topics">
             <tbody id="topics">
-            <?php getTopicHtml($topics) ?>
+            <?php echo getTopicHtml($topics) ?>
             </tbody>
             <?php if ($userIsAdmin): ?>
                 <tfoot>
