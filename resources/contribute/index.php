@@ -5,7 +5,7 @@ allowIf($userIsContributor, false);
 
 $css[] = 'include/css/participate-form.css';
 
-include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
+include_once PUBLIC_FILES . '/components/header.php'; ?>
 
 <?php if ($_GET['submitted'] == "true"): ?>
     <div class="row">
@@ -16,21 +16,27 @@ include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
     </div>
 <?php else: ?>
     <?php
-    $uid = $user->getId();
-    // Get all the topics
-    $sql = 'SELECT * FROM iota_resource_topic';
-    $topics = $db->query($sql);
+
+    $topic = array();
+    try {
+        $sql = 'SELECT * FROM iota_resource_topic';
+        $prepared = $db->prepare($sql);
+        $prepared->setFetchMode(PDO::FETCH_ASSOC);
+        $prepared->execute();
+        $topics = $prepared->fetchAll();
+    } catch(Exception $e) {
+        $logger->error($e->getMessage());
+    }
     ?>
     <div class="row">
         <div class="col">
             <h1>Contribute New Content</h1>
         </div>
     </div>
-    <?php include_once PUBLIC_FILES . '/include/templates/message.php' ?>
+    <?php include_once PUBLIC_FILES . '/components/message.php' ?>
     <div class="row form-contribute-resource">
         <div class="col">
-            <form id="form" method="post" action="resources/contribute/submit.php" enctype="multipart/form-data">
-                <input type="hidden" name="uid" value="<?php echo $uid ?>"/>
+            <form id="formContributeResource" >
                 <div class="form-row">
                     <div class="col-md-6 col-lg-4">
                         <label>Resource Name *</label>
@@ -124,19 +130,34 @@ include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
                 $(this).next('.custom-file-label').html(filename);
             });
 
-            function onFormSubmit() {
+            function onContributeResourceFormSubmit() {
+
+                let form = document.getElementById('formContributeResource');
+                let fdata = new FormData(form);
+
+                api.post('/contributions', fdata, true).then(res => {
+                    window.location.replace(window.location.href.split('?')[0] + '?submitted=true');
+                }).catch(err => {
+                    snackbar(err.message, 'error');
+                    hide(eFormLoader);
+                    show(eFormSubmitButton);
+                });
+
                 hide(eFormSubmitButton);
                 show(eFormLoader);
+
+                return false;
             }
 
             function onTopicRequestSubmit() {
 
                 let body = {
+                    type: 'topic',
                     topic: eInputTopic.value,
                     seminar: eInputSeminar.value
                 };
                 eError.innerText = '';
-                api.post('resources/ajax/requesttopic.php', body).then(res => {
+                api.post('/requests', body).then(res => {
                     eResponseMessage.innerText = res.message;
                     eInputTopic.value = '';
                     eInputSeminar.value = '';
@@ -168,7 +189,7 @@ include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
             }
 
             // Add additional listeners here
-            eForm.addEventListener('submit', onFormSubmit);
+            eForm.addEventListener('submit', onContributeResourceFormSubmit);
             eButtonTopicRequest.addEventListener('mouseup', onTopicRequestSubmit);
             eButtonNewTopicRequest.addEventListener('mouseup', onPrepareNewTopicRequest);
             eInputSeminar.addEventListener('keypress', onTopicRequestKeyPress);
@@ -180,3 +201,5 @@ include_once PUBLIC_FILES . '/include/templates/header.php'; ?>
     </script>
 
 <?php endif; ?>
+
+<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>
