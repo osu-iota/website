@@ -20,7 +20,7 @@ function request(method, url, data, encoded) {
                 return reject(data);
             }
         };
-        xhr.open(method, '/api' + url, true);
+        xhr.open(method, 'api' + url, true);
         let type = encoded ? 'multipart/form-data' : 'application/json';
         xhr.setRequestHeader('Content-Type', type);
         xhr.setRequestHeader('Accept', 'application/json');
