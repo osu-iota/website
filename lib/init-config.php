@@ -12,7 +12,7 @@ if ($config['mode'] == 'production') {
 }
 // TODO: add a final else that results in displaying an error page to the client
 
-if ($config['server']['saveSession']) {
+if (!$config['server']['saveSession']) {
     session_unset();
 }
 
