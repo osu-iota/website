@@ -2,7 +2,7 @@
 # Primarily allows us to choose the mode for the site and load the required configurations
 
 # mode - can be 'production' or 'development'
-mode: development
+mode: production
 
 admin:
   serverEmail: IoT Alliance <no-reply@iota.engr.orst.edu>
