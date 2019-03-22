@@ -3,10 +3,9 @@
 #    RewriteCond %{REQUEST_FILENAME} !-f
 #    RewriteCond %{REQUEST_FILENAME} !-d
 #    RewriteCond %{REQUEST_URI} !=/favicon.ico
-#    RewriteRule ^(.*)$ skill-trees.php?q=$1 [L,QSA]
+#    RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 #</IfModule>
-#php_value auto_prepend_file "/nfs/farm/groups/iota/public_html/bootstrap.php"
-php_value auto_prepend_file "/var/www/html/bootstrap.php"
+php_value auto_prepend_file "/nfs/farm/groups/iota/public_html/bootstrap.php"
 
 # Allow for omission of .php extension
 RewriteEngine On
@@ -21,7 +20,7 @@ Deny from all
 </Files>
 
 # Deny access to files with extensions .ini, .psd, .log, .sh
-<FilesMatch "\.(ini|psd|log|sh|sql)$">
+<FilesMatch "\.(yaml|ini|psd|log|sh|sql)$">
 Order allow,deny
 Deny from all
 </FilesMatch>
