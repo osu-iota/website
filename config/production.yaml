@@ -1,15 +1,15 @@
 server:
-  privateFiles: /nfs/farm/groups/iota
+  privateFiles: /nfs/farm/groups/iota/production
   errors:
     display: false
     displayApiErrors: false
   saveSession: true
 
 client:
-  baseUrl: http://groups.engr.oregonstate.edu/IOTA/
+  baseUrl: http://groups.engr.oregonstate.edu/iota/
 
 logger:
   level: info
 
 database:
-  configFile: /nfs/farm/groups/iota/database.yaml
+  configFile: /nfs/farm/groups/iota/production/database.yaml
