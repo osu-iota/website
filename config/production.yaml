@@ -1,6 +1,8 @@
 server:
   privateFiles: /nfs/farm/groups/iota
-  displayErrors: false
+  errors:
+    display: false
+    displayApiErrors: false
   saveSession: true
 
 client:

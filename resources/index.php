@@ -24,17 +24,17 @@ session_start();
 <div class="row">
     <div class="col contribute-resource">
         <?php if ($userIsContributor): ?>
-            <a href="resources/contribute">
-                <button class="btn btn-primary">Contribute Resource</button>
-            </a>
+        <a href="resources/contribute">
+            <button class="btn btn-primary">Contribute Resource</button>
+        </a>
         <?php elseif ($userIsLoggedIn): ?>
-            <a href="resources/contribute/request">
-                <button class="btn btn-primary">Request Permission to Contribute</button>
-            </a>
+        <a href="resources/contribute/request">
+            <button class="btn btn-primary">Request Permission to Contribute</button>
+        </a>
         <?php else: ?>
-            <a href="resources/?auth=true">
-                <button class="btn btn-primary">Sign in to Contribute</button>
-            </a>
+        <a href="resources/?auth=true">
+            <button class="btn btn-primary">Sign in to Contribute</button>
+        </a>
         <?php endif; ?>
     </div>
 </div>
@@ -43,15 +43,15 @@ session_start();
         <h4>Topics</h4>
         <table class="table available-topics">
             <tbody id="topics">
-            <?php echo getTopicHtml($topics) ?>
+                <?php echo getTopicHtml($topics) ?>
             </tbody>
             <?php if ($userIsAdmin): ?>
-                <tfoot>
+            <tfoot>
                 <form id="addTopicForm" onsubmit="return addTopic();">
                     <tr>
                         <td colspan="2">
                             <input required type="text" class="form-control" name="topic" maxlength="100"
-                                   placeholder="Enter new topic"/>
+                                placeholder="Enter new topic" />
                         </td>
                     </tr>
                     <tr>
@@ -60,10 +60,10 @@ session_start();
                         </td>
                     </tr>
                 </form>
-                </tfoot>
+            </tfoot>
             <?php endif; ?>
         </table>
     </div>
 </div>
 
-<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php';

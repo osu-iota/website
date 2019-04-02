@@ -1,6 +1,6 @@
 <?php
 function respond($status, $message, $data = null) {
-    header("Content-Type: application/json; charset=UTF-8");
+    header('Content-Type: application/json; charset=UTF-8');
     http_response_code($status);
     $body = array(
         'code' => $status,
@@ -17,15 +17,17 @@ function readRequestBodyJson() {
 }
 
 function readRequestBodyUrlFormEncoded() {
-    $encodedBody =  $_POST;
+    $encodedBody = $_POST;
     foreach ($_FILES as $name => $file) {
         $encodedBody[$name] = $file;
     }
+
     return $encodedBody;
 }
 
 function readQueryString() {
     $query = array();
     parse_str($_SERVER['QUERY_STRING'], $query);
+
     return $query;
 }

@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 0);
+setApiErrorConfigForThisFile();
 include_once PUBLIC_FILES . '/lib/authorize.php';
 include_once PUBLIC_FILES . '/lib/rest-utils.php';
 include_once PUBLIC_FILES . '/lib/topic-html.php';

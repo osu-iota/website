@@ -1,11 +1,11 @@
 <?php
 
-function fail($message, $redirect = 'error/') {
+function fail($message, $redirect = 'error') {
     $_SESSION['message'] = array(
         'content' => $message,
         'type' => 'error'
     );
-    header('Location: ' . BASE_URL . $redirect);
+    echo "<script>location.replace('$redirect')</script>";
     die();
 }
 

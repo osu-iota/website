@@ -1,5 +1,8 @@
 <?php
-ini_set('display_errors', 0);
+/**
+ * The resource endpoint for handling asynchronous requests made on user resources.
+ */
+setApiErrorConfigForThisFile();
 include_once PUBLIC_FILES . '/lib/authorize.php';
 include_once PUBLIC_FILES . '/lib/rest-utils.php';
 include_once PUBLIC_FILES . '/lib/users-html.php';
@@ -9,11 +12,21 @@ allowIf($userIsAdmin);
 switch ($_SERVER['REQUEST_METHOD']) {
 
     case 'POST':
-        addNewUser();
+        $body = readRequestBodyJson();
+        addNewUser($body);
         break;
 
     case 'PATCH':
-        updateUser();
+        $query = readQueryString();
+        $body = readRequestBodyJson();
+        $id = $query['id'];
+
+        if ($id . '' == '') {
+            $logger->info('Invalid request: missing ID of user to update');
+            respond(400, 'Please include ID of user to update in query string');
+        }
+
+        updateUser($id, $body);
         break;
 
     case 'GET':
@@ -25,10 +38,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
 }
 
-function addNewUser() {
+/**
+ * Creates a new user in the database.
+ *
+ * @param mixed[] $body the parsed request body containing new user information
+ * @return void
+ */
+function addNewUser($body) {
     global $logger, $daoUsers;
-
-    $body = readRequestBodyJson();
 
     $onid = strtolower($body['onid']);
     $level = $body['privLevel'];
@@ -50,20 +67,22 @@ function addNewUser() {
     respond(201, 'Successfully created new user');
 }
 
-function updateUser() {
+/**
+ * Updates information associated with an existing user in the database.
+ *
+ * @param string $id the ID of the user to update
+ * @param mixed[] $body the parsed request body containing data to update the user with
+ * @return void
+ */
+function updateUser($id, $body) {
     global $db, $logger;
 
-    $query = readQueryString();
-
-    $body = readRequestBodyJson();
-
     // Currently can only update the privilege level
-    $id = $query['id'];
     $level = $body['level'];
 
-    if((empty($level) && $level != 0) || empty($id)) {
-        $logger->error('Cannot update user level without user id and level in request body');
-        respond(400, 'Please include user id and new level');
+    if ((empty($level) && $level != 0)) {
+        $logger->error('Cannot update user level without level in request body');
+        respond(400, 'Please include the new level');
     }
 
     try {
@@ -72,7 +91,7 @@ function updateUser() {
         $prepared->bindParam(':level', $level, PDO::PARAM_INT);
         $prepared->bindParam(':id', $id, PDO::PARAM_STR);
         $prepared->execute();
-    } catch(Exception $e) {
+    } catch (Exception $e) {
         $logger->error($e->getMessage());
         respond(500, 'Failed to update user');
     }
@@ -80,6 +99,11 @@ function updateUser() {
     respond(200, 'Successfully updated user');
 }
 
+/**
+ * Fetches all existing users in the database
+ *
+ * @return void
+ */
 function getUsers() {
     global $db, $logger;
 

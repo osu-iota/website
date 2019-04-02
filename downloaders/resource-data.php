@@ -3,7 +3,8 @@
 $rdid = $_GET['r'];
 
 // Read the blob out of the database and stream it
-$sql = 'SELECT * FROM iota_resource_data rd, iota_resource r WHERE rd.rdid = :id AND rd.rid = r.rid AND rd.rd_active = 1';
+$sql = 'SELECT * FROM iota_resource_data rd, iota_resource r ';
+$sql .= 'WHERE rd.rdid = :id AND rd.rid = r.rid AND rd.rd_active = 1';
 $prepared = $db->prepare($sql);
 $prepared->bindParam(':id', $rdid, PDO::PARAM_STR);
 $prepared->execute();
@@ -18,9 +19,11 @@ $data = $result[0];
 $filename = strtolower(str_replace(' ', '-', $data['r_name'])) . '.' . $data['rd_extension'];
 header('Content-Disposition: attachment; filename="' . $filename . '"');
 header('Content-Type: ' . $data['rd_mime']);
-$bytes = readfile(RESOURCE_DATA_DIR . '/' . $rdid . '.' . $data['rd_extension']);
-if(!$bytes) {
-    fail('Failed to upload resource file. If the problem persists, please use the "Contact Us" form to contact the '.
+$targetFile = RESOURCE_DATA_DIR . '/' . $rdid . '.' . $data['rd_extension'];
+$bytes = readfile($targetFile);
+if (!$bytes) {
+    $logger->error('Failed to read ' . $targetFile . ': ' . implode(' => ', error_get_last()));
+    fail('Failed to download resource file. If the problem persists, please use the "Contact Us" form to contact the ' .
     'IoT Alliance website administrators.');
 }
 
@@ -30,6 +33,6 @@ try {
     $prepared = $db->prepare($sql);
     $prepared->bindParam(':rdid', $rdid, PDO::PARAM_STR);
     $prepared->execute();
-} catch(Exception $e) {
+} catch (Exception $e) {
     $logger->error($e->getMessage());
 }

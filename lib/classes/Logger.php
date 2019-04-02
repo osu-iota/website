@@ -12,8 +12,8 @@ class Logger {
         if ($this->file) fclose($this->file);
     }
 
-    public function debug($message) {
-        $this->log('DEBUG', $message);
+    public function trace($message) {
+        $this->log('TRACE', $message);
     }
 
     public function info($message) {
@@ -29,7 +29,7 @@ class Logger {
     }
 
     private function log($level, $message) {
-        $str = $level . " [" . date("Y/m/d h:i:s", mktime()) . "] " . $message . "\n";
+        $str = $level . " [" . date("Y/m/d h:i:s", time()) . "] " . $message . "\n";
         fwrite($this->file, $str);
     }
 }

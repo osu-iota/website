@@ -16,30 +16,31 @@
         <h3>Contents</h3>
         <ul>
             <li><a href="charter#1">1 - General Provisions</a>
-            <ul>
-                <li><a href="charter#1.1">1.1 - Alliance Membership</a></li>
-                <li><a href="charter#1.2">1.2 - Charter Modifications</a></li>
-                <li><a href="charter#1.3">1.3 - Alliance Objectives</a></li>
-            </ul>
-            </li>
-            <li><a href="charter#2">2 -  Member Commitments</a>
-            <ul>
-                <li><a href="charter#2.1">2.1 - School of Electrical Engineering and Computer Science (EECS)</a></li>
-                <li><a href="charter#2.2">2.2 - The CS Online Capstone</a></li>
-                <li><a href="charter#2.3">2.3 - On-campus Capstones</a>
                 <ul>
-                    <li><a href="charter#2.3.1">2.3.1 - Specific ECE Capstone Commitments</a></li>
-                    <li><a href="charter#2.3.2">2.3.2 - Specific CS On-campus Capstone Commitments</a></li>
+                    <li><a href="charter#1.1">1.1 - Alliance Membership</a></li>
+                    <li><a href="charter#1.2">1.2 - Charter Modifications</a></li>
+                    <li><a href="charter#1.3">1.3 - Alliance Objectives</a></li>
                 </ul>
-                </li>
-                <li><a href="charter#2.4">2.4 - The Master's in Software Innovation (MSSWI) Track</a></li>
-                <li><a href="charter#2.5">2.5 - The CS Network Security Course</a></li>
-                <li><a href="charter#2.6">2.6 - The CS Undergraduate Operating Systems Courses</a></li>
-                <li><a href="charter#2.7">2.7 - The OSU Robotics Club</a></li>
-                <li><a href="charter#2.8">2.8 - The Hackathon Club</a></li>
-                <li><a href="charter#2.9">2.9 - The Security Club</a></li>
-                <li><a href="charter#2.10">2.10 - Inventors Enterprise</a></li>
-            </ul>
+            </li>
+            <li><a href="charter#2">2 - Member Commitments</a>
+                <ul>
+                    <li><a href="charter#2.1">2.1 - School of Electrical Engineering and Computer Science (EECS)</a>
+                    </li>
+                    <li><a href="charter#2.2">2.2 - The CS Online Capstone</a></li>
+                    <li><a href="charter#2.3">2.3 - On-campus Capstones</a>
+                        <ul>
+                            <li><a href="charter#2.3.1">2.3.1 - Specific ECE Capstone Commitments</a></li>
+                            <li><a href="charter#2.3.2">2.3.2 - Specific CS On-campus Capstone Commitments</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="charter#2.4">2.4 - The Master's in Software Innovation (MSSWI) Track</a></li>
+                    <li><a href="charter#2.5">2.5 - The CS Network Security Course</a></li>
+                    <li><a href="charter#2.6">2.6 - The CS Undergraduate Operating Systems Courses</a></li>
+                    <li><a href="charter#2.7">2.7 - The OSU Robotics Club</a></li>
+                    <li><a href="charter#2.8">2.8 - The Hackathon Club</a></li>
+                    <li><a href="charter#2.9">2.9 - The Security Club</a></li>
+                    <li><a href="charter#2.10">2.10 - Inventors Enterprise</a></li>
+                </ul>
             </li>
 
         </ul>
@@ -249,86 +250,111 @@
         <p>Although the CS On-Campus Capstone will not be making any TAs generally available "at large" to IOTA, the CS
             On-Campus Capstone will organize student teams into domains as noted above, and the TA assigned to each
             domain will organize optional events open to all members of IOTA.
-        <p>In addition, other members of IOTA may contact the representative (Kevin McGrath) of this Capstone, on behalf
-            of students, to request the use of hardware resources that this Capstone owns.</p>
+            <p>In addition, other members of IOTA may contact the representative (Kevin McGrath) of this Capstone, on
+                behalf
+                of students, to request the use of hardware resources that this Capstone owns.</p>
 
-        <h4 id="2.4">Section 2.4: The Master's in Software Innovation (MSSWI) Track</h4>
-        <p>Chris Scaffidi (<a href="mailto:scaffidc@engr.oregonstate.edu">scaffidc@engr.oregonstate.edu</a>) represents
-            the MSSWI Track and has committed to oversee the
-            IOTA Community Coordinator supplied by EECS (Section 2.1).</p>
-        <p>Students in this track generally participate in two graduate courses (CS 561: Software Engineering Methods,
-            and CS 562: Software Project Management) as well as the graduate reading and conference seminar (CS 505).
-            The two CS 56x courses include significant team-oriented project implementation (similar to the
-            undergraduate capstones, but at a higher level), while the reading and conference seminar involves studying
-            a technology and teaching it to other students.</p>
-        <p>When the MSSWI Track representative teaches CS 561 and 562, students in those courses may receive extra
-            credit for participating in events held by IOTA members. These metrics will take into account the extent to
-            which these graduate students participate in events in ways that promote skills development by less
-            experienced students (such as undergraduates). The details of these metrics are as-yet to be determined.</p>
-        <p>If EECS provides CS 561 and 562 with one or more 0.49 TA with professional industry experience in engineering
-            IoT systems, then that TA will be directed to spend time creating resources that students can use for
-            creating such systems. Furthermore, the TA will work with the IOTA Community Coordinator to identify what
-            resources would be useful to create and will make the resulting resources available to the Community
-            Coordinator for sharing with other members of the Alliance.</p>
-        <p>In addition, students of CS 561 and 562 may contribute additional resources to the IOTA repository, in
-            exchange for extra credit in CS 561 and 562. The details of what they will deliver, and for how much extra
-            credit, remain to be determined.</p>
-        <p>Finally, if graduate students in the MSSWI Track ask to do so, then they may receive credit in CS 505 for
-            teaching high-quality seminars on how to engineer IoT systems. The MSSWI Track representative will grade the
-            graduate students who give these seminars. These seminars will be planned with the input of other IOTA
-            member representatives, will be advertised via the IOTA Community Coordinator via the Alliance's website,
-            and will result in new resources that the Alliance can share and reuse.</p>
+            <h4 id="2.4">Section 2.4: The Master's in Software Innovation (MSSWI) Track</h4>
+            <p>Chris Scaffidi (<a href="mailto:scaffidc@engr.oregonstate.edu">scaffidc@engr.oregonstate.edu</a>)
+                represents
+                the MSSWI Track and has committed to oversee the
+                IOTA Community Coordinator supplied by EECS (Section 2.1).</p>
+            <p>Students in this track generally participate in two graduate courses (CS 561: Software Engineering
+                Methods,
+                and CS 562: Software Project Management) as well as the graduate reading and conference seminar (CS
+                505).
+                The two CS 56x courses include significant team-oriented project implementation (similar to the
+                undergraduate capstones, but at a higher level), while the reading and conference seminar involves
+                studying
+                a technology and teaching it to other students.</p>
+            <p>When the MSSWI Track representative teaches CS 561 and 562, students in those courses may receive extra
+                credit for participating in events held by IOTA members. These metrics will take into account the extent
+                to
+                which these graduate students participate in events in ways that promote skills development by less
+                experienced students (such as undergraduates). The details of these metrics are as-yet to be determined.
+            </p>
+            <p>If EECS provides CS 561 and 562 with one or more 0.49 TA with professional industry experience in
+                engineering
+                IoT systems, then that TA will be directed to spend time creating resources that students can use for
+                creating such systems. Furthermore, the TA will work with the IOTA Community Coordinator to identify
+                what
+                resources would be useful to create and will make the resulting resources available to the Community
+                Coordinator for sharing with other members of the Alliance.</p>
+            <p>In addition, students of CS 561 and 562 may contribute additional resources to the IOTA repository, in
+                exchange for extra credit in CS 561 and 562. The details of what they will deliver, and for how much
+                extra
+                credit, remain to be determined.</p>
+            <p>Finally, if graduate students in the MSSWI Track ask to do so, then they may receive credit in CS 505 for
+                teaching high-quality seminars on how to engineer IoT systems. The MSSWI Track representative will grade
+                the
+                graduate students who give these seminars. These seminars will be planned with the input of other IOTA
+                member representatives, will be advertised via the IOTA Community Coordinator via the Alliance's
+                website,
+                and will result in new resources that the Alliance can share and reuse.</p>
 
-        <h4 id="2.5">Section 2.5: The CS Network Security Course</h4>
-        <p>Mike Rosulek (<a href="mailto:rosulekm@onid.orst.edu">rosulekm@onid.orst.edu</a>) represents the CS Network
-            Security Course.</p>
-        <p>This course will include at least one assignment that students can satisfy by participating in one or more
-            events held by IOTA members (details to be determined.) In addition, if EECS assigns a TA with relevant
-            professional experience to the CS Network Security Course, then that TA will be asked to author some short
-            resources (such as a “How-To” document or two) related to securing IoT systems.</p>
+            <h4 id="2.5">Section 2.5: The CS Network Security Course</h4>
+            <p>Mike Rosulek (<a href="mailto:rosulekm@onid.orst.edu">rosulekm@onid.orst.edu</a>) represents the CS
+                Network
+                Security Course.</p>
+            <p>This course will include at least one assignment that students can satisfy by participating in one or
+                more
+                events held by IOTA members (details to be determined.) In addition, if EECS assigns a TA with relevant
+                professional experience to the CS Network Security Course, then that TA will be asked to author some
+                short
+                resources (such as a “How-To” document or two) related to securing IoT systems.</p>
 
-        <h4 id="2.6">Section 2.6: The CS Undergraduate Operating Systems Courses</h4>
-        <p>Ben Brewster (<a href="mailto:brewsteb@oregonstate.edu">brewsteb@oregonstate.edu</a>) represents the CS
-            Undergraduate Operating Systems Courses, including both the online and on-campus variants.</p>
-        <p>These courses will include at least one assignment and/or extra credit for participating in events conducted
-            by members of the Alliance, when events are available to students in the Post-Baccalaureate or on-campus
-            program and are made available to the class as a whole. In recognition of the desirability of fostering
-            students' creation of personal projects, credit will be granted on the basis of metrics tracked by the
-            Community Coordinator, with an emphasis on how students' portfolios grow as a result of involvement in
-            Alliance members' events.</p>
+            <h4 id="2.6">Section 2.6: The CS Undergraduate Operating Systems Courses</h4>
+            <p>Ben Brewster (<a href="mailto:brewsteb@oregonstate.edu">brewsteb@oregonstate.edu</a>) represents the CS
+                Undergraduate Operating Systems Courses, including both the online and on-campus variants.</p>
+            <p>These courses will include at least one assignment and/or extra credit for participating in events
+                conducted
+                by members of the Alliance, when events are available to students in the Post-Baccalaureate or on-campus
+                program and are made available to the class as a whole. In recognition of the desirability of fostering
+                students' creation of personal projects, credit will be granted on the basis of metrics tracked by the
+                Community Coordinator, with an emphasis on how students' portfolios grow as a result of involvement in
+                Alliance members' events.</p>
 
-        <h4 id="2.7">Section 2.7: The OSU Robotics Club</h4>
-        <p>Matt Shuman (<a href="mailto:shumanm@onid.orst.edu">shumanm@onid.orst.edu</a>) represents the OSU Robotics
-            Club.</p>
-        <p>This is the largest club on campus, and it has a well-established history and reputation as well as a mission
-            that extends far beyond IoT. To the extent that IoT overlaps with engineering of robotics systems, the
-            Robotics Club will support the IoT alliance.</p>
-        <p>Specifically, the club will provide the Community Coordinator (Section 2.1) with access to initial
-            knowledge-base content that can serve as a starting point for the online repository of training materials.
-            Drawing upon its large membership base and industry connections, it will help to publicize events of mutual
-            interest to the club and the alliance, both inside the university and outward toward companies. Finally,
-            when Club events are open to students of other alliance members, the Club will provide the Community
-            Coordinator with data on which students participate in these events (Section 2.1).</p>
+            <h4 id="2.7">Section 2.7: The OSU Robotics Club</h4>
+            <p>Matt Shuman (<a href="mailto:shumanm@onid.orst.edu">shumanm@onid.orst.edu</a>) represents the OSU
+                Robotics
+                Club.</p>
+            <p>This is the largest club on campus, and it has a well-established history and reputation as well as a
+                mission
+                that extends far beyond IoT. To the extent that IoT overlaps with engineering of robotics systems, the
+                Robotics Club will support the IoT alliance.</p>
+            <p>Specifically, the club will provide the Community Coordinator (Section 2.1) with access to initial
+                knowledge-base content that can serve as a starting point for the online repository of training
+                materials.
+                Drawing upon its large membership base and industry connections, it will help to publicize events of
+                mutual
+                interest to the club and the alliance, both inside the university and outward toward companies. Finally,
+                when Club events are open to students of other alliance members, the Club will provide the Community
+                Coordinator with data on which students participate in these events (Section 2.1).</p>
 
-        <h4 id="2.8">Section 2.8: The Hackathon Club</h4>
-        <p>Temporarily Removed - additional permission still necessary from Hackathon Club.</p>
+            <h4 id="2.8">Section 2.8: The Hackathon Club</h4>
+            <p>Temporarily Removed - additional permission still necessary from Hackathon Club.</p>
 
-        <h4 id="2.9">Section 2.9: The Security Club</h4>
-        <p>Mike Rosulek (<a href="mailto:rosulekm@onid.orst.edu">rosulekm@onid.orst.edu</a>) represents the Security
-            Club.</p>
-        <p>The Club will host one or more seminar per year where students can learn about security-related aspects of
-            engineering IoT systems. The Club will provide the Community Coordinator with data on which students
-            participate in these events, so that the Community Coordinator can track student metrics (Section 2.1).</p>
+            <h4 id="2.9">Section 2.9: The Security Club</h4>
+            <p>Mike Rosulek (<a href="mailto:rosulekm@onid.orst.edu">rosulekm@onid.orst.edu</a>) represents the Security
+                Club.</p>
+            <p>The Club will host one or more seminar per year where students can learn about security-related aspects
+                of
+                engineering IoT systems. The Club will provide the Community Coordinator with data on which students
+                participate in these events, so that the Community Coordinator can track student metrics (Section 2.1).
+            </p>
 
-        <h4 id="2.10">Section 2.10: Inventors Enterprise</h4>
-        <p>Donald Heer (<a href="mailto:heer@oregonstate.edu">heer@oregonstate.edu</a>) represents Inventors Enterprise.
-        </p>
-        <p>The Club will host one or more seminars per year where students can learn about entrepreneurship and
-            hardware-related aspects of engineering with IoT systems. The Club will provide the Community Coordinator
-            with data on which students participate in these events, so that the Community Coordinator can track student
-            metrics (Section 2.1). Hardware will be loaned out by the club for purposes of the seminar as well as to
-            other IOTA members. This will come from the inventory of the club with management and availability
-            determined by the club’s resources and time.</p>
+            <h4 id="2.10">Section 2.10: Inventors Enterprise</h4>
+            <p>Donald Heer (<a href="mailto:heer@oregonstate.edu">heer@oregonstate.edu</a>) represents Inventors
+                Enterprise.
+            </p>
+            <p>The Club will host one or more seminars per year where students can learn about entrepreneurship and
+                hardware-related aspects of engineering with IoT systems. The Club will provide the Community
+                Coordinator
+                with data on which students participate in these events, so that the Community Coordinator can track
+                student
+                metrics (Section 2.1). Hardware will be loaned out by the club for purposes of the seminar as well as to
+                other IOTA members. This will come from the inventory of the club with management and availability
+                determined by the club’s resources and time.</p>
     </div>
 </div>
-<?php include_once PUBLIC_FILES . '/components/footer.php'; ?>
+<?php include_once PUBLIC_FILES . '/components/footer.php';
