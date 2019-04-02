@@ -21,13 +21,11 @@ function request(method, url, data, encoded) {
             }
         };
         xhr.open(method, 'api' + url, true);
-        let type = encoded ? 'multipart/form-data' : 'application/json';
-        xhr.setRequestHeader('Content-Type', type);
-        xhr.setRequestHeader('Accept', 'application/json');
         if (data) {
             if (encoded) {
                 xhr.send(data);
             } else {
+                xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify(data));
             }
         } else {

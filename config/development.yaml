@@ -1,13 +1,16 @@
 server:
-  privateFiles: /var/www
-  displayErrors: true
+  privateFiles: /nfs/farm/groups/iota/development
+  errors:
+    display: true
+    severity: warning
+    displayApiErrors: false
   saveSession: true
 
 client:
-  baseUrl: http://localhost:7000/
+  baseUrl: http://groups.engr.oregonstate.edu/iota-dev/
 
 logger:
   level: trace
 
 database:
-  configFile: /var/www/database.yaml
+  configFile: /nfs/farm/groups/iota/development/database.yaml

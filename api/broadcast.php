@@ -1,5 +1,6 @@
 <?php
-ini_set('display_errors', 0);
+setApiErrorConfigForThisFile();
+
 // Restrict page access to admins
 include_once PUBLIC_FILES . '/lib/authorize.php';
 allowIf($userIsAdmin);

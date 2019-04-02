@@ -1,11 +1,11 @@
-#<IfModule mod_rewrite.c>
-#    RewriteEngine on
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#    RewriteCond %{REQUEST_URI} !=/favicon.ico
-#    RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
-#</IfModule>
-php_value auto_prepend_file "/nfs/farm/groups/iota/public_html/bootstrap.php"
+# Access file configuration for IoT Alliance Website
+# Oregon State University
+
+# Automatically run the bootstrap.php file at the beginning of every request to initialize configuration, database
+# access, and user information
+# TODO: this must be changed to the proper production bootstrap.php file before pushing changes to the production
+# master repository
+php_value auto_prepend_file "/nfs/farm/groups/iota/development/public_html/bootstrap.php"
 
 # Allow for omission of .php extension
 RewriteEngine On
@@ -36,5 +36,6 @@ Options -Indexes
 
 # Custom error pages
 ErrorDocument 404 /not-found
+ErrorDocument 500 /error
 
 
