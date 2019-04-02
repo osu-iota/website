@@ -28,7 +28,7 @@ switch ($method) {
 function addNewParticipation($body) {
     global $user, $db, $logger;
 
-    $logger->info("Request to add new participation information accepted. Validating...");
+    $logger->info('Request to add new participation information accepted. Validating...');
 
     $uid = $user->getId();
     $onid = $user->getOnid();
@@ -58,24 +58,25 @@ function addNewParticipation($body) {
         respond(400, 'Please include a description', $url);
     }
 
+    // Process the config
+    switch ($type) {
+        case 'project':
+        case 'other':
+            $club = null;
+            $selfie = null;
+        case 'meeting':
+            $event = null;
+        default:
+            break;
+    }
+
     // Make sure the upload is actually an image
     $check = getimagesize($selfie['tmp_name']);
-    if ($check == false) {
+    if ($selfie && $check == false) {
         respond(400, 'The uploaded file is not an image. Please submit a selfie to receive participation credit.');
     }
 
-    // Process the config
-    switch ($type) {
-            case 'project':
-                $club = null;
-                $selfie = null;
-            case 'meeting':
-                $event = null;
-            default:
-                break;
-        }
-
-    $logger->info("Validated successfully. Processing request...");
+    $logger->info('Validated successfully. Processing request...');
 
     try {
         $db->beginTransaction();
@@ -132,6 +133,6 @@ function addNewParticipation($body) {
         respond(500,'Failed to save participation config. Please submit again or try later');
     }
 
-    $logger->info("Successfully completed request");
+    $logger->info('Successfully completed request');
     respond(201, 'Successfully submitted participation information');
 }
